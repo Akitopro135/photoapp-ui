@@ -8,6 +8,12 @@
     background-color: var(--white);
 }
 
+.image {
+    width: 31.75vw;
+    height: 31.75vw;
+    cursor: pointer;
+}
+
 .show-wrapper {
     position: absolute;
     display: flex;
@@ -19,16 +25,17 @@
     background-color: rgba(22, 24, 35, 0.8);
 }
 
-.show-image {
-    width: calc((var(--default-layout-width) - 50px) / 2.5);
-    height: calc((var(--default-layout-width) - 50px) / 2.5);
-    //margin-top: 3%;
+.btn-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    color: var(--white);
     cursor: pointer;
 }
 
-.image {
-    width: calc((var(--default-layout-width) - 50px) / 3);
-    height: calc((var(--default-layout-width) - 50px) / 3);
-    //margin-top: 7%;
+.show-image {
+    width: 75vw;
+    height: 75vh;
     cursor: pointer;
 }

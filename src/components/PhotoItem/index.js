@@ -2,6 +2,9 @@ import classNames from 'classnames/bind';
 import styles from './PhotoItem.module.scss';
 
 import { useState, useEffect } from 'react';
+import { CloseIcon } from '../Icons';
+import { Link } from 'react-router-dom';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
@@ -27,7 +30,12 @@ function PhotoItem({ data }) {
             </div>
             {visible && (
                 <div style={{ marginTop: window.scrollY }} className={cx('show-wrapper')}>
-                    <img src={data.urls.regular} className={cx('show-image')} onClick={handleClick()} />
+                    <Link to={config.routes.detailPhoto(`${data.id}`)}>
+                        <img src={data.urls.regular} className={cx('show-image')} />
+                    </Link>
+                    <button className={cx('btn-close')} onClick={handleClick()}>
+                        <CloseIcon width="1.5rem" />
+                    </button>
                 </div>
             )}
         </>

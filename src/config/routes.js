@@ -8,6 +8,9 @@ const routes = {
     searchTest: function (searchTestId = ':searchTestId') {
         return '/searchTest/' + searchTestId;
     },
+    detailPhoto: function (id = ':id') {
+        return '/id/' + id;
+    },
 };
 
 export default routes;
