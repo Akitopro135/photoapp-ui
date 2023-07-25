@@ -9,7 +9,7 @@ const routes = {
         return '/searchTest/' + searchTestId;
     },
     detailPhoto: function (id = ':id') {
-        return '/id/' + id;
+        return '/photo/' + id;
     },
 };
 

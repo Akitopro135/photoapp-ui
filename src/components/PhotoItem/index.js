@@ -8,7 +8,7 @@ import config from '~/config';
 
 const cx = classNames.bind(styles);
 
-function PhotoItem({ data }) {
+function PhotoItem({ data, className, passProp }) {
     const [visible, setVisible] = useState(false);
     const show = () => setVisible(true);
     const hide = () => setVisible(false);
@@ -23,10 +23,12 @@ function PhotoItem({ data }) {
         return visible ? hide : show;
     };
 
+    const classes = cx({ [className]: className });
+
     return (
         <>
             <div className={cx('wrapper')}>
-                <img src={data.urls.regular} className={cx('image')} onClick={handleClick()} />
+                <img src={data.urls.regular} className={classes} onClick={handleClick()} />
             </div>
             {visible && (
                 <div style={{ marginTop: window.scrollY }} className={cx('show-wrapper')}>

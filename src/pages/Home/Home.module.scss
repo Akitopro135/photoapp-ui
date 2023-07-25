@@ -2,6 +2,59 @@
     display: flex;
     min-height: 1000px;
     height: 100%;
+    width: 100vw;
     flex-direction: column;
-    margin: auto;
+}
+
+//introduct
+.introduct {
+    width: 100vw;
+    background-color: rgba(135, 187, 224, 0.2);
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    h2 {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+}
+
+.image {
+    padding: 2%;
+}
+
+//top image
+.top-image {
+    display: flex;
+    background-color: rgba(255, 91, 91, 0.3);
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 2%;
+}
+
+.top-image-body {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+//top image
+.sea-image {
+    display: flex;
+    background-color: rgba(203, 233, 222, 0.3);
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 2%;
+}
+
+.sea-image-body {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-left: 10%;
+    padding-right: 10%;
 }

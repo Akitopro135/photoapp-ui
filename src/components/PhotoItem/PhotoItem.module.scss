@@ -16,13 +16,16 @@
 
 .show-wrapper {
     position: absolute;
+    top: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 95vh;
-    background-color: rgba(22, 24, 35, 0.8);
+    height: 100vh;
+    z-index: 950;
+    background: rgba(22, 24, 35, 0.8);
 }
 
 .btn-close {
@@ -38,4 +41,10 @@
     width: 75vw;
     height: 75vh;
     cursor: pointer;
+}
+
+//Home page
+.home-introduct-image {
+    width: 20vw;
+    height: 20vw;
 }

@@ -21,7 +21,7 @@ function Search() {
         }
 
         const fetchApi = async () => {
-            const result = await getSearch(searchValue, 1, 12);
+            const result = await getSearch(searchValue, 1, 12, 'popular');
             setList(result);
             console.log(result);
         };
@@ -32,7 +32,7 @@ function Search() {
     return (
         <div className={cx('wrapper')}>
             {list.map((photo) => (
-                <PhotoItem key={photo.id} data={photo} />
+                <PhotoItem key={photo.id} data={photo} className={'image'} />
             ))}
         </div>
     );
