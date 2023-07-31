@@ -1,20 +1,16 @@
 import { createApi } from 'unsplash-js';
 
-console.log(process.env);
-const list = [process.env.REACT_APP_ACCESS_KEY, process.env.REACT_APP_ACCESS_KEY_2];
-let i = 0;
+const list = [
+    process.env.REACT_APP_ACCESS_KEY,
+    process.env.REACT_APP_ACCESS_KEY_2,
+    process.env.REACT_APP_ACCESS_KEY_3,
+    process.env.REACT_APP_ACCESS_KEY_4,
+];
 
-const checkAccessKey = () => {
-    try {
-        return list[i];
-    } catch (error) {
-        i += 1;
-        return list[i];
-    }
-};
+let i = Math.floor(Math.random() * list.length);
 
 const unsplash = createApi({
-    accessKey: checkAccessKey(),
+    accessKey: list[i],
 });
 
 export default unsplash;
