@@ -41,6 +41,7 @@
 .show-image {
     width: 75vw;
     height: 75vh;
+    border-radius: 4px;
     cursor: pointer;
 }
 
@@ -49,4 +50,23 @@
     width: 20vw;
     height: 20vw;
     border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+        animation-name: rotate;
+        animation-duration: 0.7s;
+        opacity: 0.8;
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    50% {
+        transform: rotate(-5deg);
+    }
+    100% {
+        transform: rotate(5deg);
+    }
 }

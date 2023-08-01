@@ -1,11 +1,11 @@
 import classNames from 'classnames/bind';
 import styles from './Home.module.scss';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { getRandomPhoto, getPhoto, getSearch } from '~/services/searchServices';
 
 import PhotoItem from '~/components/PhotoItem';
-import { AngleLeft, AngleRight, SearchIcon } from '~/components/Icons';
-import { ReactDOM } from 'react';
+import { AngleLeft, AngleRight } from '~/components/Icons';
+import CollectionPhoto from '~/components/CollectionPhoto';
 
 const cx = classNames.bind(styles);
 
@@ -32,8 +32,11 @@ function Home() {
     }, []);
 
     const hangleChangeTopImage = () => {
+        //setTimeout(() => {
         setChangeTopImage(changeTopImage ? false : true);
-        moveRight();
+        //     setActive('');
+        // }, 500);
+        //moveRight();
     };
 
     const hangleChangeSeaImage = () => {
@@ -61,7 +64,7 @@ function Home() {
                     <div>
                         <h1>Top Image</h1>
                     </div>
-                    <div className={cx('top-image-body', active)}>
+                    <div className={cx('top-image-body')}>
                         <button className={cx('angle-btn')} onClick={hangleChangeTopImage}>
                             <AngleLeft />
                         </button>
@@ -112,6 +115,16 @@ function Home() {
                     </div>
                 </div>
             )}
+            <div className={cx('collection-image')}>
+                <div>
+                    <h1>Collection</h1>
+                </div>
+                <div className={cx('collection-image-body')}>
+                    <CollectionPhoto data={listSeaPhoto} />
+                    <CollectionPhoto data={listSeaPhoto} />
+                    <CollectionPhoto data={listSeaPhoto} />
+                </div>
+            </div>
         </div>
     );
 }

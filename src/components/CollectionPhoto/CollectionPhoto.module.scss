@@ -1,0 +1,37 @@
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 20vw;
+    height: 20vw;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+        animation-name: rotate;
+        animation-duration: 0.7s;
+        opacity: 0.8;
+    }
+}
+
+.image1 {
+    width: 10vw;
+    height: 20vw;
+    padding: 5px;
+}
+
+.right-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.image2 {
+    width: 10vw;
+    height: 10vw;
+    padding: 5px;
+}
+
+.image3 {
+    width: 10vw;
+    height: 10vw;
+    padding: 5px;
+}

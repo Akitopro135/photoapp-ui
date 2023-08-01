@@ -1,3 +1,13 @@
+@mixin animate($animation, $duration, $method, $times) {
+    animation: $animation $duration $method $times;
+}
+
+@mixin keyframes($name) {
+    @keyframes #{$name} {
+        @content;
+    }
+}
+
 .wrapper {
     display: flex;
     min-height: 1000px;
@@ -34,26 +44,23 @@
 }
 
 .top-image-body {
-    position: relative;
-    left: 0px;
     display: flex;
     width: 100%;
     justify-content: space-between;
     align-items: center;
     padding-left: 10%;
     padding-right: 10%;
-
-    .active {
-        animation: spinner 0.8s linear;
-    }
 }
 
-@keyframes spinner {
-    from {
-        left: 0px;
+@include keyframes(fade) {
+    0% {
+        opacity: 1;
     }
-    to {
-        left: -500px;
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
     }
 }
 
@@ -64,13 +71,15 @@
     background-color: transparent;
     cursor: pointer;
 
-    &:hover {
+    :hover {
         background-color: rgb(22 24 35 / 0.03);
     }
 
-    &:active {
-        background-color: rgba(22, 24, 35, 0.06);
-    }
+    // &:active {
+    //     .top-image-body {
+    //         @include animate(fade, 1s, linear, 1);
+    //     }
+    // }
 }
 
 //sea image
@@ -84,8 +93,25 @@
 }
 
 .sea-image-body {
-    position: relative;
-    left: 0px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+//collection image
+.collection-image {
+    display: flex;
+    //background-color: rgba(255, 91, 91, 0.3);
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 2%;
+}
+
+.collection-image-body {
     display: flex;
     width: 100%;
     justify-content: space-between;
