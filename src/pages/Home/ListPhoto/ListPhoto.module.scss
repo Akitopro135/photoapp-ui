@@ -1,0 +1,36 @@
+//top image
+.wrapper-list {
+    display: flex;
+    //background-color: rgba(255, 91, 91, 0.3);
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 2%;
+}
+
+.list-body {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.angle-btn {
+    width: var(--search-button-width);
+    height: 100%;
+    font-size: 1.8rem;
+    background-color: transparent;
+    cursor: pointer;
+
+    :hover {
+        background-color: rgb(22 24 35 / 0.03);
+    }
+
+    // &:active {
+    //     .top-image-body {
+    //         @include animate(fade, 1s, linear, 1);
+    //     }
+    // }
+}

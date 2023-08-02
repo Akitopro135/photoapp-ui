@@ -3,7 +3,6 @@
     flex-direction: row;
     width: 20vw;
     height: 20vw;
-    border-radius: 4px;
     cursor: pointer;
 
     &:hover {
@@ -17,6 +16,7 @@
     width: 10vw;
     height: 20vw;
     padding: 5px;
+    border-radius: 8px;
 }
 
 .right-item {
@@ -28,10 +28,12 @@
     width: 10vw;
     height: 10vw;
     padding: 5px;
+    border-radius: 8px;
 }
 
 .image3 {
     width: 10vw;
     height: 10vw;
     padding: 5px;
+    border-radius: 8px;
 }
