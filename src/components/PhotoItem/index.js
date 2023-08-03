@@ -2,14 +2,23 @@ import classNames from 'classnames/bind';
 import styles from './PhotoItem.module.scss';
 
 import { useState, useEffect } from 'react';
-import { CloseIcon } from '../Icons';
+import { CloseIcon, Download, Heart } from '../Icons';
 import { Link } from 'react-router-dom';
 import config from '~/config';
 import Button from '../Button';
 
 const cx = classNames.bind(styles);
 
-function PhotoItem({ data, className, classNameImage, passProp, info = false, button = false, profile_image = false }) {
+function PhotoItem({
+    data,
+    className,
+    classNameImage,
+    passProp,
+    info = false,
+    button = false,
+    profileImage = false,
+    popUp = false,
+}) {
     const [visible, setVisible] = useState(false);
     const show = () => setVisible(true);
     const hide = () => setVisible(false);
@@ -20,8 +29,8 @@ function PhotoItem({ data, className, classNameImage, passProp, info = false, bu
         return () => (document.body.style.overflow = 'scroll');
     }, [visible]);
 
-    const handleClick = () => {
-        return visible ? hide : show;
+    const handleClick = (e) => {
+        console.log(e.pageX);
     };
 
     const imageClasses = cx({ [classNameImage]: classNameImage });
@@ -31,22 +40,41 @@ function PhotoItem({ data, className, classNameImage, passProp, info = false, bu
         <div className={cx('wrapper')}>
             <div className={classes}>
                 <div>
-                    <img src={data.urls.regular} className={imageClasses} onClick={handleClick()} />
+                    <img src={data.urls.regular} className={imageClasses} onClick={popUp ? show : hide} />
                 </div>
-                {profile_image && <img src={data.user.profile_image.medium} className={cx('profile-image')} />}
+                {profileImage && <img src={data.user.profile_image.medium} className={cx('profile-image')} />}
                 {info && (
                     <div>
                         <h1>{data.user.first_name}</h1>
                     </div>
                 )}
-                {button && <Button className={'home-more-info-btn'}>More Info</Button>}
+                {button && (
+                    <Button className={'home-more-info-btn'}>
+                        <h2>More Info</h2>
+                    </Button>
+                )}
             </div>
-            {visible && (
-                <div style={{ marginTop: window.scrollY }} className={cx('show-wrapper')}>
-                    <Link to={config.routes.detailPhoto(`${data.id}`)}>
-                        <img src={data.urls.regular} className={cx('show-image')} />
-                    </Link>
-                    <button className={cx('btn-close')} onClick={handleClick()}>
+            {popUp && visible && (
+                <div style={{ marginTop: window.scrollY }} className={cx('popup-wrapper')}>
+                    <div className={cx('popup-content')}>
+                        <img src={data.urls.regular} className={cx('popup-image')} onClick={handleClick} />
+                        <div className={cx('popup-profile')}>
+                            <img src={data.user.profile_image.medium} className={cx('popup-profile-image')} />
+                            <span>{data.user.first_name}</span>
+                        </div>
+                        <div className={cx('popup-action')}>
+                            <Link to={config.routes.detailPhoto(`${data.id}`)} className={cx('popup-btn-more-info')}>
+                                More Info
+                            </Link>
+                            <button className={cx('popup-btn-download')}>
+                                <Download />
+                            </button>
+                            <button className={cx('popup-btn-heart')}>
+                                <Heart />
+                            </button>
+                        </div>
+                    </div>
+                    <button className={cx('btn-close')} onClick={hide}>
                         <CloseIcon width="1.5rem" />
                     </button>
                 </div>

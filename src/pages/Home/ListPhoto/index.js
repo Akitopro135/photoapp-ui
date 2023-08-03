@@ -40,7 +40,8 @@ function ListPhoto({ data, title }) {
                                 classNameImage={'list-image'}
                                 info
                                 button
-                                profile_image
+                                profileImage
+                                popUp
                             />
                             <PhotoItem
                                 data={data[1]}
@@ -48,7 +49,8 @@ function ListPhoto({ data, title }) {
                                 classNameImage={'list-image'}
                                 info
                                 button
-                                profile_image
+                                profileImage
+                                popUp
                             />
                             <PhotoItem
                                 data={data[2]}
@@ -56,7 +58,8 @@ function ListPhoto({ data, title }) {
                                 classNameImage={'list-image'}
                                 info
                                 button
-                                profile_image
+                                profileImage
+                                popUp
                             />
                         </>
                     ) : (
@@ -67,7 +70,8 @@ function ListPhoto({ data, title }) {
                                 classNameImage={'list-image'}
                                 info
                                 button
-                                profile_image
+                                profileImage
+                                popUp
                             />
                             <PhotoItem
                                 data={data[4]}
@@ -75,7 +79,8 @@ function ListPhoto({ data, title }) {
                                 classNameImage={'list-image'}
                                 info
                                 button
-                                profile_image
+                                profileImage
+                                popUp
                             />
                             <PhotoItem
                                 data={data[5]}
@@ -83,7 +88,8 @@ function ListPhoto({ data, title }) {
                                 classNameImage={'list-image'}
                                 info
                                 button
-                                profile_image
+                                profileImage
+                                popUp
                             />
                         </>
                     )}
