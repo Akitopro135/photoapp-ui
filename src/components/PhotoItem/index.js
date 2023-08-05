@@ -23,14 +23,28 @@ function PhotoItem({
     const show = () => setVisible(true);
     const hide = () => setVisible(false);
 
+    const [zoom, setZoom] = useState(true);
+
     useEffect(() => {
         if (!visible) return;
         document.body.style.overflow = 'hidden';
         return () => (document.body.style.overflow = 'scroll');
     }, [visible]);
 
-    const handleClick = (e) => {
-        console.log(e.pageX);
+    const handleClick = () => {
+        const content = document.getElementsByClassName(cx('popup-content'));
+        const image = document.getElementsByClassName(cx('popup-image'));
+        if (zoom) {
+            content[0].style.height = '95vh';
+            content[0].style.width = '100vw';
+            image[0].style.cursor = 'zoom-out';
+            setZoom(false);
+        } else {
+            content[0].style.height = '80vh';
+            content[0].style.width = '75vw';
+            image[0].style.cursor = 'zoom-in';
+            setZoom(true);
+        }
     };
 
     const imageClasses = cx({ [classNameImage]: classNameImage });
@@ -58,25 +72,34 @@ function PhotoItem({
                 <div style={{ marginTop: window.scrollY }} className={cx('popup-wrapper')}>
                     <div className={cx('popup-content')}>
                         <img src={data.urls.regular} className={cx('popup-image')} onClick={handleClick} />
-                        <div className={cx('popup-profile')}>
-                            <img src={data.user.profile_image.medium} className={cx('popup-profile-image')} />
-                            <span>{data.user.first_name}</span>
-                        </div>
-                        <div className={cx('popup-action')}>
-                            <Link to={config.routes.detailPhoto(`${data.id}`)} className={cx('popup-btn-more-info')}>
-                                More Info
-                            </Link>
-                            <button className={cx('popup-btn-download')}>
-                                <Download />
-                            </button>
-                            <button className={cx('popup-btn-heart')}>
-                                <Heart />
-                            </button>
-                        </div>
+                        {zoom && (
+                            <>
+                                <div className={cx('popup-profile')}>
+                                    <img src={data.user.profile_image.medium} className={cx('popup-profile-image')} />
+                                    <span>{data.user.first_name}</span>
+                                </div>
+                                <div className={cx('popup-action')}>
+                                    <Link
+                                        to={config.routes.detailPhoto(`${data.id}`)}
+                                        className={cx('popup-btn-more-info')}
+                                    >
+                                        More Info
+                                    </Link>
+                                    <button className={cx('popup-btn-download')}>
+                                        <Download />
+                                    </button>
+                                    <button className={cx('popup-btn-heart')}>
+                                        <Heart />
+                                    </button>
+                                </div>
+                            </>
+                        )}
                     </div>
-                    <button className={cx('btn-close')} onClick={hide}>
-                        <CloseIcon width="1.5rem" />
-                    </button>
+                    {zoom && (
+                        <button className={cx('btn-close')} onClick={hide}>
+                            <CloseIcon width="1.5rem" />
+                        </button>
+                    )}
                 </div>
             )}
         </div>

@@ -32,7 +32,7 @@ function Search() {
     return (
         <div className={cx('wrapper')}>
             {list.map((photo) => (
-                <PhotoItem key={photo.id} data={photo} classNameImage={'image'} />
+                <PhotoItem key={photo.id} data={photo} classNameImage={'image'} popUp />
             ))}
         </div>
     );

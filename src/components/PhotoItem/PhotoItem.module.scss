@@ -72,12 +72,17 @@
     background-color: rgba(0, 0, 0, 0.5);
     font-size: calc((var(--width-popup-content) + var(--height-popup-content)) * 2.5 / 200);
     color: var(--white);
+
+    & span {
+        cursor: pointer;
+    }
 }
 
 .popup-profile-image {
     height: 80%;
     margin: 1vw;
     border-radius: 100%;
+    cursor: pointer;
 }
 
 .popup-action {
