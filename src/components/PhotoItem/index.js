@@ -9,16 +9,7 @@ import Button from '../Button';
 
 const cx = classNames.bind(styles);
 
-function PhotoItem({
-    data,
-    className,
-    classNameImage,
-    passProp,
-    info = false,
-    button = false,
-    profileImage = false,
-    popUp = false,
-}) {
+function PhotoItem({ data, className, passProp, info = false, button = false, profileImage = false, popUp = false }) {
     const [visible, setVisible] = useState(false);
     const show = () => setVisible(true);
     const hide = () => setVisible(false);
@@ -47,23 +38,22 @@ function PhotoItem({
         }
     };
 
-    const imageClasses = cx({ [classNameImage]: classNameImage });
     const classes = cx({ [className]: className });
 
     return (
         <div className={cx('wrapper')}>
             <div className={classes}>
                 <div>
-                    <img src={data.urls.regular} className={imageClasses} onClick={popUp ? show : hide} />
+                    <img src={data.urls.regular} className={cx('image')} onClick={popUp ? show : hide} />
                 </div>
                 {profileImage && <img src={data.user.profile_image.medium} className={cx('profile-image')} />}
                 {info && (
-                    <div>
-                        <h1>{data.user.first_name}</h1>
+                    <div className={cx('profile-user-name')}>
+                        <span>{data.user.first_name}</span>
                     </div>
                 )}
                 {button && (
-                    <Button className={'home-more-info-btn'}>
+                    <Button to={config.routes.detailPhoto(`${data.id}`)} className={'home-more-info-btn'}>
                         <h2>More Info</h2>
                     </Button>
                 )}

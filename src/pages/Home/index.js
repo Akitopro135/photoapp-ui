@@ -8,6 +8,8 @@ import CollectionPhoto from '~/components/CollectionPhoto';
 import ListPhoto from './ListPhoto';
 
 const cx = classNames.bind(styles);
+const list = ['Sea', 'Cat', 'Dog', 'Earth', 'Galaxy'];
+let random;
 
 function Home() {
     const [photo, setPhoto] = useState();
@@ -19,9 +21,11 @@ function Home() {
             const photo = await getRandomPhoto();
             setPhoto(photo);
             const listTop = await getPhoto(Math.floor(Math.random() * 20), 6, 'popular');
-            console.log(listTop);
             setListTopPhoto(listTop);
-            const listSea = await getSearch('sea', Math.floor(Math.random() * 20), 6);
+            random = await Math.floor(Math.random() * list.length);
+            console.log(random);
+            const listSea = await getSearch(list[random], Math.floor(Math.random() * 20), 6);
+            console.log(listSea);
             setListSeaPhoto(listSea);
         };
 
@@ -36,16 +40,16 @@ function Home() {
                         <PhotoItem data={photo} classNameImage={'home-introduct-image'} />
                     </div>
                     <div>
-                        <h1>{photo.alt_description.toUpperCase()}</h1>
+                        <span>{photo.alt_description.toUpperCase()}</span>
                     </div>
                 </div>
             )}
-            <ListPhoto data={listTopPhoto} title={'Top Image'} />
-            <ListPhoto data={listSeaPhoto} title={'Sea Image'} />
+            <ListPhoto data={listTopPhoto} title={'Top'} morePhoto={false} />
+            <ListPhoto data={listSeaPhoto} title={list[random]} morePhoto={true} />
             {listSeaPhoto[0] && (
                 <div className={cx('collection-image')}>
                     <div>
-                        <h1>Collection</h1>
+                        <span>Collection</span>
                     </div>
                     <div className={cx('collection-image-body')}>
                         <CollectionPhoto data={listSeaPhoto} />
