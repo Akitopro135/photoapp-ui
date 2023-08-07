@@ -8,13 +8,14 @@ import config from '~/config';
 
 const cx = classNames.bind(styles);
 
-function ListPhoto({ data, title, morePhoto = false }) {
+function ListPhoto({ data, title, morePhoto = false, className }) {
     const [changeImage, setChangeImage] = useState(true);
 
     const hangleChangeImage = () => {
         setChangeImage(changeImage ? false : true);
     };
 
+    const classes = cx({ [className]: className });
     return (
         data[0] && (
             <div className={cx('wrapper-list')}>
@@ -32,15 +33,15 @@ function ListPhoto({ data, title, morePhoto = false }) {
                     </button>
                     {changeImage ? (
                         <div className={cx('list-body-image')}>
-                            <PhotoItem data={data[0]} className={'card-home'} info button profileImage popUp />
-                            <PhotoItem data={data[1]} className={'card-home'} info button profileImage popUp />
-                            <PhotoItem data={data[2]} className={'card-home'} info button profileImage popUp />
+                            <PhotoItem data={data[0]} className={classes} info button profileImage popUp />
+                            <PhotoItem data={data[1]} className={classes} info button profileImage popUp />
+                            <PhotoItem data={data[2]} className={classes} info button profileImage popUp />
                         </div>
                     ) : (
                         <div className={cx('list-body-image')}>
-                            <PhotoItem data={data[3]} className={'card-home'} info button profileImage popUp />
-                            <PhotoItem data={data[4]} className={'card-home'} info button profileImage popUp />
-                            <PhotoItem data={data[5]} className={'card-home'} info button profileImage popUp />
+                            <PhotoItem data={data[3]} className={classes} info button profileImage popUp />
+                            <PhotoItem data={data[4]} className={classes} info button profileImage popUp />
+                            <PhotoItem data={data[5]} className={classes} info button profileImage popUp />
                         </div>
                     )}
                     <button className={cx('angle-btn')} onClick={hangleChangeImage}>

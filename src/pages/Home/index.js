@@ -37,15 +37,15 @@ function Home() {
             {photo && (
                 <div className={cx('introduct')}>
                     <div className={cx('image')}>
-                        <PhotoItem data={photo} classNameImage={'home-introduct-image'} />
+                        <PhotoItem data={photo} />
                     </div>
                     <div>
                         <span>{photo.alt_description.toUpperCase()}</span>
                     </div>
                 </div>
             )}
-            <ListPhoto data={listTopPhoto} title={'Top'} morePhoto={false} />
-            <ListPhoto data={listSeaPhoto} title={list[random]} morePhoto={true} />
+            <ListPhoto data={listTopPhoto} className={'card-home'} title={'Top'} morePhoto={false} />
+            <ListPhoto data={listSeaPhoto} className={'card-search'} title={list[random]} morePhoto={true} />
             {listSeaPhoto[0] && (
                 <div className={cx('collection-image')}>
                     <div>
