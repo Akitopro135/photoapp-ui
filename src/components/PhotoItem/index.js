@@ -9,7 +9,16 @@ import Button from '../Button';
 
 const cx = classNames.bind(styles);
 
-function PhotoItem({ data, className, passProp, info = false, button = false, profileImage = false, popUp = false }) {
+function PhotoItem({
+    data,
+    className,
+    passProp,
+    info = false,
+    button = false,
+    profileImage = false,
+    popUp = false,
+    popUpAction = false,
+}) {
     const [visible, setVisible] = useState(false);
     const show = () => setVisible(true);
     const hide = () => setVisible(false);
@@ -68,20 +77,22 @@ function PhotoItem({ data, className, passProp, info = false, button = false, pr
                                     <img src={data.user.profile_image.medium} className={cx('popup-profile-image')} />
                                     <span>{data.user.first_name}</span>
                                 </div>
-                                <div className={cx('popup-action')}>
-                                    <Link
-                                        to={config.routes.detailPhoto(`${data.id}`)}
-                                        className={cx('popup-btn-more-info')}
-                                    >
-                                        More Info
-                                    </Link>
-                                    <button className={cx('popup-btn-download')}>
-                                        <Download />
-                                    </button>
-                                    <button className={cx('popup-btn-heart')}>
-                                        <Heart />
-                                    </button>
-                                </div>
+                                {popUpAction && (
+                                    <div className={cx('popup-action')}>
+                                        <Link
+                                            to={config.routes.detailPhoto(`${data.id}`)}
+                                            className={cx('popup-btn-more-info')}
+                                        >
+                                            More Info
+                                        </Link>
+                                        <button className={cx('popup-btn-download')}>
+                                            <Download />
+                                        </button>
+                                        <button className={cx('popup-btn-heart')}>
+                                            <Heart />
+                                        </button>
+                                    </div>
+                                )}
                             </>
                         )}
                     </div>
