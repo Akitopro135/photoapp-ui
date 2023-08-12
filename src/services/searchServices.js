@@ -25,3 +25,10 @@ export const getPhoto = async (page = 1, perPage = 10, order_by = 'popular') => 
     });
     return responce.response.results;
 };
+
+export const getDetailPhoto = async (photoId) => {
+    const responce = await unsplash.photos.get({
+        photoId: photoId,
+    });
+    return responce.response;
+};

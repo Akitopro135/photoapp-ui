@@ -7,17 +7,40 @@
     width: 100%;
     padding: 2%;
 
-    h1 {
+    & h1 {
         font-size: 2vw;
     }
 
-    h2 {
+    & h2 {
         font-size: 1vw;
+    }
+}
+
+.list-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    padding-left: 5%;
+    padding-right: 5%;
+
+    & .btn-seemore {
+        display: flex;
+        align-items: center;
+        background-color: transparent;
+        color: green;
+        font-size: 1vw;
+        cursor: pointer;
+
+        &:hover {
+            color: greenyellow;
+        }
     }
 }
 
 .list-body {
     display: flex;
+    flex-direction: row;
     width: 100%;
     justify-content: space-between;
     align-items: center;
@@ -26,7 +49,7 @@
 }
 
 .angle-btn {
-    width: var(--search-button-width);
+    width: 10%;
     height: 100%;
     font-size: 1.8rem;
     background-color: transparent;
@@ -41,4 +64,11 @@
     //         @include animate(fade, 1s, linear, 1);
     //     }
     // }
+}
+
+.list-body-image {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
 }

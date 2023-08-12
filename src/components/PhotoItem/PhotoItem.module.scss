@@ -7,23 +7,6 @@
     --height-popup-content: 80vh;
 }
 
-.card {
-    width: 20vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0px 3px 3px rgb(0 0 0 / 12%);
-    background: var(--background-image);
-    background-size: cover;
-}
-
-.image {
-    width: 31.75vw;
-    height: 31.75vw;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
 .popup-wrapper {
     position: absolute;
     top: 0;
@@ -72,12 +55,17 @@
     background-color: rgba(0, 0, 0, 0.5);
     font-size: calc((var(--width-popup-content) + var(--height-popup-content)) * 2.5 / 200);
     color: var(--white);
+
+    & span {
+        cursor: pointer;
+    }
 }
 
 .popup-profile-image {
     height: 80%;
     margin: 1vw;
     border-radius: 100%;
+    cursor: pointer;
 }
 
 .popup-action {
@@ -144,32 +132,57 @@
 }
 
 //Home page
-.home-introduct-image {
+.image {
     width: 50vw;
     height: 35vw;
     border-radius: 4px;
-}
-
-.list-image {
-    position: relative;
-    left: -2.5vw;
-    width: 15vw;
-    height: 12vw;
-    border-radius: 4px 100% 100%;
     cursor: pointer;
-
-    &:hover {
-        animation-name: rotate;
-        animation-duration: 0.7s;
-        opacity: 0.8;
-    }
 }
 
-.profile-image {
+.card-home {
     position: relative;
-    border-radius: 100%;
-    width: 4vw;
-    top: -3vw;
+    width: 20vw;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 4px 4px 4px 4px rgb(0 0 0 / 12%);
+    background: var(--background-image);
+    background-size: cover;
+
+    & .profile-user-name {
+        position: absolute;
+        bottom: 17.5%;
+        text-align: center;
+
+        & span {
+            font-size: calc((2vw + 2vh) / 2);
+            font-weight: bold;
+        }
+    }
+
+    & .profile-image {
+        position: absolute;
+        top: 42.5%;
+        width: 4vw;
+        height: 4vw;
+        border-radius: 100%;
+    }
+
+    & .image {
+        position: absolute;
+        left: 0;
+        width: 15vw;
+        height: 50%;
+        border-radius: 4px 100% 100%;
+        cursor: pointer;
+
+        &:hover {
+            animation-name: rotate;
+            animation-duration: 0.7s;
+            opacity: 0.8;
+        }
+    }
 }
 
 @keyframes rotate {
@@ -181,5 +194,47 @@
     }
     100% {
         transform: rotate(5deg);
+    }
+}
+
+//Search page
+.card-search {
+    position: relative;
+    width: 20vw;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10%;
+    box-shadow: 4px 4px 4px 4px rgb(0 0 0 / 12%);
+    background: var(--background-image);
+    background-size: cover;
+
+    & .profile-user-name {
+        position: absolute;
+        bottom: 17.5%;
+        text-align: center;
+
+        & span {
+            font-size: calc((2vw + 2vh) / 2);
+            font-weight: bold;
+        }
+    }
+
+    & .profile-image {
+        position: absolute;
+        top: 42.5%;
+        width: 4vw;
+        height: 4vw;
+        border-radius: 100%;
+    }
+
+    & .image {
+        position: absolute;
+        left: 0;
+        width: 20vw;
+        height: 50%;
+        border-radius: 4px;
+        cursor: pointer;
     }
 }
