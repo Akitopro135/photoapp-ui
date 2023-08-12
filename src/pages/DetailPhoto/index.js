@@ -87,38 +87,50 @@ function DetailPhoto() {
                                 </div>
                             </div>
                             <div className={cx('detail-order')}>
-                                <div>
-                                    <LocationDot />
-                                    <span>{photo.user.location}</span>
-                                </div>
-                                <div>
-                                    <Camera />
-                                    <span>{photo.exif.name}</span>
-                                </div>
+                                {photo.user.location && (
+                                    <div>
+                                        <LocationDot />
+                                        <span>{photo.user.location}</span>
+                                    </div>
+                                )}
+                                {photo.exif.name && (
+                                    <div>
+                                        <Camera />
+                                        <span>{photo.exif.name}</span>
+                                    </div>
+                                )}
                                 <div>
                                     <Calendar />
                                     <span>{new Date(photo.created_at).toDateString()}</span>
                                 </div>
-                                <div>
-                                    <Exposure />
-                                    <span>Exposure: {photo.exif.exposure_time}</span>
-                                </div>
-                                <div>
-                                    <Aperture />
-                                    <span>Aperture: {photo.exif.aperture}</span>
-                                </div>
-                                <div>
-                                    <FocalLength />
-                                    <span>Focal: {photo.exif.focal_length}</span>
-                                </div>
-                                <div>
-                                    <Iso />
-                                    <span>Iso: {photo.exif.iso}</span>
-                                </div>
+                                {photo.exif.exposure_time && (
+                                    <div>
+                                        <Exposure />
+                                        <span>Exposure: {photo.exif.exposure_time}</span>
+                                    </div>
+                                )}
+                                {photo.exif.aperture && (
+                                    <div>
+                                        <Aperture />
+                                        <span>Aperture: {photo.exif.aperture}</span>
+                                    </div>
+                                )}
+                                {photo.exif.focal_length && (
+                                    <div>
+                                        <FocalLength />
+                                        <span>Focal: {photo.exif.focal_length}</span>
+                                    </div>
+                                )}
+                                {photo.exif.iso && (
+                                    <div>
+                                        <Iso />
+                                        <span>Iso: {photo.exif.iso}</span>
+                                    </div>
+                                )}
                             </div>
                             <div className={cx('detail-tags')}>
-                                {photo.tags.map((tag) => (
-                                    <button>{tag.title}</button>
+                                {photo.tags.map((tag, index) => (
+                                    <button key={index}>{tag.title}</button>
                                 ))}
                             </div>
                         </div>
@@ -127,8 +139,8 @@ function DetailPhoto() {
                         <span>Related Collections</span>
                         <div className={cx('related-collections')}>
                             {photo.related_collections.results.map((collection) => (
-                                <div className={cx('collection')}>
-                                    <span>{collection.cover_photo.alt_description}</span>
+                                <div key={collection.id} className={cx('collection')}>
+                                    <span>{collection.title}</span>
                                     <span>number of photos: {collection.total_photos}</span>
                                     <CollectionPhoto data={collection.preview_photos} />
                                 </div>
