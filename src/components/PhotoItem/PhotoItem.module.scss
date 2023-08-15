@@ -133,10 +133,8 @@
 
 //Home page
 .image {
-    width: 50vw;
-    height: 35vw;
     border-radius: 4px;
-    cursor: pointer;
+    //cursor: pointer;
 }
 
 .card-home {
@@ -152,7 +150,7 @@
 
     & .profile-user-name {
         position: absolute;
-        bottom: 17.5%;
+        top: 70%;
         text-align: center;
 
         & span {
@@ -212,7 +210,7 @@
 
     & .profile-user-name {
         position: absolute;
-        bottom: 17.5%;
+        top: 70%;
         text-align: center;
 
         & span {
@@ -236,5 +234,18 @@
         height: 50%;
         border-radius: 4px;
         cursor: pointer;
+        object-fit: cover;
+    }
+}
+
+//DetailPage / RelatedPhotos
+.related-photos {
+    margin-bottom: 2%;
+
+    & .image {
+        cursor: pointer;
+        &:hover {
+            opacity: 0.8;
+        }
     }
 }

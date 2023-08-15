@@ -11,10 +11,8 @@ function SearchTest() {
     const [list, setList] = useState([]);
 
     const params = useParams();
-    console.log(params);
 
     const search = params.searchTestId.slice(0, params.searchTestId.length);
-    console.log(search);
 
     const unsplash = createApi({
         accessKey: 't7QEW3RgnoVp2t47HdPBTIS9_7dqkqEYrljiycAWhVY',

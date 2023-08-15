@@ -8,8 +8,6 @@
     cursor: pointer;
 
     &:hover {
-        animation-name: rotate;
-        animation-duration: 0.7s;
         opacity: 0.8;
     }
 }
@@ -19,6 +17,7 @@
     height: 20vw;
     padding: 5px;
     border-radius: 8px;
+    object-fit: cover;
 }
 
 .right-item {
@@ -31,6 +30,7 @@
     height: 10vw;
     padding: 5px;
     border-radius: 8px;
+    object-fit: cover;
 }
 
 .image3 {
@@ -38,4 +38,5 @@
     height: 10vw;
     padding: 5px;
     border-radius: 8px;
+    object-fit: cover;
 }
