@@ -1,8 +1,8 @@
 import unsplash from '~/utils/request';
 
-export const getSearch = async (search = '', page = 1, perPage = 10, order_by = 'latest') => {
+export const getSearch = async ({ query = 'top', page = 1, perPage = 10, order_by = 'latest' }) => {
     const responce = await unsplash.search.getPhotos({
-        query: search,
+        query,
         page: page,
         perPage: perPage,
         orderBy: order_by,
@@ -17,7 +17,7 @@ export const getRandomPhoto = async (search = 'camera') => {
     return responce.response;
 };
 
-export const getPhoto = async (page = 1, perPage = 10, order_by = 'popular') => {
+export const getPhoto = async ({ page = 1, perPage = 10, order_by = 'popular' }) => {
     const responce = await unsplash.photos.list({
         page: page,
         perPage: perPage,

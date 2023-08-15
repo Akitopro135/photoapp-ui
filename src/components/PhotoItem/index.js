@@ -6,6 +6,7 @@ import { CloseIcon, Download, Heart } from '../Icons';
 import { Link } from 'react-router-dom';
 import config from '~/config';
 import Button from '../Button';
+import { calculateImageSize } from '~/helpers';
 
 const cx = classNames.bind(styles);
 
@@ -13,6 +14,8 @@ function PhotoItem({
     data,
     className,
     passProp,
+    width,
+    height,
     info = false,
     button = false,
     profileImage = false,
@@ -24,7 +27,9 @@ function PhotoItem({
     const hide = () => setVisible(false);
 
     const [zoom, setZoom] = useState(true);
+    const { calculatedWidth, calculatedHeight } = calculateImageSize(data, 900);
 
+    //console.log(data);
     useEffect(() => {
         if (!visible) return;
         document.body.style.overflow = 'hidden';
@@ -35,13 +40,13 @@ function PhotoItem({
         const content = document.getElementsByClassName(cx('popup-content'));
         const image = document.getElementsByClassName(cx('popup-image'));
         if (zoom) {
-            content[0].style.height = '95vh';
+            content[0].style.height = '100vh';
             content[0].style.width = '100vw';
             image[0].style.cursor = 'zoom-out';
             setZoom(false);
         } else {
-            content[0].style.height = '80vh';
-            content[0].style.width = '75vw';
+            content[0].style.height = `${calculatedHeight}vh`;
+            content[0].style.width = `${calculatedWidth}vw`;
             image[0].style.cursor = 'zoom-in';
             setZoom(true);
         }
@@ -52,10 +57,16 @@ function PhotoItem({
     return (
         <div className={cx('wrapper')}>
             <div className={classes}>
-                <div>
-                    <img src={data.urls.regular} className={cx('image')} onClick={popUp ? show : hide} />
+                <div className={cx('wrapper-image')}>
+                    <img
+                        src={data.urls.regular}
+                        alt=""
+                        className={cx('image')}
+                        style={{ width: `${width}vw`, height: `${height}vh` }}
+                        onClick={popUp ? show : hide}
+                    />
                 </div>
-                {profileImage && <img src={data.user.profile_image.medium} className={cx('profile-image')} />}
+                {profileImage && <img src={data.user.profile_image.medium} alt="" className={cx('profile-image')} />}
                 {info && (
                     <div className={cx('profile-user-name')}>
                         <span>{data.user.first_name}</span>
@@ -69,14 +80,23 @@ function PhotoItem({
             </div>
             {popUp && visible && (
                 <div style={{ marginTop: window.scrollY }} className={cx('popup-wrapper')}>
-                    <div className={cx('popup-content')}>
-                        <img src={data.urls.regular} className={cx('popup-image')} onClick={handleClick} />
+                    <div
+                        style={{ width: `${calculatedWidth}vw`, height: `${calculatedHeight}vh` }}
+                        className={cx('popup-content')}
+                    >
+                        <img src={data.urls.regular} alt="" className={cx('popup-image')} onClick={handleClick} />
                         {zoom && (
                             <>
+                                (
                                 <div className={cx('popup-profile')}>
-                                    <img src={data.user.profile_image.medium} className={cx('popup-profile-image')} />
+                                    <img
+                                        src={data.user.profile_image.medium}
+                                        alt=""
+                                        className={cx('popup-profile-image')}
+                                    />
                                     <span>{data.user.first_name}</span>
                                 </div>
+                                )
                                 {popUpAction && (
                                     <div className={cx('popup-action')}>
                                         <Link

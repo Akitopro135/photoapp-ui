@@ -17,39 +17,37 @@ function ListPhoto({ data, title, morePhoto = false, className }) {
 
     const classes = cx({ [className]: className });
     return (
-        data[0] && (
-            <div className={cx('wrapper-list')}>
-                <div className={cx(morePhoto ? 'list-header' : '')}>
-                    <h1>{title} Image</h1>
-                    {morePhoto && (
-                        <Link to={config.routes.search(`${title}`)} className={cx('btn-seemore')}>
-                            See more
-                        </Link>
-                    )}
-                </div>
-                <div className={cx('list-body')}>
-                    <button className={cx('angle-btn')} onClick={hangleChangeImage}>
-                        <AngleLeft />
-                    </button>
-                    {changeImage ? (
-                        <div className={cx('list-body-image')}>
-                            <PhotoItem data={data[0]} className={classes} info button profileImage popUp popUpAction />
-                            <PhotoItem data={data[1]} className={classes} info button profileImage popUp popUpAction />
-                            <PhotoItem data={data[2]} className={classes} info button profileImage popUp popUpAction />
-                        </div>
-                    ) : (
-                        <div className={cx('list-body-image')}>
-                            <PhotoItem data={data[3]} className={classes} info button profileImage popUp popUpAction />
-                            <PhotoItem data={data[4]} className={classes} info button profileImage popUp popUpAction />
-                            <PhotoItem data={data[5]} className={classes} info button profileImage popUp popUpAction />
-                        </div>
-                    )}
-                    <button className={cx('angle-btn')} onClick={hangleChangeImage}>
-                        <AngleRight />
-                    </button>
-                </div>
+        <div className={cx('wrapper-list')}>
+            <div className={cx(morePhoto ? 'list-header' : '')}>
+                <h1>{title} Image</h1>
+                {morePhoto && (
+                    <Link to={config.routes.search(`${title}`)} className={cx('btn-seemore')}>
+                        See more
+                    </Link>
+                )}
             </div>
-        )
+            <div className={cx('list-body')}>
+                <button className={cx('angle-btn')} onClick={hangleChangeImage}>
+                    <AngleLeft />
+                </button>
+                {changeImage ? (
+                    <div className={cx('list-body-image')}>
+                        <PhotoItem data={data[0]} className={classes} info button profileImage popUp popUpAction />
+                        <PhotoItem data={data[1]} className={classes} info button profileImage popUp popUpAction />
+                        <PhotoItem data={data[2]} className={classes} info button profileImage popUp popUpAction />
+                    </div>
+                ) : (
+                    <div className={cx('list-body-image')}>
+                        <PhotoItem data={data[3]} className={classes} info button profileImage popUp popUpAction />
+                        <PhotoItem data={data[4]} className={classes} info button profileImage popUp popUpAction />
+                        <PhotoItem data={data[5]} className={classes} info button profileImage popUp popUpAction />
+                    </div>
+                )}
+                <button className={cx('angle-btn')} onClick={hangleChangeImage}>
+                    <AngleRight />
+                </button>
+            </div>
+        </div>
     );
 }
 
