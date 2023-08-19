@@ -5,7 +5,6 @@ import PhotoItem from '~/components/PhotoItem';
 import CollectionPhoto from '~/components/CollectionPhoto';
 import ListPhoto from './ListPhoto';
 import { useSearch, useRandomPhoto, useList } from '~/hooks';
-import { calculateImageSize } from '~/helpers';
 
 const cx = classNames.bind(styles);
 
@@ -21,14 +20,12 @@ function Home() {
     });
     const { photo } = useRandomPhoto();
 
-    const { calculatedWidth, calculatedHeight } = calculateImageSize(photo ? photo : 500, '');
-
     return (
         <div className={cx('wrapper')}>
             {photo && (
                 <div className={cx('introduct')}>
                     <div className={cx('image')}>
-                        <PhotoItem data={photo} width={calculatedWidth} height={calculatedHeight} />
+                        <PhotoItem data={photo} width={1000} />
                     </div>
                     <div>
                         <span>{photo.alt_description.toUpperCase()}</span>

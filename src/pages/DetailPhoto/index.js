@@ -15,12 +15,9 @@ import {
 } from '~/components/Icons';
 import CollectionPhoto from '~/components/CollectionPhoto';
 import { usePhoto } from '~/hooks';
-import { calculateImageSize } from '~/helpers';
 import { Link, useParams } from 'react-router-dom';
-import BlurhashItem from '~/components/Blurhash';
-import PhotoItem from '~/components/PhotoItem';
 import config from '~/config';
-import { useEffect, useState } from 'react';
+import PhotoItem from '~/components/PhotoItem';
 
 const cx = classNames.bind(styles);
 
@@ -28,16 +25,7 @@ function DetailPhoto() {
     const params = useParams();
     const id = params.id.slice(0, params.id.length);
 
-    const { photo, loading, error } = usePhoto({ id });
-    const { calculatedWidth: contentPhotoWidth, calculatedHeight: contentPhotoHeight } = calculateImageSize({
-        photo,
-        width: 900,
-    });
-
-    const { calculatedWidth: relatedPhotoWidth, calculatedHeight: relatedPhotoHeight } = calculateImageSize({
-        photo,
-        width: 410,
-    });
+    const { photo } = usePhoto({ id });
 
     return (
         <>
@@ -59,20 +47,7 @@ function DetailPhoto() {
                     </div>
                     <div className={cx('detail-content')}>
                         <div className={cx('content-photo')}>
-                            <BlurhashItem
-                                photo={photo}
-                                contentPhotoWidth={contentPhotoWidth}
-                                contentPhotoHeight={contentPhotoHeight}
-                            />
-                            <img
-                                style={{
-                                    width: `${contentPhotoWidth}vw`,
-                                    height: `${contentPhotoHeight}vh`,
-                                }}
-                                className={cx('image')}
-                                src={photo.urls.raw}
-                                alt=""
-                            />
+                            <PhotoItem data={photo} width={900} />
                         </div>
                         <div className={cx('content-photo-detail')}>
                             <div className={cx('detail-view-download')}>
@@ -158,10 +133,9 @@ function DetailPhoto() {
                                     <Link key={photo.id} to={config.routes.detailPhoto(`${photo.id}`)}>
                                         <PhotoItem
                                             data={photo}
-                                            width={relatedPhotoWidth}
-                                            height={relatedPhotoHeight}
+                                            hardWidthVW={25}
+                                            hardHeightVH={30}
                                             className={'related-photos'}
-                                            checkReload
                                         />
                                     </Link>
                                 )),

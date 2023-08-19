@@ -59,25 +59,6 @@
     margin-top: var(--default-layout-header-height);
 }
 
-.content-photo {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-
-    .image {
-        position: absolute;
-    }
-
-    .hide {
-        opacity: 0;
-    }
-
-    :first-child {
-        z-index: 1;
-    }
-}
-
 @keyframes opacity {
     0% {
         opacity: 1;
@@ -85,9 +66,6 @@
     100% {
         opacity: 0;
     }
-}
-
-.content-photo-detail {
 }
 
 .detail-view-download {
@@ -239,7 +217,6 @@
 .detail-related-photos {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     width: 100%;
     margin-top: var(--margin-detail-page);

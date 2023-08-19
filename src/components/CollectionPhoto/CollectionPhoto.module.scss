@@ -1,8 +1,6 @@
 .wrapper {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    line-height: 0;
     cursor: pointer;
 
     &:hover {
@@ -13,6 +11,4 @@
 .right-item {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    font-size: 0;
 }
