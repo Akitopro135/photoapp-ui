@@ -19,7 +19,7 @@ function Search() {
     return (
         <div className={cx('wrapper')}>
             {listPhoto.map((photo) => (
-                <PhotoItem key={photo.id} data={photo} className={'card-search'} info button profileImage popUp />
+                <PhotoItem key={photo.id} data={photo} className={'search'} card info button profileImage popUp />
             ))}
         </div>
     );

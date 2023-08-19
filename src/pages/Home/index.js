@@ -35,8 +35,8 @@ function Home() {
                     </div>
                 </div>
             )}
-            {listTop[0] && <ListPhoto data={listTop} className={'card-home'} title={'Top'} morePhoto={false} />}
-            {listSea[0] && <ListPhoto data={listSea} className={'card-search'} title={'Sea'} morePhoto={true} />}
+            {listTop[0] && <ListPhoto data={listTop} className={'home'} title={'Top'} morePhoto={false} />}
+            {listSea[0] && <ListPhoto data={listSea} className={'search'} title={'Sea'} morePhoto={true} />}
             {listSea[0] && (
                 <div className={cx('collection-image')}>
                     <div>

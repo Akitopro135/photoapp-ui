@@ -17,8 +17,10 @@ import CollectionPhoto from '~/components/CollectionPhoto';
 import { usePhoto } from '~/hooks';
 import { calculateImageSize } from '~/helpers';
 import { Link, useParams } from 'react-router-dom';
+import BlurhashItem from '~/components/Blurhash';
 import PhotoItem from '~/components/PhotoItem';
 import config from '~/config';
+import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -34,7 +36,7 @@ function DetailPhoto() {
 
     const { calculatedWidth: relatedPhotoWidth, calculatedHeight: relatedPhotoHeight } = calculateImageSize({
         photo,
-        width: 400,
+        width: 410,
     });
 
     return (
@@ -57,12 +59,18 @@ function DetailPhoto() {
                     </div>
                     <div className={cx('detail-content')}>
                         <div className={cx('content-photo')}>
+                            <BlurhashItem
+                                photo={photo}
+                                contentPhotoWidth={contentPhotoWidth}
+                                contentPhotoHeight={contentPhotoHeight}
+                            />
                             <img
                                 style={{
                                     width: `${contentPhotoWidth}vw`,
                                     height: `${contentPhotoHeight}vh`,
                                 }}
-                                src={photo.urls.full}
+                                className={cx('image')}
+                                src={photo.urls.raw}
                                 alt=""
                             />
                         </div>
@@ -153,6 +161,7 @@ function DetailPhoto() {
                                             width={relatedPhotoWidth}
                                             height={relatedPhotoHeight}
                                             className={'related-photos'}
+                                            checkReload
                                         />
                                     </Link>
                                 )),

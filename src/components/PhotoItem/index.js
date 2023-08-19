@@ -6,21 +6,25 @@ import { CloseIcon, Download, Heart } from '../Icons';
 import { Link } from 'react-router-dom';
 import config from '~/config';
 import Button from '../Button';
-import { calculateImageSize } from '~/helpers';
+import { calculateImageSize, scrollToTop, reload } from '~/helpers';
+import BlurhashItem from '../Blurhash';
 
 const cx = classNames.bind(styles);
 
 function PhotoItem({
     data,
     className,
-    passProp,
     width,
     height,
+    card = false,
     info = false,
     button = false,
     profileImage = false,
     popUp = false,
     popUpAction = false,
+    checkScrollToTop = false,
+    checkReload = false,
+    passProps,
 }) {
     const [visible, setVisible] = useState(false);
     const show = () => setVisible(true);
@@ -36,7 +40,7 @@ function PhotoItem({
         return () => (document.body.style.overflow = 'scroll');
     }, [visible]);
 
-    const handleClick = () => {
+    const handleZoom = () => {
         const content = document.getElementsByClassName(cx('popup-content'));
         const image = document.getElementsByClassName(cx('popup-image'));
         if (zoom) {
@@ -45,14 +49,20 @@ function PhotoItem({
             image[0].style.cursor = 'zoom-out';
             setZoom(false);
         } else {
-            content[0].style.height = `${calculatedHeight}vh`;
-            content[0].style.width = `${calculatedWidth}vw`;
+            content[0].style.height = `80vh`;
+            content[0].style.width = `75vw`;
             image[0].style.cursor = 'zoom-in';
             setZoom(true);
         }
     };
 
-    const classes = cx({ [className]: className });
+    const handleClick = async () => {
+        checkScrollToTop && scrollToTop();
+        (await checkReload) && reload();
+        popUp ? show() : hide();
+    };
+
+    const classes = cx(card && 'card', { [className]: className });
 
     return (
         <div className={cx('wrapper')}>
@@ -63,7 +73,7 @@ function PhotoItem({
                         alt=""
                         className={cx('image')}
                         style={{ width: `${width}vw`, height: `${height}vh` }}
-                        onClick={popUp ? show : hide}
+                        onClick={handleClick}
                     />
                 </div>
                 {profileImage && <img src={data.user.profile_image.medium} alt="" className={cx('profile-image')} />}
@@ -84,10 +94,15 @@ function PhotoItem({
                         style={{ width: `${calculatedWidth}vw`, height: `${calculatedHeight}vh` }}
                         className={cx('popup-content')}
                     >
-                        <img src={data.urls.regular} alt="" className={cx('popup-image')} onClick={handleClick} />
+                        <BlurhashItem
+                            photo={data}
+                            contentPhotoWidth={75}
+                            contentPhotoHeight={80}
+                            className={'popup-image'}
+                        />
+                        <img src={data.urls.full} alt="" className={cx('popup-image')} onClick={handleZoom} />
                         {zoom && (
                             <>
-                                (
                                 <div className={cx('popup-profile')}>
                                     <img
                                         src={data.user.profile_image.medium}
@@ -96,7 +111,6 @@ function PhotoItem({
                                     />
                                     <span>{data.user.first_name}</span>
                                 </div>
-                                )
                                 {popUpAction && (
                                     <div className={cx('popup-action')}>
                                         <Link

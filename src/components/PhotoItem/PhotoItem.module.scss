@@ -2,6 +2,10 @@
     //display: block;
 }
 
+.wrapper-image {
+    //position: relative;
+}
+
 :root {
     --width-popup-content: 75vw;
     --height-popup-content: 80vh;
@@ -34,6 +38,8 @@
     position: relative;
     width: var(--width-popup-content);
     height: var(--height-popup-content);
+    display: flex;
+    justify-content: center;
 }
 
 .popup-image {
@@ -42,6 +48,7 @@
     height: 100%;
     border-radius: 4px;
     cursor: zoom-in;
+    object-fit: cover;
 }
 
 .popup-profile {
@@ -131,13 +138,7 @@
     }
 }
 
-//Home page
-.image {
-    border-radius: 4px;
-    //cursor: pointer;
-}
-
-.card-home {
+.card {
     position: relative;
     width: 20vw;
     height: 50vh;
@@ -159,7 +160,7 @@
         }
     }
 
-    & .profile-image {
+    .profile-image {
         position: absolute;
         top: 42.5%;
         width: 4vw;
@@ -167,14 +168,25 @@
         border-radius: 100%;
     }
 
-    & .image {
+    .image {
         position: absolute;
         left: 0;
-        width: 15vw;
+        width: 100%;
         height: 50%;
-        border-radius: 4px 100% 100%;
         cursor: pointer;
+        object-fit: cover;
+    }
+}
 
+//Home page
+.image {
+    border-radius: 8px;
+    //cursor: pointer;
+}
+
+.home {
+    .image {
+        border-radius: 4px 100% 100%;
         &:hover {
             animation-name: rotate;
             animation-duration: 0.7s;
@@ -196,45 +208,13 @@
 }
 
 //Search page
-.card-search {
-    position: relative;
-    width: 20vw;
-    height: 50vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.search {
     margin-bottom: 10%;
-    box-shadow: 4px 4px 4px 4px rgb(0 0 0 / 12%);
-    background: var(--background-image);
-    background-size: cover;
-
-    & .profile-user-name {
-        position: absolute;
-        top: 70%;
-        text-align: center;
-
-        & span {
-            font-size: calc((2vw + 2vh) / 2);
-            font-weight: bold;
-        }
-    }
-
-    & .profile-image {
-        position: absolute;
-        top: 42.5%;
-        width: 4vw;
-        height: 4vw;
-        border-radius: 100%;
-    }
-
-    & .image {
-        position: absolute;
-        left: 0;
-        width: 20vw;
-        height: 50%;
+    .image {
         border-radius: 4px;
-        cursor: pointer;
-        object-fit: cover;
+        &:hover {
+            opacity: 0.8;
+        }
     }
 }
 
@@ -247,5 +227,13 @@
         &:hover {
             opacity: 0.8;
         }
+    }
+}
+
+//CollectionPhoto
+.collection-image {
+    .image {
+        padding: 5px;
+        object-fit: cover;
     }
 }
