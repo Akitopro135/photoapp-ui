@@ -3,8 +3,6 @@ import styles from './PhotoItem.module.scss';
 import { useState } from 'react';
 import { Blurhash } from 'react-blurhash';
 import { calculateImageSize } from '~/helpers';
-import { Link } from 'react-router-dom';
-import config from '~/config';
 
 const cx = classNames.bind(styles);
 
@@ -30,7 +28,7 @@ function PhotoItem({ data, width, hardWidthVW, hardHeightVH, className, onClick,
     const classes = cx('wrapper-image', { [className]: className });
 
     return (
-        <div className={classes} {...props}>
+        <div className={cx({ hidden: loading }, classes)} {...props}>
             {loading && (
                 <Blurhash
                     hash={data.blur_hash}
@@ -38,18 +36,16 @@ function PhotoItem({ data, width, hardWidthVW, hardHeightVH, className, onClick,
                     height={`${hardHeightVH || calculatedHeight}vh`}
                 />
             )}
-            <Link to={config.routes.detailPhoto(data.id)}>
-                <img
-                    src={data.urls.regular}
-                    alt=""
-                    className={cx('image', { hidden: loading })}
-                    style={{
-                        width: `${hardWidthVW || calculatedWidth}vw`,
-                        height: `${hardHeightVH || calculatedHeight}vh`,
-                    }}
-                    onLoad={handleLoad}
-                />
-            </Link>
+            <img
+                src={data.urls.regular}
+                alt=""
+                className={cx('image', { hidden: loading })}
+                style={{
+                    width: `${hardWidthVW || calculatedWidth}vw`,
+                    height: `${hardHeightVH || calculatedHeight}vh`,
+                }}
+                onLoad={handleLoad}
+            />
         </div>
     );
 }
