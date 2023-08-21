@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 
-import PhotoItem from '~/components/PhotoItem';
+import PhotoCard from '~/components/PhotoCard';
 import { useSearch } from '~/hooks';
 import { useParams } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ function Search() {
     return (
         <div className={cx('wrapper')}>
             {listPhoto.map((photo) => (
-                <PhotoItem key={photo.id} data={photo} className={'card-search'} info button profileImage popUp />
+                <PhotoCard key={photo.id} data={photo} className={'search'} card info button profileImage popUp />
             ))}
         </div>
     );

@@ -14,10 +14,13 @@ export function calculateImageSize({ photo, width }) {
 
     calculatedWidth = (width / window.innerWidth) * 100;
     calculatedHeight = (height / window.innerHeight) * 100;
+
     return {
         calculatedWidth,
         calculatedHeight,
         realHeight,
         realWidth,
+        height,
+        width,
     };
 }

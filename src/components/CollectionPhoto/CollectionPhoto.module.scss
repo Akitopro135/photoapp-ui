@@ -1,10 +1,6 @@
 .wrapper {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 20vw;
-    height: 20vw;
     cursor: pointer;
 
     &:hover {
@@ -12,31 +8,7 @@
     }
 }
 
-.image1 {
-    width: 10vw;
-    height: 20vw;
-    padding: 5px;
-    border-radius: 8px;
-    object-fit: cover;
-}
-
 .right-item {
     display: flex;
     flex-direction: column;
-}
-
-.image2 {
-    width: 10vw;
-    height: 10vw;
-    padding: 5px;
-    border-radius: 8px;
-    object-fit: cover;
-}
-
-.image3 {
-    width: 10vw;
-    height: 10vw;
-    padding: 5px;
-    border-radius: 8px;
-    object-fit: cover;
 }

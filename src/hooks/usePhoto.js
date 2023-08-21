@@ -6,20 +6,20 @@ function usePhoto({ id }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
 
-    const getPhoto = async () => {
-        try {
-            const photo = await getDetailPhoto(id);
-            setPhoto(photo);
-            setLoading(false);
-        } catch (error) {
-            console.log('Detail Page Error: ' + error);
-            setError(error);
-        }
-    };
-
     useEffect(() => {
-        if (loading) return;
         setLoading(true);
+        const getPhoto = async () => {
+            try {
+                const photo = await getDetailPhoto(id);
+                setPhoto(photo);
+            } catch (error) {
+                console.log('Detail Page Error: ' + error);
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
         getPhoto();
     }, [id]);
 

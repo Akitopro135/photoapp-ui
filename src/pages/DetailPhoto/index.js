@@ -15,10 +15,9 @@ import {
 } from '~/components/Icons';
 import CollectionPhoto from '~/components/CollectionPhoto';
 import { usePhoto } from '~/hooks';
-import { calculateImageSize } from '~/helpers';
 import { Link, useParams } from 'react-router-dom';
-import PhotoItem from '~/components/PhotoItem';
 import config from '~/config';
+import PhotoItem from '~/components/PhotoItem';
 
 const cx = classNames.bind(styles);
 
@@ -26,16 +25,7 @@ function DetailPhoto() {
     const params = useParams();
     const id = params.id.slice(0, params.id.length);
 
-    const { photo, loading, error } = usePhoto({ id });
-    const { calculatedWidth: contentPhotoWidth, calculatedHeight: contentPhotoHeight } = calculateImageSize({
-        photo,
-        width: 900,
-    });
-
-    const { calculatedWidth: relatedPhotoWidth, calculatedHeight: relatedPhotoHeight } = calculateImageSize({
-        photo,
-        width: 400,
-    });
+    const { photo } = usePhoto({ id });
 
     return (
         <>
@@ -57,14 +47,7 @@ function DetailPhoto() {
                     </div>
                     <div className={cx('detail-content')}>
                         <div className={cx('content-photo')}>
-                            <img
-                                style={{
-                                    width: `${contentPhotoWidth}vw`,
-                                    height: `${contentPhotoHeight}vh`,
-                                }}
-                                src={photo.urls.full}
-                                alt=""
-                            />
+                            <PhotoItem data={photo} width={900} />
                         </div>
                         <div className={cx('content-photo-detail')}>
                             <div className={cx('detail-view-download')}>
@@ -150,8 +133,8 @@ function DetailPhoto() {
                                     <Link key={photo.id} to={config.routes.detailPhoto(`${photo.id}`)}>
                                         <PhotoItem
                                             data={photo}
-                                            width={relatedPhotoWidth}
-                                            height={relatedPhotoHeight}
+                                            hardWidthVW={25}
+                                            hardHeightVH={30}
                                             className={'related-photos'}
                                         />
                                     </Link>
