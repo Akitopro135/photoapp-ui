@@ -33,7 +33,7 @@ function PhotoItem({ data, width, hardWidthVW, hardHeightVH, className, onClick,
                 <Blurhash
                     hash={data.blur_hash}
                     width={`${hardWidthVW || calculatedWidth}vw`}
-                    height={`${hardHeightVH || calculatedHeight}vh`}
+                    height={`${hardHeightVH || calculatedHeight}vw`}
                 />
             )}
             <img
@@ -42,7 +42,7 @@ function PhotoItem({ data, width, hardWidthVW, hardHeightVH, className, onClick,
                 className={cx('image', { hidden: loading })}
                 style={{
                     width: `${hardWidthVW || calculatedWidth}vw`,
-                    height: `${hardHeightVH || calculatedHeight}vh`,
+                    height: `${hardHeightVH || calculatedHeight}vw`,
                 }}
                 onLoad={handleLoad}
             />

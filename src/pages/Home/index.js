@@ -25,7 +25,7 @@ function Home() {
             {photo && (
                 <div className={cx('introduct')}>
                     <div className={cx('image')}>
-                        <PhotoItem data={photo} width={1000} />
+                        <PhotoItem data={photo} width={800} />
                     </div>
                     <div>
                         <span>{photo.alt_description.toUpperCase()}</span>

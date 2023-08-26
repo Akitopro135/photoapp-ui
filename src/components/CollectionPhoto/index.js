@@ -10,17 +10,17 @@ function CollectionPhoto({ data }) {
     if (length === 1) {
         return (
             <div className={cx('wrapper')}>
-                <PhotoItem data={data[0]} hardWidthVW={20} hardHeightVH={40} className={'collection-image'} />
+                <PhotoItem data={data[0]} hardWidthVW={20} hardHeightVH={20} className={'collection-image'} />
             </div>
         );
     } else if (length === 2) {
         return (
             <div className={cx('wrapper')}>
                 <div className={cx('left-item')}>
-                    <PhotoItem data={data[0]} hardWidthVW={10} hardHeightVH={40} className={'collection-image'} />
+                    <PhotoItem data={data[0]} hardWidthVW={10} hardHeightVH={20} className={'collection-image'} />
                 </div>
                 <div className={cx('right-item')}>
-                    <PhotoItem data={data[1]} hardWidthVW={10} hardHeightVH={40} className={'collection-image'} />
+                    <PhotoItem data={data[1]} hardWidthVW={10} hardHeightVH={20} className={'collection-image'} />
                 </div>
             </div>
         );
@@ -28,11 +28,11 @@ function CollectionPhoto({ data }) {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('left-item')}>
-                <PhotoItem data={data[0]} hardWidthVW={10} hardHeightVH={40} className={'collection-image'} />
+                <PhotoItem data={data[0]} hardWidthVW={10} hardHeightVH={20} className={'collection-image'} />
             </div>
             <div className={cx('right-item')}>
-                <PhotoItem data={data[1]} hardWidthVW={10} hardHeightVH={20} className={'collection-image'} />
-                <PhotoItem data={data[2]} hardWidthVW={10} hardHeightVH={20} className={'collection-image'} />
+                <PhotoItem data={data[1]} hardWidthVW={10} hardHeightVH={10} className={'collection-image'} />
+                <PhotoItem data={data[2]} hardWidthVW={10} hardHeightVH={10} className={'collection-image'} />
             </div>
         </div>
     );
