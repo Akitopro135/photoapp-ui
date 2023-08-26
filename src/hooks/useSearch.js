@@ -26,7 +26,7 @@ function useSearch({ query, page, perPage, order_by }) {
         };
 
         getList();
-    }, []);
+    }, [query, page, perPage, order_by]);
     return {
         listPhoto,
         loading,

@@ -15,6 +15,8 @@ function PhotoCard({
     profileImage = false,
     checkScrollToTop = false,
     checkReload = false,
+    width = 24,
+    height = 12,
     passProps,
 }) {
     const handleClick = async () => {
@@ -24,14 +26,14 @@ function PhotoCard({
 
     return (
         <div className={cx('wrapper')}>
-            <div className={cx('card')}>
+            <div style={{ width: `${width}vw`, height: `${height * 2}vw` }} className={cx('card')}>
                 <div className={cx('wrapper-image')}>
                     <PhotoItem
                         data={data}
                         onClick={handleClick}
                         className={className}
-                        hardWidthVW={20}
-                        hardHeightVH={25}
+                        hardWidthVW={width}
+                        hardHeightVH={height}
                     />
                 </div>
                 {profileImage && <img src={data.user.profile_image.medium} alt="" className={cx('profile-image')} />}
