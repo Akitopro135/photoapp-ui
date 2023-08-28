@@ -11,6 +11,9 @@ const routes = {
     detailPhoto: function (id = ':id') {
         return '/photo/' + id;
     },
+    collection: function (id = ':id') {
+        return '/collection/' + id;
+    },
 };
 
 export default routes;

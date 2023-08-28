@@ -146,11 +146,15 @@ function DetailPhoto() {
                         <span>Related Collections</span>
                         <div className={cx('related-collections')}>
                             {photo.related_collections.results.map((collection) => (
-                                <div key={collection.id} className={cx('collection')}>
+                                <Link
+                                    key={collection.id}
+                                    to={config.routes.collection(`${collection.id}`)}
+                                    className={cx('collection')}
+                                >
                                     <span>{collection.title}</span>
                                     <span>number of photos: {collection.total_photos}</span>
                                     <CollectionPhoto data={collection.preview_photos} />
-                                </div>
+                                </Link>
                             ))}
                         </div>
                     </div>
