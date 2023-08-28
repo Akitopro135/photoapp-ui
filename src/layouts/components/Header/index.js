@@ -18,7 +18,7 @@ function Header() {
     const loginWithUnsplash = () => {
         const baseUrl = 'https://unsplash.com/oauth/authorize';
         const clientId = `client_id=${process.env.REACT_APP_ACCESS_KEY}`;
-        const redirect = `redirect_uri=unsplash://app/login_success`;
+        const redirect = `redirect_uri=http://localhost:3000/`;
         const responseType = `response_type=code`;
         // const allScope = [
         //     'public',
@@ -30,7 +30,7 @@ function Header() {
         //     'write_followers',
         //     'read_collections',
         //     'write_collections',
-        // ];
+        // ];unsplash://app/login_success
 
         // const scope = `scope=${allScope.join('+')}`;
 
@@ -45,7 +45,8 @@ function Header() {
             <div className={cx('inner')}>
                 <div className={cx('logo')}>
                     <Link to={config.routes.home} className={cx('logo-link')}>
-                        <img src={images.logo} alt="PhotoApp" className={cx('logo')} />
+                        <img src={images.logo} alt="PhotoApp" className={cx('logo-image')} />
+                        <h1>PhotoApp</h1>
                     </Link>
                 </div>
                 <Search />
@@ -56,10 +57,10 @@ function Header() {
                         </button>
                     ) : (
                         <>
-                            <Button href={loginWithUnsplash()}>Log In</Button>
                             <button className={cx('more-btn')}>
                                 <FontAwesomeIcon icon={faEllipsisVertical} />
                             </button>
+                            <Button href={loginWithUnsplash()}>Log In</Button>
                         </>
                     )}
                 </div>

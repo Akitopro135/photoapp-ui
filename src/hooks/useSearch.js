@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { getSearch } from '~/services/searchServices';
 
 function useSearch({ query, page, perPage, order_by }) {
     const [listPhoto, setListPhoto] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
+
+    const prevPage = useRef(0);
 
     useEffect(() => {
         setLoading(true);
@@ -22,11 +24,16 @@ function useSearch({ query, page, perPage, order_by }) {
                 setError(error);
             } finally {
                 setLoading(false);
+                prevPage.current = page;
             }
         };
 
-        getList();
-    }, [query, page, perPage, order_by]);
+        if (page !== prevPage.current) {
+            getList();
+        }
+
+        prevPage.current = page;
+    }, [page]);
     return {
         listPhoto,
         loading,

@@ -10,10 +10,6 @@
     cursor: pointer;
     background-color: transparent;
 
-    + .wrapper {
-        margin-left: 8px;
-    }
-
     &.disabled {
         pointer-events: none;
         opacity: 0.5;

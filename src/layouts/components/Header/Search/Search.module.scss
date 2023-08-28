@@ -1,6 +1,6 @@
 .search,
 .sreach-result {
-    width: 361px;
+    width: 28vw;
 }
 .search {
     position: relative;
@@ -45,9 +45,11 @@
 }
 
 .search-btn {
+    position: absolute;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    right: 0;
     width: var(--search-button-width);
     height: 100%;
     border-top-right-radius: var(--border-radius);
