@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { getSearch } from '~/services/searchServices';
+import requestKey from '~/utils/request';
 
 function useSearch({ query, page, perPage, order_by }) {
     const [listPhoto, setListPhoto] = useState([]);
@@ -12,13 +13,17 @@ function useSearch({ query, page, perPage, order_by }) {
         setLoading(true);
         const getList = async () => {
             try {
-                const list = await getSearch({
-                    query,
-                    page,
-                    perPage,
-                    order_by,
-                });
-                setListPhoto(list);
+                (async () => {
+                    const { unsplash, token } = await requestKey();
+
+                    const list = await getSearch(unsplash, token, {
+                        query,
+                        page,
+                        perPage,
+                        order_by,
+                    });
+                    setListPhoto(list);
+                })();
             } catch (error) {
                 console.log('List: ' + error);
                 setError(error);

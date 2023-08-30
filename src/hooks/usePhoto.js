@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getDetailPhoto } from '~/services/searchServices';
+import requestKey from '~/utils/request';
 
 function usePhoto({ id }) {
     const [photo, setPhoto] = useState();
@@ -10,8 +11,12 @@ function usePhoto({ id }) {
         setLoading(true);
         const getPhoto = async () => {
             try {
-                const photo = await getDetailPhoto(id);
-                setPhoto(photo);
+                (async () => {
+                    const { unsplash, token } = await requestKey();
+
+                    const photo = await getDetailPhoto(unsplash, id, token);
+                    setPhoto(photo);
+                })();
             } catch (error) {
                 console.log('Detail Page Error: ' + error);
                 setError(error);

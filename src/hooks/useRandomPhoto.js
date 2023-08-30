@@ -1,5 +1,6 @@
 import { getRandomPhoto } from '~/services/searchServices';
 import { useEffect, useState } from 'react';
+import requestKey from '~/utils/request';
 
 function useRandomPhoto() {
     const [photo, setPhoto] = useState();
@@ -10,8 +11,12 @@ function useRandomPhoto() {
         setLoading(true);
         const getPhoto = async () => {
             try {
-                const photo = await getRandomPhoto();
-                setPhoto(photo);
+                (async () => {
+                    const { unsplash, token } = await requestKey();
+
+                    const photo = await getRandomPhoto(unsplash, token);
+                    setPhoto(photo);
+                })();
             } catch (error) {
                 console.log('RandomPhoto: ' + error);
                 setError(error);

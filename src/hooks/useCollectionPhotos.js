@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getCollectionPhotos } from '~/services/searchServices';
+import requestKey from '~/utils/request';
 
 function useCollectionPhotos({ id, page, perPage, order_by }) {
     const [photos, setPhotos] = useState([]);
@@ -10,13 +11,17 @@ function useCollectionPhotos({ id, page, perPage, order_by }) {
         setLoading(true);
         const getPhotos = async () => {
             try {
-                const photo = await getCollectionPhotos({
-                    collectionId: id,
-                    page,
-                    perPage,
-                    order_by,
-                });
-                setPhotos(photo);
+                (async () => {
+                    const { unsplash, token } = await requestKey();
+
+                    const photo = await getCollectionPhotos(unsplash, token, {
+                        collectionId: id,
+                        page,
+                        perPage,
+                        order_by,
+                    });
+                    setPhotos(photo);
+                })();
             } catch (error) {
                 console.log('Detail Page Error: ' + error);
                 setError(error);
