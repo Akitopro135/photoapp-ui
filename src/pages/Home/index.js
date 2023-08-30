@@ -53,19 +53,21 @@ function Home() {
                     <div>
                         <span>Collection</span>
                     </div>
-                    <div className={cx('collection-image-body')}>
-                        {collections.results.map((collection) => (
-                            <Link
-                                key={collection.id}
-                                to={config.routes.collection(`${collection.id}`)}
-                                className={cx('collection-info')}
-                            >
-                                <span>{collection.title}</span>
-                                <span>number of photos: {collection.total_photos}</span>
-                                <CollectionPhoto data={collection.preview_photos} />
-                            </Link>
-                        ))}
-                    </div>
+                    {collections && (
+                        <div className={cx('collection-image-body')}>
+                            {collections.results.map((collection) => (
+                                <Link
+                                    key={collection.id}
+                                    to={config.routes.collection(`${collection.id}`)}
+                                    className={cx('collection-info')}
+                                >
+                                    <span>{collection.title}</span>
+                                    <span>number of photos: {collection.total_photos}</span>
+                                    <CollectionPhoto data={collection.preview_photos} />
+                                </Link>
+                            ))}
+                        </div>
+                    )}
                 </div>
             )}
         </div>

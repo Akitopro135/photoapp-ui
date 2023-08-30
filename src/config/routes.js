@@ -14,6 +14,9 @@ const routes = {
     collection: function (id = ':id') {
         return '/collection/' + id;
     },
+    user: function (userName = ':username') {
+        return '/collection/' + userName;
+    },
 };
 
 export default routes;
