@@ -15,7 +15,7 @@ const routes = {
         return '/collection/' + id;
     },
     user: function (userName = ':username') {
-        return '/collection/' + userName;
+        return '/user/' + userName;
     },
 };
 
