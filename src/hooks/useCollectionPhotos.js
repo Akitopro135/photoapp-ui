@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getCollectionPhotos } from '~/services/searchServices';
+import { getCollectionPhotos } from '~/services';
 import requestKey from '~/utils/request';
 
 function useCollectionPhotos({ id, page, perPage, order_by }) {
@@ -23,7 +23,7 @@ function useCollectionPhotos({ id, page, perPage, order_by }) {
                     setPhotos(photo);
                 })();
             } catch (error) {
-                console.log('Detail Page Error: ' + error);
+                console.log('Collection Page Error: ' + error);
                 setError(error);
             } finally {
                 setLoading(false);

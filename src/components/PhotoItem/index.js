@@ -25,7 +25,7 @@ function PhotoItem({ data, width, hardWidthVW, hardHeightVH, className, onClick,
         }, 1000);
     };
 
-    const classes = cx('wrapper-image', { [className]: className });
+    let classes = cx('wrapper-image', { [className]: className });
 
     return (
         <div className={cx({ hidden: loading }, classes)} {...props}>

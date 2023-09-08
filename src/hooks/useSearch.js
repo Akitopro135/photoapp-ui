@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { getSearch } from '~/services/searchServices';
+import { getSearch } from '~/services';
 import requestKey from '~/utils/request';
 
 function useSearch({ query, page, perPage, order_by }) {

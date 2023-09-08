@@ -1,4 +1,4 @@
-import { getRandomPhoto } from '~/services/searchServices';
+import { getRandomPhoto } from '~/services';
 import { useEffect, useState } from 'react';
 import requestKey from '~/utils/request';
 

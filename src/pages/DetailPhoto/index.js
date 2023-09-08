@@ -32,10 +32,10 @@ function DetailPhoto() {
             {photo && (
                 <div className={cx('detail-wrapper')}>
                     <div className={cx('detail-header')}>
-                        <div className={cx('detail-header-user')}>
+                        <Link to={config.routes.user(photo.user.username)} className={cx('detail-header-user')}>
                             <img src={photo.user.profile_image.medium} className={cx('profile-image')} alt="" />
                             <span>{photo.user.name}</span>
-                        </div>
+                        </Link>
                         <div className={cx('detail-header-actions')}>
                             <button className={cx('btn-download')}>
                                 <Download />

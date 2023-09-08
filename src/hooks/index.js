@@ -7,3 +7,5 @@ export { default as useScroll } from './useScroll';
 export { default as useCollectionPhotos } from './useCollectionPhotos';
 export { default as useCollectionInfo } from './useCollectionInfo';
 export { default as useCollections } from './useCollections';
+export { default as useUser } from './useUser';
+export { default as useUserPhotos } from './useUserPhotos';

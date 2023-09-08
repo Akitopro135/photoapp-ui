@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getCollectionInfo } from '~/services/searchServices';
+import { getCollectionInfo } from '~/services';
 import requestKey from '~/utils/request';
 
 function useCollectionInfo({ id }) {
@@ -20,7 +20,7 @@ function useCollectionInfo({ id }) {
                     setCollectionInfo(photo);
                 })();
             } catch (error) {
-                console.log('Detail Page Error: ' + error);
+                console.log('Collection Page Error: ' + error);
                 setError(error);
             } finally {
                 setLoading(false);

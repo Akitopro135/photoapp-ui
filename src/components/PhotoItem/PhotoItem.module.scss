@@ -22,6 +22,13 @@
     border-radius: 8px;
 }
 
+//UserPhotos
+.user-photos {
+    width: 100%; /* Chia độ rộng bằng nhau */
+    height: auto; /* Giữ tỷ lệ khung hình */
+    margin-top: 10px;
+}
+
 //RelatedPhotos
 .related-photos {
     margin-bottom: 20px;
