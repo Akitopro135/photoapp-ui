@@ -8,6 +8,9 @@ function useRandomPhoto() {
     const [error, setError] = useState();
 
     useEffect(() => {
+        if (loading) {
+            return;
+        }
         setLoading(true);
         const getPhoto = async () => {
             try {

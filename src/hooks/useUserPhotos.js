@@ -3,16 +3,22 @@ import { getUserPhotos } from '~/services';
 import requestKey from '~/utils/request';
 import useScroll from './useScroll';
 
-function useUserPhotos({ userName, pageInput, perPage, orderBy, stats, orientation, checkScroll = false }) {
+function useUserPhotos({ userName, pageInput = 1, perPage, orderBy, stats, orientation, checkScroll = false }) {
     const [photos, setPhotos] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
 
     const [data, setData] = useState([]);
 
-    const { page } = useScroll();
+    // Sử dụng useScroll với checkScroll cụ thể cho useUserPhotos
+    const { page } = useScroll({
+        checkScroll: checkScroll,
+    });
 
     useEffect(() => {
+        if (loading) {
+            return;
+        }
         setLoading(true);
         const getPhotos = async () => {
             try {
@@ -20,7 +26,7 @@ function useUserPhotos({ userName, pageInput, perPage, orderBy, stats, orientati
 
                 const photos = await getUserPhotos(unsplash, token, {
                     userName: userName,
-                    page: checkScroll ? page.current : pageInput,
+                    page: checkScroll ? page : pageInput,
                     perPage: perPage,
                     orderBy: orderBy,
                     stats: stats,
@@ -37,16 +43,14 @@ function useUserPhotos({ userName, pageInput, perPage, orderBy, stats, orientati
         };
 
         getPhotos();
-    }, [page.current]);
+    }, [page]);
 
     useEffect(() => {
-        if (checkScroll) {
-            if (page.current === 1 || data.length === 0) {
-                setData(photos.results);
-            } else {
-                const newPhotos = photos.results.filter((photo) => !data.some((p) => p.id === photo.id));
-                setData((prevPhotos) => [...prevPhotos, ...newPhotos]);
-            }
+        if (page === 1 || data.length === 0) {
+            setData(photos.results);
+        } else if (checkScroll) {
+            const newPhotos = photos.results.filter((photo) => !data.some((p) => p.id === photo.id));
+            setData((prevPhotos) => [...prevPhotos, ...newPhotos]);
         }
     }, [photos.results]);
 

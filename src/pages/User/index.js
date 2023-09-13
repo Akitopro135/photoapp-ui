@@ -18,7 +18,6 @@ import config from '~/config';
 import useUserCollection from '~/hooks/useUserCollections';
 import CollectionCard from '~/components/CollectionCard';
 import useUserLike from '~/hooks/useUserLikes';
-import Button from '~/components/Button';
 
 const cx = classNames.bind(styles);
 
@@ -55,24 +54,23 @@ function User() {
 
     //Lấy list photos có scroll để load thêm photos
     const { photos, data } = useUserPhotos({
-        checkScroll: true,
+        checkScroll: isPhotosActive ? true : false,
         userName: userName,
         perPage: 12,
     });
 
     //Lấy list collection có scroll để load thêm collections
     const { collections, data: collectionsData } = useUserCollection({
-        checkScroll: true,
+        //checkScroll: isCollectionsActive ? true : false,
         userName: userName,
     });
 
     //Lấy list photos like có scroll để load thêm photos like
     const { data: likePhotosData, photos: photoLikes } = useUserLike({
-        checkScroll: true,
+        checkScroll: isLikesActive ? true : false,
         userName: userName,
+        perPage: 12,
     });
-
-    console.log(user);
 
     return (
         <>

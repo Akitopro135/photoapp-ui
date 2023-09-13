@@ -8,6 +8,9 @@ function useCollections({ page, perPage }) {
     const [error, setError] = useState();
 
     useEffect(() => {
+        if (loading) {
+            return;
+        }
         setLoading(true);
         const getPhotos = async () => {
             try {

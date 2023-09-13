@@ -3,12 +3,17 @@
     flex-direction: column;
     margin-bottom: 4%;
     width: 33%;
+
+    //align-items: center;
 }
 
 .collection-card-info {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     :first-child {
         font-weight: bold;
+        text-transform: capitalize;
     }
     :last-child {
         color: darkgray;

@@ -1,9 +1,75 @@
 .wrapper {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content-header {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    width: 100%;
+
+    .photos-icon,
+    .likes-icon,
+    .collections-icon {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-transform: capitalize;
+        color: darkgray;
+        padding: 12px;
+        background-color: transparent;
+        border-radius: 4px;
+        margin-left: 20px;
+        cursor: pointer;
+
+        & span {
+            font-size: 1vw;
+            margin-left: 8px;
+        }
+
+        &:hover {
+            color: black;
+        }
+    }
+
+    .active {
+        display: flex;
+        justify-content: center;
+        color: black;
+        cursor: default;
+        &::after {
+            content: '';
+            position: absolute;
+            width: 6vw;
+            height: 2px;
+            bottom: 0;
+            background-color: black;
+        }
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        bottom: 0;
+        background-color: rgba(22, 24, 35, 0.12);
+    }
+}
+
+.search-value {
+    text-transform: capitalize;
+}
+
+.content-body {
+    display: flex;
     padding: 1.5%;
     min-height: 100vh;
     height: 100%;
-    width: 100%;
+    width: 80%;
     flex-wrap: wrap;
     justify-content: space-between;
 }

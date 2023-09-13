@@ -8,6 +8,9 @@ function useList({ page, perPage, order_by }) {
     const [error, setError] = useState();
 
     useEffect(() => {
+        if (loading) {
+            return;
+        }
         setLoading(true);
         const getList = async () => {
             try {

@@ -29,7 +29,7 @@ function PhotoItem({ data, width, hardWidthVW, hardHeightVH, className, onClick,
 
     return (
         <div className={cx({ hidden: loading }, classes)} {...props}>
-            {loading && (
+            {loading && data.blur_hash && (
                 <Blurhash
                     hash={data.blur_hash}
                     width={`${hardWidthVW || calculatedWidth}vw`}

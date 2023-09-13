@@ -8,6 +8,9 @@ function useUser({ username }) {
     const [error, setError] = useState();
 
     useEffect(() => {
+        if (loading) {
+            return;
+        }
         setLoading(true);
         const getUserInfo = async () => {
             try {
