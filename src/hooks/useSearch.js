@@ -1,15 +1,26 @@
-import { useState, useEffect, useRef } from 'react';
-import { getSearch } from '~/services/searchServices';
+import { useState, useEffect } from 'react';
+import { getSearch } from '~/services';
 import requestKey from '~/utils/request';
+import useScroll from './useScroll';
 
-function useSearch({ query, page, perPage, order_by }) {
+function useSearch({ query, pageInput, perPage, order_by, checkScroll = false }) {
     const [listPhoto, setListPhoto] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
 
-    const prevPage = useRef(0);
+    const [data, setData] = useState([]);
+
+    const { page, setPage } = useScroll({ checkScroll: checkScroll });
 
     useEffect(() => {
+        setData([]);
+        setPage(1);
+    }, [query]);
+
+    useEffect(() => {
+        if (loading) {
+            return;
+        }
         setLoading(true);
         const getList = async () => {
             try {
@@ -18,28 +29,34 @@ function useSearch({ query, page, perPage, order_by }) {
 
                     const list = await getSearch(unsplash, token, {
                         query,
-                        page,
+                        page: checkScroll ? page : pageInput,
                         perPage,
                         order_by,
                     });
                     setListPhoto(list);
                 })();
             } catch (error) {
-                console.log('List: ' + error);
+                console.log('SearchPage Error: ' + error);
                 setError(error);
             } finally {
                 setLoading(false);
-                prevPage.current = page;
             }
         };
 
-        if (page !== prevPage.current) {
-            getList();
-        }
+        getList();
+    }, [page, query]);
 
-        prevPage.current = page;
-    }, [page]);
+    useEffect(() => {
+        if (page === 1 || data.length === 0) {
+            setData(listPhoto.results);
+        } else if (checkScroll) {
+            const newPhotos = listPhoto.results.filter((photo) => !data.some((p) => p.id === photo.id));
+            setData((prevPhotos) => [...prevPhotos, ...newPhotos]);
+        }
+    }, [listPhoto.results]);
+
     return {
+        data,
         listPhoto,
         loading,
         error,

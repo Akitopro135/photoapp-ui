@@ -13,24 +13,11 @@ function Collection() {
     const params = useParams();
     const id = params.id.slice(0, params.id.length);
 
-    const [data, setData] = useState([]);
-
-    const { page } = useScroll();
-
-    const { photos } = useCollectionPhotos({
+    const { photos, data } = useCollectionPhotos({
+        checkScroll: true,
         id,
-        page: page.current,
         perPage: 12,
     });
-
-    useEffect(() => {
-        if (page.current === 1 || data.length === 0) {
-            setData(photos.results);
-        } else {
-            const newPhotos = photos.results.filter((photo) => !data.some((p) => p.id === photo.id));
-            setData((prevPhotos) => [...prevPhotos, ...newPhotos]);
-        }
-    }, [photos.results]);
 
     //Lay collection khac
     const { collections } = useCollections({

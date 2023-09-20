@@ -14,7 +14,7 @@ function PhotoItem({ data, width, hardWidthVW, hardHeightVH, className, onClick,
         ...passProps,
     };
 
-    const { calculatedWidth, calculatedHeight } = calculateImageSize({
+    const { width: calculatedWidth, height: calculatedHeight } = calculateImageSize({
         photo: data,
         width: width,
     });
@@ -25,15 +25,15 @@ function PhotoItem({ data, width, hardWidthVW, hardHeightVH, className, onClick,
         }, 1000);
     };
 
-    const classes = cx('wrapper-image', { [className]: className });
+    let classes = cx('wrapper-image', { [className]: className });
 
     return (
         <div className={cx({ hidden: loading }, classes)} {...props}>
-            {loading && (
+            {loading && data.blur_hash && (
                 <Blurhash
                     hash={data.blur_hash}
-                    width={`${hardWidthVW || calculatedWidth}vw`}
-                    height={`${hardHeightVH || calculatedHeight}vw`}
+                    width={`${hardWidthVW || calculatedWidth}`}
+                    height={`${hardHeightVH || calculatedHeight}`}
                 />
             )}
             <img
@@ -41,8 +41,8 @@ function PhotoItem({ data, width, hardWidthVW, hardHeightVH, className, onClick,
                 alt=""
                 className={cx('image', { hidden: loading })}
                 style={{
-                    width: `${hardWidthVW || calculatedWidth}vw`,
-                    height: `${hardHeightVH || calculatedHeight}vw`,
+                    width: `${hardWidthVW || calculatedWidth}`,
+                    height: `${hardHeightVH || calculatedHeight}`,
                 }}
                 onLoad={handleLoad}
             />

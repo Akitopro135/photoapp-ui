@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getCollectionInfo } from '~/services/searchServices';
+import { getCollectionInfo } from '~/services';
 import requestKey from '~/utils/request';
 
 function useCollectionInfo({ id }) {
@@ -8,6 +8,9 @@ function useCollectionInfo({ id }) {
     const [error, setError] = useState();
 
     useEffect(() => {
+        if (loading) {
+            return;
+        }
         setLoading(true);
         const getCollectionDetail = async () => {
             try {
@@ -20,7 +23,7 @@ function useCollectionInfo({ id }) {
                     setCollectionInfo(photo);
                 })();
             } catch (error) {
-                console.log('Detail Page Error: ' + error);
+                console.log('Collection Page Error: ' + error);
                 setError(error);
             } finally {
                 setLoading(false);

@@ -13,11 +13,12 @@ import {
     LocationDot,
     Share,
 } from '~/components/Icons';
-import CollectionPhoto from '~/components/CollectionPhoto';
-import { usePhoto } from '~/hooks';
+import { usePhoto, useSearch } from '~/hooks';
 import { Link, useParams } from 'react-router-dom';
 import config from '~/config';
 import PhotoItem from '~/components/PhotoItem';
+import CollectionCard from '~/components/CollectionCard';
+import PhotoList from '~/components/PhotoList';
 
 const cx = classNames.bind(styles);
 
@@ -27,15 +28,20 @@ function DetailPhoto() {
 
     const { photo } = usePhoto({ id });
 
+    const { listPhoto } = useSearch({
+        query: photo && photo.tags_preview[0].title,
+        perPage: 12,
+    });
+
     return (
         <>
             {photo && (
                 <div className={cx('detail-wrapper')}>
                     <div className={cx('detail-header')}>
-                        <div className={cx('detail-header-user')}>
+                        <Link to={config.routes.user(photo.user.username)} className={cx('detail-header-user')}>
                             <img src={photo.user.profile_image.medium} className={cx('profile-image')} alt="" />
                             <span>{photo.user.name}</span>
-                        </div>
+                        </Link>
                         <div className={cx('detail-header-actions')}>
                             <button className={cx('btn-download')}>
                                 <Download />
@@ -47,7 +53,7 @@ function DetailPhoto() {
                     </div>
                     <div className={cx('detail-content')}>
                         <div className={cx('content-photo')}>
-                            <PhotoItem data={photo} width={900} />
+                            <PhotoItem data={photo} width={'900px'} />
                         </div>
                         <div className={cx('content-photo-detail')}>
                             <div className={cx('detail-view-download')}>
@@ -120,7 +126,14 @@ function DetailPhoto() {
                             </div>
                             <div className={cx('detail-tags')}>
                                 {photo.tags.map((tag) => (
-                                    <button key={tag.title}>{tag.title}</button>
+                                    <Link
+                                        to={config.routes.search(`${tag.title}`)}
+                                        key={tag.title}
+                                        className={cx('tags')}
+                                        onClick={() => window.scrollTo({ top: 0 })}
+                                    >
+                                        {tag.title}
+                                    </Link>
                                 ))}
                             </div>
                         </div>
@@ -128,33 +141,26 @@ function DetailPhoto() {
                     <div className={cx('detail-related-photos')}>
                         <span>Related Photos</span>
                         <div className={cx('related-photos')}>
-                            {photo.related_collections.results.map((collection) =>
-                                collection.preview_photos.map((photo) => (
+                            {/* {photo.related_collections.results.map((collection, listIndex) =>
+                                collection.preview_photos.map((photo, index) => (
                                     <Link key={photo.id} to={config.routes.detailPhoto(`${photo.id}`)}>
                                         <PhotoItem
                                             data={photo}
                                             hardWidthVW={25}
                                             hardHeightVH={30}
-                                            className={'related-photos'}
+                                            className={'related-photo'}
                                         />
                                     </Link>
                                 )),
-                            )}
+                            )} */}
+                            <PhotoList data={listPhoto.results} width={'500px'} />
                         </div>
                     </div>
                     <div className={cx('detail-related-collections')}>
-                        <span>Related Collections</span>
+                        <span className={cx('related_collections-title')}>Related Collections</span>
                         <div className={cx('related-collections')}>
                             {photo.related_collections.results.map((collection) => (
-                                <Link
-                                    key={collection.id}
-                                    to={config.routes.collection(`${collection.id}`)}
-                                    className={cx('collection')}
-                                >
-                                    <span>{collection.title}</span>
-                                    <span>number of photos: {collection.total_photos}</span>
-                                    <CollectionPhoto data={collection.preview_photos} />
-                                </Link>
+                                <CollectionCard key={collection.id} collection={collection} />
                             ))}
                         </div>
                     </div>

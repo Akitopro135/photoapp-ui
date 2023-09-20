@@ -2,9 +2,9 @@ import classNames from 'classnames/bind';
 import styles from './ListPhoto.module.scss';
 import { useState } from 'react';
 import { AngleLeft, AngleRight } from '~/components/Icons';
-import PhotoCard from '~/components/PhotoCard';
 import { Link } from 'react-router-dom';
 import config from '~/config';
+import { PhotoCard } from '~/components/PhotoCard';
 
 const cx = classNames.bind(styles);
 

@@ -1,4 +1,4 @@
-import { getRandomPhoto } from '~/services/searchServices';
+import { getRandomPhoto } from '~/services';
 import { useEffect, useState } from 'react';
 import requestKey from '~/utils/request';
 
@@ -8,6 +8,9 @@ function useRandomPhoto() {
     const [error, setError] = useState();
 
     useEffect(() => {
+        if (loading) {
+            return;
+        }
         setLoading(true);
         const getPhoto = async () => {
             try {

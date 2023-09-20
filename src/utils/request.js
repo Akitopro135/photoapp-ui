@@ -16,7 +16,7 @@ function requestKey() {
     });
 
     const key = list[i];
-    console.log(key);
+    //console.log(key);
 
     return {
         unsplash,

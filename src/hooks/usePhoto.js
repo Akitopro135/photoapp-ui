@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getDetailPhoto } from '~/services/searchServices';
+import { getDetailPhoto } from '~/services';
 import requestKey from '~/utils/request';
 
 function usePhoto({ id }) {
@@ -8,6 +8,9 @@ function usePhoto({ id }) {
     const [error, setError] = useState();
 
     useEffect(() => {
+        if (loading) {
+            return;
+        }
         setLoading(true);
         const getPhoto = async () => {
             try {

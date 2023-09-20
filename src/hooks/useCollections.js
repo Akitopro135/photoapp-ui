@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getCollections } from '~/services/searchServices';
+import { getCollections } from '~/services';
 import requestKey from '~/utils/request';
 
 function useCollections({ page, perPage }) {
@@ -8,6 +8,9 @@ function useCollections({ page, perPage }) {
     const [error, setError] = useState();
 
     useEffect(() => {
+        if (loading) {
+            return;
+        }
         setLoading(true);
         const getPhotos = async () => {
             try {
@@ -21,7 +24,7 @@ function useCollections({ page, perPage }) {
                     setCollections(data);
                 })();
             } catch (error) {
-                console.log('Detail Page Error: ' + error);
+                console.log('Collection Page Error: ' + error);
                 setError(error);
             } finally {
                 setLoading(false);

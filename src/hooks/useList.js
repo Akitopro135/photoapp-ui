@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getPhoto } from '~/services/searchServices';
+import { getPhoto } from '~/services';
 import requestKey from '~/utils/request';
 
 function useList({ page, perPage, order_by }) {
@@ -8,6 +8,9 @@ function useList({ page, perPage, order_by }) {
     const [error, setError] = useState();
 
     useEffect(() => {
+        if (loading) {
+            return;
+        }
         setLoading(true);
         const getList = async () => {
             try {
