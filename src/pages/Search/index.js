@@ -1,7 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 
-import PhotoCard from '~/components/PhotoCard';
 import { useSearch } from '~/hooks';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
@@ -10,6 +9,7 @@ import useSearchUsers from '~/hooks/useSearchUsers';
 import useSearchCollections from '~/hooks/useSearchCollections';
 import CollectionCard from '~/components/CollectionCard';
 import UserCard from '~/components/UserCard';
+import { PhotoCard } from '~/components/PhotoCard';
 
 const cx = classNames.bind(styles);
 

@@ -11,7 +11,12 @@ function useUserLike({ userName, pageInput = 1, perPage, orderBy, orientation, c
     const [data, setData] = useState([]);
 
     // Sử dụng useScroll với checkScroll cụ thể cho useUserLike
-    const { page: likePage } = useScroll({ checkScroll: checkScroll });
+    const { page: likePage, setPage } = useScroll({ checkScroll: checkScroll });
+
+    useEffect(() => {
+        setData([]);
+        setPage(1);
+    }, [userName]);
 
     useEffect(() => {
         if (loading) {
@@ -40,7 +45,7 @@ function useUserLike({ userName, pageInput = 1, perPage, orderBy, orientation, c
         };
 
         getPhotos();
-    }, [likePage]);
+    }, [likePage, userName]);
 
     useEffect(() => {
         if (likePage === 1 || data.length === 0) {

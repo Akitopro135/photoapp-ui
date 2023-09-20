@@ -10,7 +10,12 @@ function useSearchUsers({ query, pageInput, perPage, checkScroll = false }) {
 
     const [data, setData] = useState([]);
 
-    const { page } = useScroll({ checkScroll });
+    const { page, setPage } = useScroll({ checkScroll });
+
+    useEffect(() => {
+        setData([]);
+        setPage(1);
+    }, [query]);
 
     useEffect(() => {
         if (loading) {
@@ -37,7 +42,7 @@ function useSearchUsers({ query, pageInput, perPage, checkScroll = false }) {
         };
 
         getList();
-    }, [page]);
+    }, [page, query]);
 
     useEffect(() => {
         if (page === 1 || data.length === 0) {

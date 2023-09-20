@@ -11,9 +11,14 @@ function useUserPhotos({ userName, pageInput = 1, perPage, orderBy, stats, orien
     const [data, setData] = useState([]);
 
     // Sử dụng useScroll với checkScroll cụ thể cho useUserPhotos
-    const { page } = useScroll({
+    const { page, setPage } = useScroll({
         checkScroll: checkScroll,
     });
+
+    useEffect(() => {
+        setData([]);
+        setPage(1);
+    }, [userName]);
 
     useEffect(() => {
         if (loading) {
@@ -43,7 +48,7 @@ function useUserPhotos({ userName, pageInput = 1, perPage, orderBy, stats, orien
         };
 
         getPhotos();
-    }, [page]);
+    }, [page, userName]);
 
     useEffect(() => {
         if (page === 1 || data.length === 0) {

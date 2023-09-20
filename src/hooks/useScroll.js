@@ -43,7 +43,7 @@ function useScroll({ scrollThreshold = 500, checkScroll = true }) {
             if (checkScroll && !isScrolling.current && newScrollY + windowHeight >= pageHeight - scrollThreshold) {
                 isScrolling.current = true;
                 setTimeout(() => {
-                    setPage(page + 1);
+                    setPage((page) => page + 1);
                     isScrolling.current = false;
                 }, 2000);
 
@@ -59,6 +59,7 @@ function useScroll({ scrollThreshold = 500, checkScroll = true }) {
 
     return {
         page,
+        setPage,
         scrollY,
     };
 }

@@ -13,11 +13,12 @@ import {
 } from '~/components/Icons';
 import 'tippy.js/dist/tippy.css';
 import { useState } from 'react';
-import PhotoItem from '~/components/PhotoItem';
 import config from '~/config';
 import useUserCollection from '~/hooks/useUserCollections';
 import CollectionCard from '~/components/CollectionCard';
 import useUserLike from '~/hooks/useUserLikes';
+import { PhotoHover } from '~/components/PhotoCard';
+import PhotoList from '~/components/PhotoList';
 
 const cx = classNames.bind(styles);
 
@@ -83,12 +84,14 @@ function User() {
                         <div className={cx('info')}>
                             <span className={cx('username')}>{user.username}</span>
                             <span className={cx('bio')}>{user.bio}</span>
-                            <div>
-                                <Link to={config.routes.search(`${user.location}`)} className={cx('location-icon')}>
-                                    <LocationDot />
-                                    <span>{user.location}</span>
-                                </Link>
-                            </div>
+                            {user.location && (
+                                <div>
+                                    <Link to={config.routes.search(`${user.location}`)} className={cx('location-icon')}>
+                                        <LocationDot />
+                                        <span>{user.location}</span>
+                                    </Link>
+                                </div>
+                            )}
                             {user.social.instagram_username && (
                                 <a
                                     href={`https://www.instagram.com/${user.social.instagram_username}`}
@@ -122,7 +125,14 @@ function User() {
                                 <span>Interests</span>
                                 <div className={cx('detail-tags')}>
                                     {user.tags.custom.map((tag) => (
-                                        <button key={tag.title}>{tag.title}</button>
+                                        <Link
+                                            to={config.routes.search(`${tag.title}`)}
+                                            key={tag.title}
+                                            className={cx('tags')}
+                                            onClick={() => window.scrollTo({ top: 0 })}
+                                        >
+                                            {tag.title}
+                                        </Link>
                                     ))}
                                 </div>
                             </div>
@@ -130,56 +140,62 @@ function User() {
                     </div>
                     <div className={cx('content-wrapper')}>
                         <div className={cx('content-header')}>
-                            <div
-                                className={cx('photos-icon', isPhotosActive ? 'active' : '')}
-                                onClick={() => !isPhotosActive && handlePhotosChange()}
-                            >
-                                <ImageIcon />
-                                <span>Photos {photos.total}</span>
+                            <div onClick={() => !isPhotosActive && handlePhotosChange()}>
+                                <Link
+                                    to={config.routes.user(`${userName}`)}
+                                    className={cx('photos-icon', isPhotosActive ? 'active' : '')}
+                                >
+                                    <ImageIcon />
+                                    <span>Photos {photos.total}</span>
+                                </Link>
                             </div>
-                            <div
-                                className={cx('likes-icon', isLikesActive ? 'active' : '')}
-                                onClick={() => !isLikesActive && handleLikesChange()}
-                            >
-                                <Heart />
-                                <span>Likes {photoLikes.total}</span>
+                            <div onClick={() => !isLikesActive && handleLikesChange()}>
+                                <Link
+                                    to={config.routes.userLike(`${userName}`)}
+                                    className={cx('likes-icon', isLikesActive ? 'active' : '')}
+                                >
+                                    <Heart />
+                                    <span>Likes {photoLikes.total}</span>
+                                </Link>
                             </div>
-                            <div
-                                className={cx('collections-icon', isCollectionsActive ? 'active' : '')}
-                                onClick={() => !isCollectionsActive && handleCollectionsChange()}
-                            >
-                                <CollectionIcon />
-                                <span>Collections {collections.total}</span>
+                            <div onClick={() => !isCollectionsActive && handleCollectionsChange()}>
+                                <Link
+                                    to={config.routes.userCollection(`${userName}`)}
+                                    className={cx('collections-icon', isCollectionsActive ? 'active' : '')}
+                                >
+                                    <CollectionIcon />
+                                    <span>Collections {collections.total}</span>
+                                </Link>
                             </div>
                         </div>
                         <div className={cx('content-body')}>
-                            {data &&
-                                isPhotosActive &&
-                                data.map((photo, index) => (
-                                    <Link key={photo.id} to={config.routes.detailPhoto(`${photo.id}`)}>
-                                        <PhotoItem
-                                            data={photo}
-                                            hardWidthVW={25}
-                                            hardHeightVH={30}
-                                            className={'user-photos'}
-                                        />
-                                    </Link>
-                                ))}
-                            {likePhotosData &&
-                                isLikesActive &&
-                                likePhotosData.map((photo, index) => (
-                                    <Link key={photo.id} to={config.routes.detailPhoto(`${photo.id}`)}>
-                                        <PhotoItem
-                                            data={photo}
-                                            hardWidthVW={25}
-                                            hardHeightVH={30}
-                                            className={'user-photos'}
-                                        />
-                                    </Link>
-                                ))}
+                            {data && isPhotosActive && (
+                                // data.map((photo) => (
+                                //     <PhotoHover
+                                //         key={photo.id}
+                                //         data={photo}
+                                //         hardWidthVW={25}
+                                //         hardHeightVH={30}
+                                //         className={'user-photos'}
+                                //     />
+                                // ))}
+                                <PhotoList data={data} width={'500px'} />
+                            )}
+                            {likePhotosData && isLikesActive && (
+                                // likePhotosData.map((photo) => (
+                                //     <PhotoHover
+                                //         key={photo.id}
+                                //         data={photo}
+                                //         hardWidthVW={25}
+                                //         hardHeightVH={30}
+                                //         className={'user-photos'}
+                                //     />
+                                // ))
+                                <PhotoList data={likePhotosData} width={'500px'} />
+                            )}
                             {collectionsData &&
                                 isCollectionsActive &&
-                                collectionsData.map((collection, index) => (
+                                collectionsData.map((collection) => (
                                     <CollectionCard key={collection.id} collection={collection} />
                                 ))}
                         </div>

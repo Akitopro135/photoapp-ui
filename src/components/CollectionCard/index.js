@@ -26,7 +26,9 @@ function CollectionCard({ collection }) {
             </div>
             <div className={cx('detail-tags')}>
                 {slicedTag.map((tag) => (
-                    <button key={tag.title}>{tag.title}</button>
+                    <Link to={config.routes.search(`${tag.title}`)} key={tag.title} className={cx('tags')}>
+                        {tag.title}
+                    </Link>
                 ))}
             </div>
         </div>

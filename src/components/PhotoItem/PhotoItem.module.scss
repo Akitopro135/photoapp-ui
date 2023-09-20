@@ -3,13 +3,10 @@
     display: flex;
     justify-content: center;
 
+    //z-index: 1;
+
     .hidden {
         display: none;
-    }
-
-    :first-child {
-        z-index: 2;
-        border-radius: 8px;
     }
 }
 
@@ -18,7 +15,8 @@
 }
 
 .image {
-    z-index: 1;
+    //display: flex;
+    //z-index: 1;
     border-radius: 8px;
 }
 
@@ -30,12 +28,13 @@
 }
 
 //RelatedPhotos
-.related-photos {
+.related-photo {
     margin-bottom: 20px;
 
     &:hover {
         opacity: 0.8;
     }
+    //flex: 1;
 }
 
 //CollectionPhoto

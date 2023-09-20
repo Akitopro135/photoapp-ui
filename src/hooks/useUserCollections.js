@@ -10,7 +10,12 @@ function useUserCollection({ userName, pageInput, perPage, checkScroll = false }
 
     const [data, setData] = useState([]);
 
-    const { page } = useScroll({ checkScroll: checkScroll });
+    const { page, setPage } = useScroll({ checkScroll: checkScroll });
+
+    useEffect(() => {
+        setData([]);
+        setPage(1);
+    }, [userName]);
 
     useEffect(() => {
         if (loading) {
@@ -37,7 +42,7 @@ function useUserCollection({ userName, pageInput, perPage, checkScroll = false }
         };
 
         getCollections();
-    }, [page]);
+    }, [page, userName]);
 
     useEffect(() => {
         if (page === 1 || data.length === 0) {

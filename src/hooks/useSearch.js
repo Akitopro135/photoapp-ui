@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { getSearch } from '~/services';
 import requestKey from '~/utils/request';
 import useScroll from './useScroll';
@@ -10,7 +10,12 @@ function useSearch({ query, pageInput, perPage, order_by, checkScroll = false })
 
     const [data, setData] = useState([]);
 
-    const { page } = useScroll({ checkScroll: checkScroll });
+    const { page, setPage } = useScroll({ checkScroll: checkScroll });
+
+    useEffect(() => {
+        setData([]);
+        setPage(1);
+    }, [query]);
 
     useEffect(() => {
         if (loading) {

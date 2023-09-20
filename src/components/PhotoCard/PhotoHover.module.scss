@@ -1,0 +1,42 @@
+.hover-wrapper {
+    display: flex;
+    position: relative;
+    width: 100%;
+    justify-content: center;
+
+    transition: opacity 0.1s, filter 0.1s; /* Thêm transition để có hiệu ứng mượt mà */
+
+    &:hover {
+        opacity: 0.9;
+        filter: brightness(0.9); /* Áp dụng hiệu ứng tối khi hover */
+    }
+}
+
+.show-info {
+    position: absolute;
+    bottom: 0;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: row;
+
+    height: auto;
+    align-items: center;
+
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    border-end-start-radius: 8px;
+    border-end-end-radius: 8px;
+
+    & span {
+        color: white;
+        font-weight: bold;
+        text-transform: capitalize;
+        font-size: 1vw;
+    }
+}
+
+.profile-image {
+    border-radius: 100%;
+    padding: 12px;
+}

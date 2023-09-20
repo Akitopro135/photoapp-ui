@@ -17,6 +17,12 @@ const routes = {
     user: function (userName = ':username') {
         return '/user/' + userName;
     },
+    userLike: function (userName = ':username') {
+        return '/user/' + userName + '/likes';
+    },
+    userCollection: function (userName = ':username') {
+        return '/user/' + userName + '/collections';
+    },
 };
 
 export default routes;

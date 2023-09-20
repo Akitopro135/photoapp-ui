@@ -42,7 +42,6 @@ function useCollectionPhotos({ id, pageInput, perPage, order_by, checkScroll = f
     }, [id, page, perPage, order_by]);
 
     useEffect(() => {
-        console.log(data);
         if (page === 1 || data.length === 0) {
             setData(photos.results);
         } else {
