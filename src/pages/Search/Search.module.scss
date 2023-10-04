@@ -10,10 +10,12 @@
     flex-direction: row;
     align-items: start;
     width: 100%;
+    box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
 
     .photos-icon,
-    .likes-icon,
+    .users-icon,
     .collections-icon {
+        position: relative;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -33,30 +35,27 @@
         &:hover {
             color: black;
         }
-    }
 
-    .active {
-        display: flex;
-        justify-content: center;
-        color: black;
-        cursor: default;
-        &::after {
+        &::before {
             content: '';
             position: absolute;
-            width: 6vw;
             height: 2px;
+            width: 100%;
             bottom: 0;
-            background-color: black;
+            left: 0;
+            background-color: black; /* Màu sắc của gạch chân */
+            transform: scaleX(0); /* Ẩn gạch chân ban đầu */
+            transform-origin: 0 0; /* Đặt điểm bắt đầu ở góc trái trên của phần tử */
+            transition: transform 0.2s ease-in-out; /* Hiệu ứng khi hover */
         }
     }
 
-    &::after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 1px;
-        bottom: 0;
-        background-color: rgba(22, 24, 35, 0.12);
+    .active {
+        color: black;
+
+        &::before {
+            transform: scaleX(1); /* Hiển thị gạch chân cho item active */
+        }
     }
 }
 

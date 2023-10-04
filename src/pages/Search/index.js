@@ -1,15 +1,16 @@
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 
-import { useSearch } from '~/hooks';
-import { useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useLoadMore, useSearch } from '~/hooks';
+import { Link, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { CollectionIcon, Heart, ImageIcon } from '~/components/Icons';
 import useSearchUsers from '~/hooks/useSearchUsers';
 import useSearchCollections from '~/hooks/useSearchCollections';
 import CollectionCard from '~/components/CollectionCard';
 import UserCard from '~/components/UserCard';
 import { PhotoCard } from '~/components/PhotoCard';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
@@ -39,25 +40,44 @@ function Search() {
         setCheckCollections(true);
     };
 
+    useEffect(() => {
+        if (params.value === 'users') {
+            handleUsersChange();
+        } else if (params.value === 'collections') {
+            handleCollectionsChange();
+        } else {
+            handlePhotosChange();
+        }
+    }, [params]);
+
     //Lấy danh sách search photos
-    const { data, listPhoto } = useSearch({
-        checkScroll: true,
-        query: searchValue,
-        perPage: 12,
+    const { loadMoreData: data, total } = useLoadMore({
+        checkScroll: isPhotosActive ? true : false,
+        fetchDatas: useSearch,
+        fetchDatasProps: {
+            query: searchValue,
+            perPage: 12,
+        },
     });
 
     //Lấy danh sách search users
-    const { data: usersData, users } = useSearchUsers({
-        checkScroll: true,
-        query: searchValue,
-        perPage: 12,
+    const { loadMoreData: usersData, total: totalUser } = useLoadMore({
+        checkScroll: isUsersActive ? true : false,
+        fetchDatas: useSearchUsers,
+        fetchDatasProps: {
+            query: searchValue,
+            perPage: 12,
+        },
     });
 
     //Lấy danh sách search collections
-    const { data: collectionsData, collections } = useSearchCollections({
-        checkScroll: true,
-        query: searchValue,
-        perPage: 12,
+    const { loadMoreData: collectionsData, total: totalCollection } = useLoadMore({
+        checkScroll: isCollectionsActive ? true : false,
+        fetchDatas: useSearchCollections,
+        fetchDatasProps: {
+            query: searchValue,
+            perPage: 12,
+        },
     });
 
     const handleChange = (number) => {
@@ -70,27 +90,30 @@ function Search() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('content-header')}>
-                <div
+                <Link
+                    to={config.routes.search({ searchId: searchValue, value: 'photos' })}
                     className={cx('photos-icon', isPhotosActive ? 'active' : '')}
                     onClick={() => !isPhotosActive && handlePhotosChange()}
                 >
                     <ImageIcon />
-                    <span>Photos {handleChange(parseInt(listPhoto.total))}</span>
-                </div>
-                <div
-                    className={cx('likes-icon', isUsersActive ? 'active' : '')}
+                    <span>Photos {handleChange(parseInt(total))}</span>
+                </Link>
+                <Link
+                    to={config.routes.search({ searchId: searchValue, value: 'users' })}
+                    className={cx('users-icon', isUsersActive ? 'active' : '')}
                     onClick={() => !isUsersActive && handleUsersChange()}
                 >
                     <Heart />
-                    <span>Users {handleChange(parseInt(users.total))}</span>
-                </div>
-                <div
+                    <span>Users {handleChange(parseInt(totalUser))}</span>
+                </Link>
+                <Link
+                    to={config.routes.search({ searchId: searchValue, value: 'collections' })}
                     className={cx('collections-icon', isCollectionsActive ? 'active' : '')}
                     onClick={() => !isCollectionsActive && handleCollectionsChange()}
                 >
                     <CollectionIcon />
-                    <span>Collections {handleChange(parseInt(collections.total))}</span>
-                </div>
+                    <span>Collections {handleChange(parseInt(totalCollection))}</span>
+                </Link>
             </div>
             <h1 className={cx('search-value')}>{searchValue}</h1>
             <div className={cx('content-body')}>
@@ -108,7 +131,11 @@ function Search() {
                             popUp
                         />
                     ))}
-                {usersData && isUsersActive && usersData.map((photo) => <UserCard key={photo.id} data={photo} />)}
+                {usersData &&
+                    isUsersActive &&
+                    usersData.map((photo) => (
+                        <UserCard key={photo.id} data={photo} className={'search-user'} checkPhoto />
+                    ))}
                 {collectionsData &&
                     isCollectionsActive &&
                     collectionsData.map((collection) => <CollectionCard key={collection.id} collection={collection} />)}

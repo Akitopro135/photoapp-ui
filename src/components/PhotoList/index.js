@@ -1,72 +1,92 @@
 import classNames from 'classnames/bind';
 import styles from './PhotoList.module.scss';
-import { useEffect, useState } from 'react';
-import images from '~/assets/images';
 import { PhotoHover } from '../PhotoCard';
+import { calculateImageSize } from '~/helpers';
+import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
-// function PhotoList({ data }) {
-//     const [columns1, setColumns1] = useState([]);
-//     const [columns2, setColumns2] = useState([]);
-//     const [columns3, setColumns3] = useState([]);
+function PhotoList({ data, check, widthPC }) {
+    const [isWidthInRange, setIsWidthInRange] = useState(false);
 
-//     useEffect(() => {}, []);
+    const handleResize = () => {
+        // Xử lý khi chiều rộng thay đổi
+        if (
+            (window.screen.width * 33) / 100 < window.innerWidth &&
+            window.innerWidth < (window.screen.width * 96) / 100
+        ) {
+            setIsWidthInRange(true);
+        } else {
+            setIsWidthInRange(false);
+        }
+    };
 
-//     return (
-//         <>
-//             {columns1 && (
-//                 <div className={cx('row')}>
-//                     <div className={cx('column')}>
-//                         <img src={images.background} alt="" style={{ width: 500, height: 1000 }} />
-//                         <img src={images.background} alt="" style={{ width: 500, height: 500 }} />
-//                         <img src={images.background} alt="" style={{ width: 500, height: 500 }} />
-//                         <img src={images.background} alt="" style={{ width: 500, height: 1000 }} />
-//                     </div>
-//                     <div className={cx('column')}>
-//                         <img src={images.background} alt="" style={{ width: 500, height: 500 }} />
-//                         <img src={images.background} alt="" style={{ width: 500, height: 1000 }} />
-//                         <img src={images.background} alt="" style={{ width: 500, height: 500 }} />
-//                         <img src={images.background} alt="" style={{ width: 500, height: 1000 }} />
-//                     </div>
-//                     <div className={cx('column')}>
-//                         <img src={images.background} alt="" style={{ width: 500, height: 1000 }} />
-//                         <img src={images.background} alt="" style={{ width: 500, height: 1000 }} />
-//                         <img src={images.background} alt="" style={{ width: 500, height: 500 }} />
-//                         <img src={images.background} alt="" style={{ width: 500, height: 500 }} />
-//                     </div>
-//                 </div>
-//             )}
-//         </>
-//     );
-// }
+    useEffect(() => {
+        // Gắn sự kiện lắng nghe sự thay đổi chiều rộng
+        window.addEventListener('resize', handleResize);
 
-function PhotoList({ data, width }) {
-    // Khởi tạo các mảng chứa ảnh cho từng cột
+        // Lần đầu tiên khi tải trang, gọi hàm xử lý
+        handleResize();
+
+        // Làm sạch sự kiện khi component unmount
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    const renderColumns = () => {
+        const columns = isWidthInRange ? [column4, column5] : [column1, column2, column3];
+        return columns.map((column, index) => (
+            <div key={index} className={cx('column')}>
+                {column}
+            </div>
+        ));
+    };
+
     const column1 = [];
     const column2 = [];
     const column3 = [];
+    const column4 = [];
+    const column5 = [];
 
-    // Duyệt qua danh sách ảnh trong data
+    let height1 = 0;
+    let height2 = 0;
+    let height3 = 0;
+    let height4 = 0;
+    let height5 = 0;
+
     data &&
-        data.forEach((photo, index) => {
-            // Dựa vào số thứ tự (index % 3) để quyết định cột tương ứng
-            if (index % 3 === 0) {
-                column3.push(<PhotoHover key={photo.id} data={photo} width={width} />);
-            } else if (index % 3 === 1) {
-                column1.push(<PhotoHover key={photo.id} data={photo} width={width} />);
+        data.forEach((photo) => {
+            const { heightPX: calculatedHeight } = calculateImageSize({
+                photo: photo,
+                width: widthPC,
+            });
+
+            if (isWidthInRange) {
+                let smallestHeight = Math.min(height4, height5);
+                if (height4 === smallestHeight) {
+                    column4.push(<PhotoHover key={photo.id} data={photo} widthPC={widthPC} check={check} />);
+                    height4 += Math.floor(calculatedHeight);
+                } else {
+                    column5.push(<PhotoHover key={photo.id} data={photo} widthPC={widthPC} check={check} />);
+                    height5 += Math.floor(calculatedHeight);
+                }
             } else {
-                column2.push(<PhotoHover key={photo.id} data={photo} width={width} />);
+                let smallestHeight = Math.min(height1, height2, height3);
+                if (height1 === smallestHeight) {
+                    column1.push(<PhotoHover key={photo.id} data={photo} widthPC={widthPC} check={check} />);
+                    height1 += Math.floor(calculatedHeight);
+                } else if (height2 === smallestHeight) {
+                    column2.push(<PhotoHover key={photo.id} data={photo} widthPC={widthPC} check={check} />);
+                    height2 += Math.floor(calculatedHeight);
+                } else {
+                    column3.push(<PhotoHover key={photo.id} data={photo} widthPC={widthPC} check={check} />);
+                    height3 += Math.floor(calculatedHeight);
+                }
             }
         });
 
-    return (
-        <div className={cx('row')}>
-            <div className={cx('column')}>{column1}</div>
-            <div className={cx('column')}>{column2}</div>
-            <div className={cx('column')}>{column3}</div>
-        </div>
-    );
+    return <div className={cx('row')}>{renderColumns()}</div>;
 }
 
 export default PhotoList;

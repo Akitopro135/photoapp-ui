@@ -11,23 +11,23 @@ const random = Math.floor(Math.random() * 20) + 1;
 
 function Home() {
     //Lay listSea
-    const { listPhoto: listSea } = useSearch({
+    const { data: listSea } = useSearch({
         query: 'sea',
         page: random,
         perPage: 6,
     });
 
     //Lay listTop
-    const { listPhoto: listTop } = useList({
+    const { data: listTop } = useList({
         page: random,
         perPage: 6,
     });
 
     //Lay anh Random
-    const { photo } = useRandomPhoto();
+    const { data: photo } = useRandomPhoto();
 
     //Lay collection khac
-    const { collections } = useCollections({
+    const { data: collections } = useCollections({
         page: random,
         perPage: 3,
     });

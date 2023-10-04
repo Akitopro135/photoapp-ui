@@ -20,7 +20,11 @@ function ListPhoto({ data, title, morePhoto = false, className }) {
             <div className={cx(morePhoto ? 'list-header' : '')}>
                 <h1>{title} Image</h1>
                 {morePhoto && (
-                    <Link to={config.routes.search(`${title}`)} className={cx('btn-seemore')}>
+                    <Link
+                        to={config.routes.search({ searchId: title, value: 'photos' })}
+                        className={cx('btn-seemore')}
+                        onClick={() => window.scrollTo({ top: 0 })}
+                    >
                         See more
                     </Link>
                 )}

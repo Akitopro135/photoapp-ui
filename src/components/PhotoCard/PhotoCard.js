@@ -34,13 +34,16 @@ function PhotoCard({
                             data={data}
                             onClick={handleClick}
                             className={className}
-                            hardWidthVW={`${width}vw`}
-                            hardHeightVH={`${height}vw`}
+                            hardWidthVW={width}
+                            hardHeightVH={height}
                         />
                     </Link>
                 </div>
                 {profileImage && (
-                    <Link to={config.routes.user(`${data.user.username}`)} className={cx('profile-image')}>
+                    <Link
+                        to={config.routes.user({ userName: `${data.user.username}`, value: 'user' })}
+                        className={cx('profile-image')}
+                    >
                         <img src={data.user.profile_image.medium} alt="" />
                     </Link>
                 )}

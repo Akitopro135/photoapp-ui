@@ -9,3 +9,7 @@ export { default as useCollectionInfo } from './useCollectionInfo';
 export { default as useCollections } from './useCollections';
 export { default as useUser } from './useUser';
 export { default as useUserPhotos } from './useUserPhotos';
+export { default as useTopic } from './useTopic';
+export { default as useTopicList } from './useTopicList';
+export { default as useTopicPhotos } from './useTopicPhotos';
+export { default as useLoadMore } from './useLoadMore';

@@ -1,38 +1,28 @@
 import { useEffect, useState } from 'react';
-import { getSearchCollection } from '~/services';
 import requestKey from '~/utils/request';
-import useScroll from './useScroll';
 
-function useSearchCollections({ query, pageInput, perPage, checkScroll = false }) {
-    const [collections, setCollections] = useState([]);
+function useSearchCollections({ query, page, perPage }) {
+    const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
 
-    const [data, setData] = useState([]);
-
-    const { page, setPage } = useScroll({ checkScroll });
-
     useEffect(() => {
-        setData([]);
-        setPage(1);
-    }, [query]);
-
-    useEffect(() => {
-        if (loading) {
-            return;
-        }
+        if (loading) return;
         setLoading(true);
         const getList = async () => {
             try {
                 const { unsplash, token } = requestKey();
 
-                const collections = await getSearchCollection(unsplash, token, {
+                const data = await unsplash.search.getCollections({
                     query,
-                    page: checkScroll ? page : pageInput,
+                    page,
                     perPage,
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
                 });
 
-                setCollections(collections);
+                setData(data.response);
             } catch (error) {
                 console.log('SearchPage Error: ' + error);
                 setError(error);
@@ -44,18 +34,7 @@ function useSearchCollections({ query, pageInput, perPage, checkScroll = false }
         getList();
     }, [page, query]);
 
-    useEffect(() => {
-        if (page === 1 || data.length === 0) {
-            setData(collections.results);
-        } else if (checkScroll) {
-            const newCollections = collections.results.filter(
-                (collection) => !data.some((p) => p.id === collection.id),
-            );
-            setData((prevCollections) => [...prevCollections, ...newCollections]);
-        }
-    }, [collections.results]);
-
-    return { data, collections, loading, error };
+    return { data, total: data.total, loading, error };
 }
 
 export default useSearchCollections;

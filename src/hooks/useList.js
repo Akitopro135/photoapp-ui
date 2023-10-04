@@ -1,29 +1,29 @@
 import { useState, useEffect } from 'react';
-import { getPhoto } from '~/services';
 import requestKey from '~/utils/request';
 
 function useList({ page, perPage, order_by }) {
-    const [listPhoto, setListPhoto] = useState([]);
+    const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
 
     useEffect(() => {
-        if (loading) {
-            return;
-        }
+        if (loading) return;
         setLoading(true);
         const getList = async () => {
             try {
                 (async () => {
                     const { unsplash, token } = await requestKey();
 
-                    const list = await getPhoto(unsplash, token, {
-                        page,
-                        perPage,
-                        order_by,
+                    const list = await unsplash.photos.list({
+                        page: page,
+                        perPage: perPage,
+                        orderBy: order_by,
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
                     });
 
-                    setListPhoto(list);
+                    setData(list.response.results);
                 })();
             } catch (error) {
                 console.log('List: ' + error);
@@ -36,7 +36,7 @@ function useList({ page, perPage, order_by }) {
         getList();
     }, []);
     return {
-        listPhoto,
+        data,
         loading,
         error,
     };

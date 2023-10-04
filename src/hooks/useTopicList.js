@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import requestKey from '~/utils/request';
 
-function useUserPhotos({ userName, page, perPage, orderBy, stats, orientation }) {
+function useTopicList({ topicIdOrSlug, page, perPage, orderBy }) {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
@@ -9,17 +9,15 @@ function useUserPhotos({ userName, page, perPage, orderBy, stats, orientation })
     useEffect(() => {
         if (loading) return;
         setLoading(true);
-        const getPhotos = async () => {
+        const get = async () => {
             try {
                 const { unsplash, token } = await requestKey();
 
-                const data = await unsplash.users.getPhotos({
-                    username: userName,
+                const data = await unsplash.topics.list({
+                    topicIdOrSlug,
                     page,
-                    perPage: perPage,
-                    orderBy: orderBy,
-                    stats: stats,
-                    orientation: orientation,
+                    perPage,
+                    orderBy,
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -27,22 +25,17 @@ function useUserPhotos({ userName, page, perPage, orderBy, stats, orientation })
 
                 setData(data.response);
             } catch (error) {
-                console.log('User Page Error: ' + error);
+                console.log('TopicPage Error: ' + error);
                 setError(error);
             } finally {
                 setLoading(false);
             }
         };
 
-        getPhotos();
-    }, [page, userName]);
+        get();
+    }, [page, topicIdOrSlug]);
 
-    return {
-        data,
-        total: data.total,
-        loading,
-        error,
-    };
+    return { data, total: data.total, loading, error };
 }
 
-export default useUserPhotos;
+export default useTopicList;

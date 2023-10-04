@@ -1,11 +1,10 @@
 import classNames from 'classnames/bind';
 import styles from './Collection.module.scss';
 import { Link, useParams } from 'react-router-dom';
-import { useCollectionInfo, useCollectionPhotos, useCollections, useScroll } from '~/hooks';
-import PhotoItem from '~/components/PhotoItem';
+import { useCollectionInfo, useCollectionPhotos, useCollections, useLoadMore } from '~/hooks';
 import config from '~/config';
 import CollectionPhoto from '~/components/CollectionPhoto';
-import { useEffect, useState } from 'react';
+import PhotoList from '~/components/PhotoList';
 
 const cx = classNames.bind(styles);
 
@@ -13,24 +12,24 @@ function Collection() {
     const params = useParams();
     const id = params.id.slice(0, params.id.length);
 
-    const { photos, data } = useCollectionPhotos({
+    const { loadMoreData: data, total } = useLoadMore({
         checkScroll: true,
-        id,
-        perPage: 12,
+        fetchDatas: useCollectionPhotos,
+        fetchDatasProps: { id, perPage: 12 },
     });
 
     //Lay collection khac
-    const { collections } = useCollections({
+    const { data: collections } = useCollections({
         page: 2,
         perPage: 3,
     });
 
     //Lay thong tin cua collection
-    const { collectionInfo } = useCollectionInfo({ id });
+    const { data: collectionInfo } = useCollectionInfo({ id });
 
     return (
         <>
-            {collectionInfo && data && photos && collections && (
+            {collectionInfo && data && collections && (
                 <div className={cx('wrapper')}>
                     <div className={cx('title')}>
                         <h1>{collectionInfo.title}</h1>
@@ -45,18 +44,19 @@ function Collection() {
                     </div>
                     {data.length > 0 && (
                         <div className={cx('photos-wrapper')}>
-                            <span>Photos: {photos.total}</span>
+                            <span>Photos: {total}</span>
                             <div className={cx('photos')}>
-                                {data.map((photo) => (
+                                {/* {data.map((photo) => (
                                     <Link key={photo.id} to={config.routes.detailPhoto(`${photo.id}`)}>
                                         <PhotoItem
                                             data={photo}
                                             hardWidthVW={25}
                                             hardHeightVH={30}
-                                            className={'related-photos'}
+                                            className={'related-photo'}
                                         />
                                     </Link>
-                                ))}
+                                ))} */}
+                                <PhotoList data={data} widthPC={30} />
                             </div>
                         </div>
                     )}

@@ -4,11 +4,18 @@ import { Link } from 'react-router-dom';
 import PhotoItem from '../PhotoItem';
 import config from '~/config';
 import { useState } from 'react';
+import { calculateImageSize } from '~/helpers';
 
 const cx = classNames.bind(styles);
 
-function PhotoHover({ data, width, hardWidthVW, hardHeightVH, className, onClick, passProps }) {
+function PhotoHover({ data, check, widthPC, hardWidthVW, hardHeightVH, className, onClick, passProps }) {
     const [showInfo, setShowInfo] = useState(false);
+
+    const { widthPX: calculatedWidth } = calculateImageSize({
+        photo: data,
+        width: widthPC,
+    });
+
     const handleMouseEnter = () => {
         setShowInfo(true); // Khi rê chuột vào, hiển thị thông tin
     };
@@ -16,13 +23,24 @@ function PhotoHover({ data, width, hardWidthVW, hardHeightVH, className, onClick
     const handleMouseLeave = () => {
         setShowInfo(false); // Khi chuột rời khỏi, ẩn thông tin
     };
+
+    const handleLink = () => {
+        if (check === 'likes') {
+            return config.routes.user({ userName: `${data.user.username}`, value: 'likes' });
+        } else if (check === 'collections') {
+            return config.routes.user({ userName: `${data.user.username}`, value: 'collections' });
+        } else {
+            return config.routes.user({ userName: `${data.user.username}`, value: 'user' });
+        }
+    };
+
     return (
         <div className={cx('hover-wrapper')}>
             <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                <Link to={config.routes.detailPhoto(`${data.id}`)}>
+                <Link to={config.routes.detailPhoto(`${data.id}`)} onClick={() => window.scrollTo({ top: 0 })}>
                     <PhotoItem
                         data={data}
-                        width={width}
+                        widthPC={widthPC}
                         onClick={onClick}
                         className={className}
                         hardWidthVW={hardWidthVW}
@@ -36,13 +54,9 @@ function PhotoHover({ data, width, hardWidthVW, hardHeightVH, className, onClick
                     className={cx('show-info')}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
-                    style={{ width: width }}
+                    style={{ width: `${calculatedWidth}px` }}
                 >
-                    <Link
-                        to={config.routes.user(`${data.user.username}`)}
-                        className={cx('user-info')}
-                        onClick={window.location.reload}
-                    >
+                    <Link to={handleLink()} className={cx('user-info')} onClick={() => window.scrollTo({ top: 0 })}>
                         <img src={data.user.profile_image.medium} alt="" className={cx('profile-image')} />
                         <span>{data.user.username}</span>
                     </Link>

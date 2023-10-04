@@ -1,38 +1,28 @@
 import { useEffect, useState } from 'react';
-import { getSearchUser } from '~/services';
 import requestKey from '~/utils/request';
-import useScroll from './useScroll';
 
-function useSearchUsers({ query, pageInput, perPage, checkScroll = false }) {
-    const [users, setUsers] = useState([]);
+function useSearchUsers({ query, page, perPage }) {
+    const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
 
-    const [data, setData] = useState([]);
-
-    const { page, setPage } = useScroll({ checkScroll });
-
     useEffect(() => {
-        setData([]);
-        setPage(1);
-    }, [query]);
-
-    useEffect(() => {
-        if (loading) {
-            return;
-        }
+        if (loading) return;
         setLoading(true);
         const getList = async () => {
             try {
                 const { unsplash, token } = requestKey();
 
-                const users = await getSearchUser(unsplash, token, {
+                const data = await unsplash.search.getUsers({
                     query,
-                    page: checkScroll ? page : pageInput,
+                    page,
                     perPage,
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
                 });
 
-                setUsers(users);
+                setData(data.response);
             } catch (error) {
                 console.log('SearchPage Error: ' + error);
                 setError(error);
@@ -44,16 +34,7 @@ function useSearchUsers({ query, pageInput, perPage, checkScroll = false }) {
         getList();
     }, [page, query]);
 
-    useEffect(() => {
-        if (page === 1 || data.length === 0) {
-            setData(users.results);
-        } else if (checkScroll) {
-            const newUsers = users.results.filter((user) => !data.some((p) => p.id === user.id));
-            setData((prevUsers) => [...prevUsers, ...newUsers]);
-        }
-    }, [users.results]);
-
-    return { data, users, loading, error };
+    return { data, total: data.total, loading, error };
 }
 
 export default useSearchUsers;

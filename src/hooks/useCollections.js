@@ -1,27 +1,28 @@
 import { useEffect, useState } from 'react';
-import { getCollections } from '~/services';
 import requestKey from '~/utils/request';
 
 function useCollections({ page, perPage }) {
-    const [collections, setCollections] = useState();
+    const [data, setData] = useState();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
 
     useEffect(() => {
-        if (loading) {
-            return;
-        }
+        if (loading) return;
         setLoading(true);
         const getPhotos = async () => {
             try {
                 (async () => {
                     const { unsplash, token } = await requestKey();
 
-                    const data = await getCollections(unsplash, token, {
+                    const data = await unsplash.collections.list({
                         page,
                         perPage,
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
                     });
-                    setCollections(data);
+
+                    setData(data.response);
                 })();
             } catch (error) {
                 console.log('Collection Page Error: ' + error);
@@ -35,7 +36,7 @@ function useCollections({ page, perPage }) {
     }, [page, perPage]);
 
     return {
-        collections,
+        data,
         loading,
         error,
     };

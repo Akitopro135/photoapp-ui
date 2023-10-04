@@ -6,7 +6,7 @@ import { calculateImageSize } from '~/helpers';
 
 const cx = classNames.bind(styles);
 
-function PhotoItem({ data, width, hardWidthVW, hardHeightVH, className, onClick, passProps }) {
+function PhotoItem({ data, widthPC, hardWidthVW, hardHeightVH, className, onClick, passProps }) {
     const [loading, setLoading] = useState(true);
 
     const props = {
@@ -14,9 +14,9 @@ function PhotoItem({ data, width, hardWidthVW, hardHeightVH, className, onClick,
         ...passProps,
     };
 
-    const { width: calculatedWidth, height: calculatedHeight } = calculateImageSize({
+    const { widthPX: calculatedWidth, heightPX: calculatedHeight } = calculateImageSize({
         photo: data,
-        width: width,
+        width: widthPC,
     });
 
     const handleLoad = () => {
@@ -32,8 +32,9 @@ function PhotoItem({ data, width, hardWidthVW, hardHeightVH, className, onClick,
             {loading && data.blur_hash && (
                 <Blurhash
                     hash={data.blur_hash}
-                    width={`${hardWidthVW || calculatedWidth}`}
-                    height={`${hardHeightVH || calculatedHeight}`}
+                    width={hardWidthVW ? `${hardWidthVW}vw` : `${calculatedWidth}px`}
+                    height={hardHeightVH ? `${hardHeightVH}vw` : `${calculatedHeight}px`}
+                    //style={{ margin: 2 }}
                 />
             )}
             <img
@@ -41,8 +42,8 @@ function PhotoItem({ data, width, hardWidthVW, hardHeightVH, className, onClick,
                 alt=""
                 className={cx('image', { hidden: loading })}
                 style={{
-                    width: `${hardWidthVW || calculatedWidth}`,
-                    height: `${hardHeightVH || calculatedHeight}`,
+                    width: hardWidthVW ? `${hardWidthVW}vw` : `${calculatedWidth}px`,
+                    height: hardHeightVH ? `${hardHeightVH}vw` : `${calculatedHeight}px`,
                 }}
                 onLoad={handleLoad}
             />

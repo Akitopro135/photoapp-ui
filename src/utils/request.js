@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { createApi } from 'unsplash-js';
 
 function requestKey() {
@@ -14,6 +13,8 @@ function requestKey() {
     const unsplash = createApi({
         accessKey: list[i],
     });
+
+    // unsplash.topics.get({id: ""})
 
     const key = list[i];
     //console.log(key);
