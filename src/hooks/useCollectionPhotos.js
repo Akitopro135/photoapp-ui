@@ -1,35 +1,29 @@
 import { useState, useEffect } from 'react';
-import { getCollectionPhotos } from '~/services';
 import requestKey from '~/utils/request';
-import useScroll from './useScroll';
 
-function useCollectionPhotos({ id, pageInput, perPage, order_by, checkScroll = false }) {
-    const [photos, setPhotos] = useState([]);
+function useCollectionPhotos({ id, page, perPage, order_by }) {
+    const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
 
-    const [data, setData] = useState([]);
-
-    const { page } = useScroll({ checkScroll: checkScroll });
-
     useEffect(() => {
-        if (loading) {
-            return;
-        }
+        if (loading) return;
         setLoading(true);
         const getPhotos = async () => {
             try {
-                (async () => {
-                    const { unsplash, token } = await requestKey();
+                const { unsplash, token } = await requestKey();
 
-                    const photo = await getCollectionPhotos(unsplash, token, {
-                        collectionId: id,
-                        page: checkScroll ? page : pageInput,
-                        perPage,
-                        order_by,
-                    });
-                    setPhotos(photo);
-                })();
+                const photo = await unsplash.collections.getPhotos({
+                    collectionId: id,
+                    page,
+                    perPage: perPage,
+                    orderBy: order_by,
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                setData(photo.response);
             } catch (error) {
                 console.log('Collection Page Error: ' + error);
                 setError(error);
@@ -39,20 +33,11 @@ function useCollectionPhotos({ id, pageInput, perPage, order_by, checkScroll = f
         };
 
         getPhotos();
-    }, [id, page, perPage, order_by]);
-
-    useEffect(() => {
-        if (page === 1 || data.length === 0) {
-            setData(photos.results);
-        } else {
-            const newPhotos = photos.results.filter((photo) => !data.some((p) => p.id === photo.id));
-            setData((prevPhotos) => [...prevPhotos, ...newPhotos]);
-        }
-    }, [photos.results]);
+    }, [id, page]);
 
     return {
         data,
-        photos,
+        total: data.total,
         loading,
         error,
     };

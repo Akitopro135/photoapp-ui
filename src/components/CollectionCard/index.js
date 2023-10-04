@@ -26,7 +26,12 @@ function CollectionCard({ collection }) {
             </div>
             <div className={cx('detail-tags')}>
                 {slicedTag.map((tag) => (
-                    <Link to={config.routes.search(`${tag.title}`)} key={tag.title} className={cx('tags')}>
+                    <Link
+                        to={config.routes.search({ searchId: tag.title, value: 'photos' })}
+                        key={tag.title}
+                        className={cx('tags')}
+                        onClick={() => window.scrollTo({ top: 0 })}
+                    >
                         {tag.title}
                     </Link>
                 ))}

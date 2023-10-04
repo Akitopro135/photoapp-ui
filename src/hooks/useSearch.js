@@ -1,40 +1,29 @@
 import { useState, useEffect } from 'react';
-import { getSearch } from '~/services';
 import requestKey from '~/utils/request';
-import useScroll from './useScroll';
 
-function useSearch({ query, pageInput, perPage, order_by, checkScroll = false }) {
-    const [listPhoto, setListPhoto] = useState([]);
+function useSearch({ query, page, perPage, order_by }) {
+    const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
 
-    const [data, setData] = useState([]);
-
-    const { page, setPage } = useScroll({ checkScroll: checkScroll });
-
     useEffect(() => {
-        setData([]);
-        setPage(1);
-    }, [query]);
-
-    useEffect(() => {
-        if (loading) {
-            return;
-        }
+        if (loading || query === '') return;
         setLoading(true);
         const getList = async () => {
             try {
-                (async () => {
-                    const { unsplash, token } = await requestKey();
+                const { unsplash, token } = await requestKey();
 
-                    const list = await getSearch(unsplash, token, {
-                        query,
-                        page: checkScroll ? page : pageInput,
-                        perPage,
-                        order_by,
-                    });
-                    setListPhoto(list);
-                })();
+                const list = await unsplash.search.getPhotos({
+                    query,
+                    page,
+                    perPage: perPage,
+                    orderBy: order_by,
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                setData(list.response);
             } catch (error) {
                 console.log('SearchPage Error: ' + error);
                 setError(error);
@@ -46,18 +35,9 @@ function useSearch({ query, pageInput, perPage, order_by, checkScroll = false })
         getList();
     }, [page, query]);
 
-    useEffect(() => {
-        if (page === 1 || data.length === 0) {
-            setData(listPhoto.results);
-        } else if (checkScroll) {
-            const newPhotos = listPhoto.results.filter((photo) => !data.some((p) => p.id === photo.id));
-            setData((prevPhotos) => [...prevPhotos, ...newPhotos]);
-        }
-    }, [listPhoto.results]);
-
     return {
         data,
-        listPhoto,
+        total: data.total,
         loading,
         error,
     };

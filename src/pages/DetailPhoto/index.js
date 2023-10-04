@@ -26,10 +26,10 @@ function DetailPhoto() {
     const params = useParams();
     const id = params.id.slice(0, params.id.length);
 
-    const { photo } = usePhoto({ id });
+    const { data: photo } = usePhoto({ id });
 
-    const { listPhoto } = useSearch({
-        query: photo && photo.tags_preview[0].title,
+    const { data: listPhoto } = useSearch({
+        query: photo ? photo.tags[0].title : '',
         perPage: 12,
     });
 
@@ -38,7 +38,10 @@ function DetailPhoto() {
             {photo && (
                 <div className={cx('detail-wrapper')}>
                     <div className={cx('detail-header')}>
-                        <Link to={config.routes.user(photo.user.username)} className={cx('detail-header-user')}>
+                        <Link
+                            to={config.routes.user({ userName: photo.user.username, value: `user` })}
+                            className={cx('detail-header-user')}
+                        >
                             <img src={photo.user.profile_image.medium} className={cx('profile-image')} alt="" />
                             <span>{photo.user.name}</span>
                         </Link>
@@ -53,7 +56,7 @@ function DetailPhoto() {
                     </div>
                     <div className={cx('detail-content')}>
                         <div className={cx('content-photo')}>
-                            <PhotoItem data={photo} width={'900px'} />
+                            <PhotoItem data={photo} widthPC={50} />
                         </div>
                         <div className={cx('content-photo-detail')}>
                             <div className={cx('detail-view-download')}>
@@ -127,7 +130,7 @@ function DetailPhoto() {
                             <div className={cx('detail-tags')}>
                                 {photo.tags.map((tag) => (
                                     <Link
-                                        to={config.routes.search(`${tag.title}`)}
+                                        to={config.routes.search({ searchId: tag.title, value: 'photos' })}
                                         key={tag.title}
                                         className={cx('tags')}
                                         onClick={() => window.scrollTo({ top: 0 })}
@@ -153,7 +156,7 @@ function DetailPhoto() {
                                     </Link>
                                 )),
                             )} */}
-                            <PhotoList data={listPhoto.results} width={'500px'} />
+                            <PhotoList data={listPhoto.results} widthPC={30} />
                         </div>
                     </div>
                     <div className={cx('detail-related-collections')}>

@@ -1,25 +1,26 @@
-import { getRandomPhoto } from '~/services';
 import { useEffect, useState } from 'react';
 import requestKey from '~/utils/request';
 
 function useRandomPhoto() {
-    const [photo, setPhoto] = useState();
+    const [data, setData] = useState();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
 
     useEffect(() => {
-        if (loading) {
-            return;
-        }
+        if (loading) return;
         setLoading(true);
         const getPhoto = async () => {
             try {
-                (async () => {
-                    const { unsplash, token } = await requestKey();
+                const { unsplash, token } = await requestKey();
 
-                    const photo = await getRandomPhoto(unsplash, token);
-                    setPhoto(photo);
-                })();
+                const data = await unsplash.photos.getRandom({
+                    query: 'camera',
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                setData(data.response);
             } catch (error) {
                 console.log('RandomPhoto: ' + error);
                 setError(error);
@@ -30,7 +31,7 @@ function useRandomPhoto() {
         getPhoto();
     }, []);
     return {
-        photo,
+        data,
         loading,
         error,
     };

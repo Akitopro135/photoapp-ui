@@ -1,25 +1,26 @@
 import { useState, useEffect } from 'react';
-import { getUser } from '~/services';
 import requestKey from '~/utils/request';
 
 function useUser({ username }) {
-    const [user, setUser] = useState();
+    const [data, setData] = useState();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
 
     useEffect(() => {
-        if (loading) {
-            return;
-        }
+        if (loading) return;
         setLoading(true);
         const getUserInfo = async () => {
             try {
                 const { unsplash, token } = await requestKey();
 
-                const user = await getUser(unsplash, token, {
-                    userName: username,
+                const data = await unsplash.users.get({
+                    username,
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
                 });
-                setUser(user);
+
+                setData(data.response);
             } catch (error) {
                 console.log('User Page Error: ' + error);
                 setError(error);
@@ -32,7 +33,7 @@ function useUser({ username }) {
     }, [username]);
 
     return {
-        user,
+        data,
         loading,
         error,
     };

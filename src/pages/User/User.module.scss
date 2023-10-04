@@ -122,65 +122,66 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    align-items: start;
+    align-items: center;
     width: 100%;
 
-    .photos-icon,
-    .likes-icon,
-    .collections-icon {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        text-transform: capitalize;
-        color: darkgray;
-        padding: 12px;
-        background-color: transparent;
-        border-radius: 4px;
-        margin-left: 20px;
-        cursor: pointer;
+    z-index: 10;
+    box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
+    background: var(--background-image);
+    background-size: cover;
+}
 
-        & span {
-            font-size: 1vw;
-            margin-left: 8px;
-        }
+.photos-icon,
+.likes-icon,
+.collections-icon {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    background: transparent;
+    text-transform: capitalize;
+    font-size: large;
+    color: rgba(22, 24, 35, 0.6);
+    margin-left: 2%;
+    padding-bottom: 16px;
+    padding-top: 16px;
 
-        &:hover {
-            color: black;
-        }
+    & span {
+        font-size: 1vw;
+        margin-left: 8px;
     }
 
-    .active {
-        display: flex;
-        justify-content: center;
+    &:hover {
         color: black;
-        cursor: default;
-        &::after {
-            content: '';
-            position: absolute;
-            width: 6vw;
-            height: 2px;
-            bottom: 0;
-            background-color: black;
-        }
     }
 
-    &::after {
+    &::before {
         content: '';
         position: absolute;
-        width: 100%;
-        height: 1px;
         bottom: 0;
-        background-color: rgba(22, 24, 35, 0.12);
+        left: 0;
+        width: 100%;
+        height: 2px; /* Độ dày của gạch chân */
+        background-color: black; /* Màu sắc của gạch chân */
+        transform: scaleX(0); /* Ẩn gạch chân ban đầu */
+        transform-origin: 0 0; /* Đặt điểm bắt đầu ở góc trái trên của phần tử */
+        transition: transform 0.2s ease-in-out; /* Hiệu ứng khi hover */
+    }
+}
+
+/* Thiết lập kiểu cho item active */
+.active {
+    color: black; /* Thay đổi màu sắc nếu cần */
+
+    &::before {
+        transform: scaleX(1); /* Hiển thị gạch chân cho item active */
     }
 }
 
 .content-body {
-    // display: flex;
-    // flex-wrap: wrap;
-    // width: 80%;
-    // margin-top: 4%;
-
-    // justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
 
     margin-top: var(--margin-detail-page);
 }

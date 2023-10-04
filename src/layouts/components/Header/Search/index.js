@@ -13,7 +13,7 @@ function Search() {
 
     const handleLink = () => {
         if (value.trim()) {
-            return config.routes.search(`${value}`);
+            return config.routes.search({ searchId: value, value: 'photos' });
         } else {
             return config.routes.home;
         }

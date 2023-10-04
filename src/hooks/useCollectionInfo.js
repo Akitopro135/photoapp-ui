@@ -1,26 +1,27 @@
 import { useState, useEffect } from 'react';
-import { getCollectionInfo } from '~/services';
 import requestKey from '~/utils/request';
 
 function useCollectionInfo({ id }) {
-    const [collectionInfo, setCollectionInfo] = useState();
+    const [data, setData] = useState();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
 
     useEffect(() => {
-        if (loading) {
-            return;
-        }
+        if (loading) return;
         setLoading(true);
         const getCollectionDetail = async () => {
             try {
                 (async () => {
                     const { unsplash, token } = await requestKey();
 
-                    const photo = await getCollectionInfo(unsplash, token, {
+                    const photo = await unsplash.collections.get({
                         collectionId: id,
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
                     });
-                    setCollectionInfo(photo);
+
+                    setData(photo.response);
                 })();
             } catch (error) {
                 console.log('Collection Page Error: ' + error);
@@ -34,7 +35,7 @@ function useCollectionInfo({ id }) {
     }, [id]);
 
     return {
-        collectionInfo,
+        data,
         loading,
         error,
     };

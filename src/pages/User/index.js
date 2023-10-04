@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './User.module.scss';
 import { Link, useParams } from 'react-router-dom';
-import { useUser, useUserPhotos } from '~/hooks';
+import { useLoadMore, useUser, useUserPhotos } from '~/hooks';
 import {
     CollectionIcon,
     Heart,
@@ -11,13 +11,12 @@ import {
     LocationDot,
     TwitterIcon,
 } from '~/components/Icons';
-import 'tippy.js/dist/tippy.css';
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 import config from '~/config';
 import useUserCollection from '~/hooks/useUserCollections';
 import CollectionCard from '~/components/CollectionCard';
 import useUserLike from '~/hooks/useUserLikes';
-import { PhotoHover } from '~/components/PhotoCard';
 import PhotoList from '~/components/PhotoList';
 
 const cx = classNames.bind(styles);
@@ -48,29 +47,48 @@ function User() {
         setCheckCollections(true);
     };
 
+    useEffect(() => {
+        if (params.value === 'likes') {
+            handleLikesChange();
+        } else if (params.value === 'collections') {
+            handleCollectionsChange();
+        } else {
+            handlePhotosChange();
+        }
+    }, [params]);
+
     //Lấy thông tin user
-    const { user } = useUser({
+    const { data: user } = useUser({
         username: userName,
     });
 
     //Lấy list photos có scroll để load thêm photos
-    const { photos, data } = useUserPhotos({
+    const { loadMoreData, total } = useLoadMore({
         checkScroll: isPhotosActive ? true : false,
-        userName: userName,
-        perPage: 12,
+        fetchDatas: useUserPhotos,
+        fetchDatasProps: {
+            userName,
+            perPage: 12,
+        },
     });
 
     //Lấy list collection có scroll để load thêm collections
-    const { collections, data: collectionsData } = useUserCollection({
-        //checkScroll: isCollectionsActive ? true : false,
-        userName: userName,
+    const { loadMoreData: collectionsData, total: totalCollection } = useLoadMore({
+        checkScroll: isCollectionsActive ? true : false,
+        fetchDatas: useUserCollection,
+        fetchDatasProps: {
+            userName,
+        },
     });
 
     //Lấy list photos like có scroll để load thêm photos like
-    const { data: likePhotosData, photos: photoLikes } = useUserLike({
+    const { loadMoreData: likePhotosData, total: totalLike } = useLoadMore({
         checkScroll: isLikesActive ? true : false,
-        userName: userName,
-        perPage: 12,
+        fetchDatas: useUserLike,
+        fetchDatasProps: {
+            userName,
+            perPage: 12,
+        },
     });
 
     return (
@@ -86,7 +104,11 @@ function User() {
                             <span className={cx('bio')}>{user.bio}</span>
                             {user.location && (
                                 <div>
-                                    <Link to={config.routes.search(`${user.location}`)} className={cx('location-icon')}>
+                                    <Link
+                                        to={config.routes.search({ searchId: user.location, value: 'photos' })}
+                                        className={cx('location-icon')}
+                                        onClick={() => window.scrollTo({ top: 0 })}
+                                    >
                                         <LocationDot />
                                         <span>{user.location}</span>
                                     </Link>
@@ -126,7 +148,7 @@ function User() {
                                 <div className={cx('detail-tags')}>
                                     {user.tags.custom.map((tag) => (
                                         <Link
-                                            to={config.routes.search(`${tag.title}`)}
+                                            to={config.routes.search({ searchId: tag.title, value: 'photos' })}
                                             key={tag.title}
                                             className={cx('tags')}
                                             onClick={() => window.scrollTo({ top: 0 })}
@@ -140,36 +162,33 @@ function User() {
                     </div>
                     <div className={cx('content-wrapper')}>
                         <div className={cx('content-header')}>
-                            <div onClick={() => !isPhotosActive && handlePhotosChange()}>
-                                <Link
-                                    to={config.routes.user(`${userName}`)}
-                                    className={cx('photos-icon', isPhotosActive ? 'active' : '')}
-                                >
-                                    <ImageIcon />
-                                    <span>Photos {photos.total}</span>
-                                </Link>
-                            </div>
-                            <div onClick={() => !isLikesActive && handleLikesChange()}>
-                                <Link
-                                    to={config.routes.userLike(`${userName}`)}
-                                    className={cx('likes-icon', isLikesActive ? 'active' : '')}
-                                >
-                                    <Heart />
-                                    <span>Likes {photoLikes.total}</span>
-                                </Link>
-                            </div>
-                            <div onClick={() => !isCollectionsActive && handleCollectionsChange()}>
-                                <Link
-                                    to={config.routes.userCollection(`${userName}`)}
-                                    className={cx('collections-icon', isCollectionsActive ? 'active' : '')}
-                                >
-                                    <CollectionIcon />
-                                    <span>Collections {collections.total}</span>
-                                </Link>
-                            </div>
+                            <Link
+                                to={config.routes.user({ userName: `${userName}`, value: 'user' })}
+                                className={cx('photos-icon', isPhotosActive ? 'active' : '')}
+                                onClick={() => !isPhotosActive && handlePhotosChange()}
+                            >
+                                <ImageIcon />
+                                <span>Photos {total}</span>
+                            </Link>
+                            <Link
+                                to={config.routes.user({ userName: `${userName}`, value: 'likes' })}
+                                className={cx('likes-icon', isLikesActive ? 'active' : '')}
+                                onClick={() => !isLikesActive && handleLikesChange()}
+                            >
+                                <Heart />
+                                <span>Likes {totalLike}</span>
+                            </Link>
+                            <Link
+                                to={config.routes.user({ userName: `${userName}`, value: 'collections' })}
+                                className={cx('collections-icon', isCollectionsActive ? 'active' : '')}
+                                onClick={() => !isCollectionsActive && handleCollectionsChange()}
+                            >
+                                <CollectionIcon />
+                                <span>Collections {totalCollection}</span>
+                            </Link>
                         </div>
                         <div className={cx('content-body')}>
-                            {data && isPhotosActive && (
+                            {loadMoreData && isPhotosActive && (
                                 // data.map((photo) => (
                                 //     <PhotoHover
                                 //         key={photo.id}
@@ -179,7 +198,7 @@ function User() {
                                 //         className={'user-photos'}
                                 //     />
                                 // ))}
-                                <PhotoList data={data} width={'500px'} />
+                                <PhotoList data={loadMoreData} widthPC={30} />
                             )}
                             {likePhotosData && isLikesActive && (
                                 // likePhotosData.map((photo) => (
@@ -191,12 +210,12 @@ function User() {
                                 //         className={'user-photos'}
                                 //     />
                                 // ))
-                                <PhotoList data={likePhotosData} width={'500px'} />
+                                <PhotoList data={likePhotosData} widthPC={30} check={'likes'} />
                             )}
                             {collectionsData &&
                                 isCollectionsActive &&
                                 collectionsData.map((collection) => (
-                                    <CollectionCard key={collection.id} collection={collection} />
+                                    <CollectionCard key={collection.id} collection={collection} check={'collections'} />
                                 ))}
                         </div>
                     </div>

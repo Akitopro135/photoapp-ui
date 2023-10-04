@@ -1,39 +1,16 @@
 .row {
     display: flex;
-    //flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
 }
 
 .column {
-    width: 100%;
-    flex: 33%;
+    flex: 1;
     padding: 0 4px;
-    text-align: center;
 }
 
 .column img {
-    //width: 100%;
     margin-top: 8px;
-    //margin-left: 60px;
-}
-
-/* Bố cục linh hoạt: tạo bố cục 2 cột */
-@media screen and (max-width: 1400px) {
-    .column {
-        max-width: 100%;
-    }
-}
-/* Bố cục linh hoạt: làm cho hai cột xếp chồng lên nhau thay vì cạnh nhau */
-@media screen and (min-width: 1401px) and (max-width: 1800px) {
-    .column {
-        max-width: 50%;
-    }
-}
-
-@media screen and (min-width: 1801px) {
-    .column {
-        max-width: 30%;
-    }
 }
