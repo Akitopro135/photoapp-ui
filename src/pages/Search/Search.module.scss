@@ -5,7 +5,10 @@
 }
 
 .content-header {
-    position: relative;
+    position: sticky;
+    top: var(--default-layout-header-height);
+    background: var(--background-image);
+    z-index: 8;
     display: flex;
     flex-direction: row;
     align-items: start;
@@ -52,7 +55,7 @@
 
     .active {
         color: black;
-
+        cursor: default;
         &::before {
             transform: scaleX(1); /* Hiển thị gạch chân cho item active */
         }
