@@ -1,10 +1,11 @@
 import classNames from 'classnames/bind';
 import styles from './PhotoCard.module.scss';
 import config from '~/config';
-import Button from '../Button';
-import { scrollToTop, reload } from '~/helpers';
-import PhotoItem from '../PhotoItem';
 import { Link } from 'react-router-dom';
+
+import { Button } from '../Button';
+import { scrollToTop, reload } from '~/helpers';
+import { PhotoItem } from '../PhotoItem';
 
 const cx = classNames.bind(styles);
 

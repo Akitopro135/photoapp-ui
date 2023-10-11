@@ -1,9 +1,10 @@
 import classNames from 'classnames/bind';
 import styles from './PhotoHover.module.scss';
-import { Link } from 'react-router-dom';
-import PhotoItem from '../PhotoItem';
 import config from '~/config';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
+
+import { PhotoItem } from '../PhotoItem';
 import { calculateImageSize } from '~/helpers';
 
 const cx = classNames.bind(styles);
@@ -30,7 +31,7 @@ function PhotoHover({ data, check, widthPC, hardWidthVW, hardHeightVH, className
         } else if (check === 'collections') {
             return config.routes.user({ userName: `${data.user.username}`, value: 'collections' });
         } else {
-            return config.routes.user({ userName: `${data.user.username}`, value: 'user' });
+            return config.routes.user({ userName: `${data.user.username}`, value: 'photos' });
         }
     };
 
@@ -54,7 +55,7 @@ function PhotoHover({ data, check, widthPC, hardWidthVW, hardHeightVH, className
                     className={cx('show-info')}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
-                    style={{ width: `${calculatedWidth}px` }}
+                    style={{ width: calculatedWidth ? `${calculatedWidth}px` : `${hardWidthVW}vw` }}
                 >
                     <Link to={handleLink()} className={cx('user-info')} onClick={() => window.scrollTo({ top: 0 })}>
                         <img src={data.user.profile_image.medium} alt="" className={cx('profile-image')} />

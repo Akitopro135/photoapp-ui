@@ -60,7 +60,11 @@
 .detail-content {
     height: 100%;
     width: 100%;
-    margin-top: var(--default-layout-header-height);
+    //margin-top: var(--default-layout-header-height);
+}
+
+.content-photo-detail {
+    margin: 20px;
 }
 
 @keyframes opacity {

@@ -1,13 +1,13 @@
-import Home from '~/pages/Home';
-import Following from '~/pages/Following';
-import Contact from '~/pages/Contact';
+import { Contact } from '~/pages/Contact';
+import { Search } from '~/pages/Search';
+import { DetailPhoto } from '~/pages/DetailPhoto';
+import { Collection } from '~/pages/Collection';
+import { User } from '~/pages/User';
+import { Topic } from '~/pages/Topic';
+import { Home } from '~/pages/Home';
+import { Following } from '~/pages/Following';
 import { HeaderOnly } from '~/layouts';
 import config from '~/config';
-import Search from '~/pages/Search';
-import DetailPhoto from '~/pages/DetailPhoto';
-import Collection from '~/pages/Collection';
-import User from '~/pages/User';
-import Topic from '~/pages/Topic';
 
 const publicRoutes = [
     { path: config.routes.home, component: Home },
