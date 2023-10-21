@@ -15,7 +15,7 @@ import { Button } from '~/components/Button';
 const cx = classNames.bind(styles);
 
 function Header() {
-    const currentUser = false;
+    const currentUser = localStorage.getItem('unsplashToken') ? true : false;
     // const urlParams = new URLSearchParams(window.location.search);
 
     // useEffect(() => {

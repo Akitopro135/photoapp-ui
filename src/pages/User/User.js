@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './User.module.scss';
 import { useParams } from 'react-router-dom';
-import { useLoadMore, useUser, useUserPhotos, useUserCollection, useUserLike } from '~/hooks';
+import { useLoadMore, useUser, useUserPhotos, useUserCollection, useUserLike } from '~/unsplash/hooks';
 
 import { useEffect, useState } from 'react';
 import UserInfo from './UserInfo';
@@ -47,31 +47,31 @@ function User() {
     });
 
     //Lấy list photos có scroll để load thêm photos
-    const { loadMoreData, total } = useLoadMore({
+    const { loadMoreData } = useLoadMore({
         checkScroll: activeTab === 'photos' ? true : false,
         fetchDatas: useUserPhotos,
         fetchDatasProps: {
-            userName,
-            perPage: 12,
+            username: userName,
+            per_page: 12,
         },
     });
 
     //Lấy list collection có scroll để load thêm collections
-    const { loadMoreData: collectionsData, total: totalCollection } = useLoadMore({
+    const { loadMoreData: collectionsData } = useLoadMore({
         checkScroll: activeTab === 'collections' ? true : false,
         fetchDatas: useUserCollection,
         fetchDatasProps: {
-            userName,
+            username: userName,
         },
     });
 
     //Lấy list photos like có scroll để load thêm photos like
-    const { loadMoreData: likePhotosData, total: totalLike } = useLoadMore({
+    const { loadMoreData: likePhotosData } = useLoadMore({
         checkScroll: activeTab === 'likes' ? true : false,
         fetchDatas: useUserLike,
         fetchDatasProps: {
-            userName,
-            perPage: 12,
+            username: userName,
+            per_page: 12,
         },
     });
 
@@ -81,14 +81,7 @@ function User() {
                 <div className={cx('wrapper')}>
                     <UserInfo user={user} />
                     <div className={cx('content-wrapper')}>
-                        <UserHeader
-                            userName={userName}
-                            activeTab={activeTab}
-                            handleTabChange={handleTabChange}
-                            total={total}
-                            totalLike={totalLike}
-                            totalCollection={totalCollection}
-                        />
+                        <UserHeader user={user} activeTab={activeTab} handleTabChange={handleTabChange} />
                         <UserBody
                             activeTab={activeTab}
                             loadMoreData={loadMoreData}

@@ -3,7 +3,7 @@ import styles from './Search.module.scss';
 
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useLoadMore, useSearch, useSearchUsers, useSearchCollections } from '~/hooks';
+import { useLoadMore, useSearch, useSearchUsers, useSearchCollections } from '~/unsplash/hooks';
 import SearchHeader from './SearchHeader';
 import SearchBody from './SearchBody';
 
@@ -44,27 +44,27 @@ function Search() {
         fetchDatas: useSearch,
         fetchDatasProps: {
             query: searchValue,
-            perPage: 12,
+            per_page: 12,
         },
     });
 
     //Lấy danh sách search users
-    const { loadMoreData: usersData, total: totalUser } = useLoadMore({
+    const { loadMoreData: usersData, total: userTotal } = useLoadMore({
         checkScroll: activeTab === 'users' ? true : false,
         fetchDatas: useSearchUsers,
         fetchDatasProps: {
             query: searchValue,
-            perPage: 12,
+            per_page: 12,
         },
     });
 
     //Lấy danh sách search collections
-    const { loadMoreData: collectionsData, total: totalCollection } = useLoadMore({
+    const { loadMoreData: collectionsData, total: collectionTotal } = useLoadMore({
         checkScroll: activeTab === 'collections' ? true : false,
         fetchDatas: useSearchCollections,
         fetchDatasProps: {
             query: searchValue,
-            perPage: 12,
+            per_page: 12,
         },
     });
 
@@ -74,8 +74,8 @@ function Search() {
                 searchValue={searchValue}
                 activeTab={activeTab}
                 total={total}
-                totalUser={totalUser}
-                totalCollection={totalCollection}
+                totalUser={userTotal}
+                totalCollection={collectionTotal}
                 handleTabChange={handleTabChange}
             />
             <h1 className={cx('search-value')}>{searchValue}</h1>

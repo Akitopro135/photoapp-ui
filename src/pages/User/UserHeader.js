@@ -6,32 +6,32 @@ import { CollectionIcon, Heart, ImageIcon } from '~/components/Icons';
 
 const cx = classNames.bind(styles);
 
-function UserHeader({ userName, activeTab, handleTabChange, total, totalLike, totalCollection }) {
+function UserHeader({ user, activeTab, handleTabChange }) {
     return (
         <div className={cx('content-header')}>
             <Link
-                to={config.routes.user({ userName: `${userName}`, value: 'photos' })}
+                to={config.routes.user({ userName: `${user.username}`, value: 'photos' })}
                 className={cx('photos-icon', activeTab === 'photos' ? 'active' : '')}
                 onClick={() => activeTab !== 'photos' && handleTabChange('photos')}
             >
                 <ImageIcon />
-                <span>Photos {total}</span>
+                <span>Photos {user.total_photos}</span>
             </Link>
             <Link
-                to={config.routes.user({ userName: `${userName}`, value: 'likes' })}
+                to={config.routes.user({ userName: `${user.username}`, value: 'likes' })}
                 className={cx('likes-icon', activeTab === 'likes' ? 'active' : '')}
                 onClick={() => activeTab !== 'likes' && handleTabChange('likes')}
             >
                 <Heart />
-                <span>Likes {totalLike}</span>
+                <span>Likes {user.total_likes}</span>
             </Link>
             <Link
-                to={config.routes.user({ userName: `${userName}`, value: 'collections' })}
+                to={config.routes.user({ userName: `${user.username}`, value: 'collections' })}
                 className={cx('collections-icon', activeTab === 'collections' ? 'active' : '')}
                 onClick={() => activeTab !== 'collections' && handleTabChange('collections')}
             >
                 <CollectionIcon />
-                <span>Collections {totalCollection}</span>
+                <span>Collections {user.total_collections}</span>
             </Link>
         </div>
     );

@@ -15,6 +15,13 @@
 .show-info {
     position: absolute;
     bottom: 0;
+
+    .user-name {
+        color: white;
+        font-weight: bold;
+        text-transform: capitalize;
+        font-size: 1.2em;
+    }
 }
 
 .user-info {
@@ -27,13 +34,6 @@
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
     border-end-start-radius: 8px;
     border-end-end-radius: 8px;
-
-    & span {
-        color: white;
-        font-weight: bold;
-        text-transform: capitalize;
-        font-size: 1vw;
-    }
 }
 
 .profile-image {

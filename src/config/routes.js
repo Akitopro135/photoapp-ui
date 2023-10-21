@@ -26,7 +26,7 @@ const routes = {
     // userCollection: function (userName = ':username') {
     //     return '/user/' + userName + '/collections';
     // },
-    topic: function (topicIdOrSlug = ':topicIdOrSlug') {
+    topic: function ({ topicIdOrSlug = ':topicIdOrSlug' }) {
         return '/topic/' + topicIdOrSlug;
     },
 };

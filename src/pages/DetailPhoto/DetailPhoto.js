@@ -1,13 +1,13 @@
 import classNames from 'classnames/bind';
 import styles from './DetailPhoto.module.scss';
 
-import { usePhoto, useSearch } from '~/hooks';
 import { useParams } from 'react-router-dom';
 import { PhotoItem } from '~/components/PhotoItem';
 import { CollectionCard } from '~/components/CollectionCard';
 import { PhotoList } from '~/components/PhotoList';
 import DetailPhotoUser from './DetailPhotoUser';
 import DetailPhotoInfo from './DetailPhotoInfo';
+import { usePhoto, useSearch } from '~/unsplash/hooks';
 
 const cx = classNames.bind(styles);
 
@@ -19,7 +19,7 @@ function DetailPhoto() {
 
     const { data: listPhoto } = useSearch({
         query: photo ? photo.tags[0].title : '',
-        perPage: 12,
+        per_page: 12,
     });
 
     return (
@@ -29,7 +29,7 @@ function DetailPhoto() {
                     <DetailPhotoUser photo={photo} />
                     <div className={cx('detail-content')}>
                         <div className={cx('content-photo')}>
-                            <PhotoItem data={photo} widthPC={50} />
+                            <PhotoItem data={photo} hardWidthVW={50} />
                         </div>
                         <DetailPhotoInfo photo={photo} />
                     </div>

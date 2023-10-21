@@ -19,6 +19,11 @@ function PhotoItem({ data, widthPC, hardWidthVW, hardHeightVH, className, onClic
         width: widthPC,
     });
 
+    const { heightVH } = calculateImageSize({
+        photo: data,
+        widthVW: hardWidthVW,
+    });
+
     const handleLoad = () => {
         setTimeout(() => {
             setLoading(false);
@@ -33,7 +38,9 @@ function PhotoItem({ data, widthPC, hardWidthVW, hardHeightVH, className, onClic
                 <Blurhash
                     hash={data.blur_hash}
                     width={hardWidthVW ? `${hardWidthVW}vw` : `${calculatedWidth}px`}
-                    height={hardHeightVH ? `${hardHeightVH}vw` : `${calculatedHeight}px`}
+                    height={
+                        hardHeightVH ? `${hardHeightVH}vw` : hardWidthVW ? `${heightVH}vw` : `${calculatedHeight}px`
+                    }
                     //style={{ margin: 2 }}
                 />
             )}
@@ -43,7 +50,11 @@ function PhotoItem({ data, widthPC, hardWidthVW, hardHeightVH, className, onClic
                 className={cx('image', { hidden: loading })}
                 style={{
                     width: hardWidthVW ? `${hardWidthVW}vw` : `${calculatedWidth}px`,
-                    height: hardHeightVH ? `${hardHeightVH}vw` : `${calculatedHeight}px`,
+                    height: hardHeightVH
+                        ? `${hardHeightVH}vw`
+                        : hardWidthVW
+                        ? `${heightVH}vw`
+                        : `${calculatedHeight}px`,
                 }}
                 onLoad={handleLoad}
             />

@@ -21,7 +21,7 @@ const publicRoutes = [
     { path: config.routes.user({}), component: User },
     // { path: config.routes.userLike(), component: User },
     // { path: config.routes.userCollection(), component: User },
-    { path: config.routes.topic(), component: Topic },
+    { path: config.routes.topic({}), component: Topic },
 ];
 const privateRoutes = [];
 export { publicRoutes, privateRoutes };
