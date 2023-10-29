@@ -15,6 +15,11 @@ function CollectionCard({ collection }) {
         slicedTag = collection.tags.slice(0, 3);
     }
 
+    const fixWord = (word) => {
+        const words = word.split(' ');
+        return words.length === 1 ? words[0] : words[0] + ' ' + words[1];
+    };
+
     return (
         <div className={cx('collection-card-wrapper')}>
             <Link to={config.routes.collection(`${collection.id}`)}>
@@ -32,7 +37,7 @@ function CollectionCard({ collection }) {
                         className={cx('tags')}
                         onClick={() => window.scrollTo({ top: 0 })}
                     >
-                        {tag.title}
+                        {fixWord(tag.title)}
                     </Link>
                 ))}
             </div>

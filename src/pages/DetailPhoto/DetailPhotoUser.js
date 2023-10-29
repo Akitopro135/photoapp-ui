@@ -17,9 +17,9 @@ function DetailPhotoUser({ photo }) {
                 <span>{photo.user.name}</span>
             </Link>
             <div className={cx('detail-header-actions')}>
-                <button className={cx('btn-download')}>
+                <a href={photo.links.download} className={cx('btn-download')}>
                     <Download />
-                </button>
+                </a>
                 <button className={cx('btn-heart')}>
                     <Heart />
                 </button>

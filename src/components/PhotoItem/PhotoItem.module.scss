@@ -37,12 +37,22 @@
     //flex: 1;
 }
 
-//Collection5hoto
+//CollectionPhoto
 .collection-image {
     :last-child {
         border-radius: 8px;
         padding: 5px;
         object-fit: cover;
+    }
+}
+
+//TopicPhoto
+.topic-photo {
+    :last-child {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        object-fit: cover;
+        filter: brightness(0.7);
     }
 }
 

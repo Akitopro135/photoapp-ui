@@ -6,27 +6,30 @@ function useLoadMore({ checkScroll = false, fetchDatas, fetchDatasProps }) {
     const { page, setPage } = useScroll({ checkScroll });
 
     useEffect(() => {
-        setData([]);
         setPage(1);
-    }, [fetchDatasProps.id, fetchDatasProps.userName, fetchDatasProps.query, fetchDatasProps.topicIdOrSlug]);
+        setData([]);
+    }, [fetchDatasProps.id, fetchDatasProps.username, fetchDatasProps.query, fetchDatasProps.id_or_slug]);
 
-    const { data, total } = fetchDatas({
+    const { data } = fetchDatas({
         ...fetchDatasProps,
         page,
     });
 
     useEffect(() => {
+        if (data === undefined) return;
+        const result = data.results ? data.results : data;
+        const loadData = loadMoreData.results ? loadMoreData.results : loadMoreData;
         if (page === 1 || loadMoreData.length === 0) {
-            setData(data.results);
+            setData(result);
         } else {
-            const newDatas = data.results.filter((data) => !loadMoreData.some((p) => p.id === data.id));
+            const newDatas = result.filter((data) => !loadData.some((p) => p.id === data.id));
             setData((prevDatas) => [...prevDatas, ...newDatas]);
         }
-    }, [data.results]);
+    }, [data]);
 
     return {
-        total,
         loadMoreData,
+        total: data?.total || 0,
     };
 }
 

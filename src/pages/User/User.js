@@ -1,12 +1,14 @@
 import classNames from 'classnames/bind';
 import styles from './User.module.scss';
 import { useParams } from 'react-router-dom';
-import { useLoadMore, useUser, useUserPhotos, useUserCollection, useUserLike } from '~/hooks';
+import { useUser, useUserPhotos, useUserCollection, useUserLike } from '~/unsplash/hooks';
+import { useLoadMore } from '~/hooks';
 
 import { useEffect, useState } from 'react';
 import UserInfo from './UserInfo';
 import UserHeader from './UserHeader';
 import UserBody from './UserBody';
+import unsplash from '~/unsplash';
 
 const cx = classNames.bind(styles);
 
@@ -36,6 +38,8 @@ function User() {
             handleTabChange('likes');
         } else if (params.value === 'collections') {
             handleTabChange('collections');
+        } else if (params.value === 'stats') {
+            handleTabChange('stats');
         } else {
             handleTabChange('photos');
         }
@@ -43,35 +47,35 @@ function User() {
 
     //Lấy thông tin user
     const { data: user } = useUser({
-        username: userName,
+        username: params.username === 'me' ? localStorage.getItem('currentId') : userName,
     });
 
     //Lấy list photos có scroll để load thêm photos
-    const { loadMoreData, total } = useLoadMore({
+    const { loadMoreData } = useLoadMore({
         checkScroll: activeTab === 'photos' ? true : false,
         fetchDatas: useUserPhotos,
         fetchDatasProps: {
-            userName,
-            perPage: 12,
+            username: params.username === 'me' ? localStorage.getItem('currentId') : userName,
+            per_page: 12,
         },
     });
 
     //Lấy list collection có scroll để load thêm collections
-    const { loadMoreData: collectionsData, total: totalCollection } = useLoadMore({
+    const { loadMoreData: collectionsData } = useLoadMore({
         checkScroll: activeTab === 'collections' ? true : false,
         fetchDatas: useUserCollection,
         fetchDatasProps: {
-            userName,
+            username: params.username === 'me' ? localStorage.getItem('currentId') : userName,
         },
     });
 
     //Lấy list photos like có scroll để load thêm photos like
-    const { loadMoreData: likePhotosData, total: totalLike } = useLoadMore({
+    const { loadMoreData: likePhotosData } = useLoadMore({
         checkScroll: activeTab === 'likes' ? true : false,
         fetchDatas: useUserLike,
         fetchDatasProps: {
-            userName,
-            perPage: 12,
+            username: params.username === 'me' ? localStorage.getItem('currentId') : userName,
+            per_page: 12,
         },
     });
 
@@ -82,12 +86,10 @@ function User() {
                     <UserInfo user={user} />
                     <div className={cx('content-wrapper')}>
                         <UserHeader
-                            userName={userName}
+                            user={user}
                             activeTab={activeTab}
                             handleTabChange={handleTabChange}
-                            total={total}
-                            totalLike={totalLike}
-                            totalCollection={totalCollection}
+                            check={params.username === 'me' ? true : false}
                         />
                         <UserBody
                             activeTab={activeTab}

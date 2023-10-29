@@ -51,6 +51,12 @@
     width: 40px;
 }
 
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+
 .actions {
     display: flex;
     flex-direction: row-reverse;
@@ -64,4 +70,78 @@
     width: 40px;
     height: 40px;
     background-color: transparent;
+}
+
+//Account-tippy
+.account-btn {
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.account-tippy {
+    display: flex;
+    flex-direction: column;
+    z-index: 12;
+
+    .profile-btn,
+    .setting-btn,
+    .stats-btn,
+    .logout-btn {
+        display: flex;
+        background: transparent;
+        padding: 16px;
+        color: var(--text-color);
+        font-size: 1.8rem;
+        width: 100%;
+        align-items: flex-start;
+        cursor: pointer;
+
+        &:hover {
+            color: var(--black);
+        }
+    }
+
+    .setting-btn {
+        box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
+    }
+}
+
+//More-tippy
+.more-btn {
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.more-tippy {
+    display: flex;
+    flex-direction: column;
+    z-index: 12;
+
+    .topic-btn,
+    .collection-btn,
+    .stats-btn,
+    .trend-btn {
+        display: flex;
+        background: transparent;
+        padding: 16px;
+        color: var(--text-color);
+        font-size: 1.8rem;
+        width: 100%;
+        align-items: flex-start;
+        cursor: pointer;
+
+        &:hover {
+            color: var(--black);
+        }
+    }
+
+    .another-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        & a {
+            padding: 8px;
+        }
+    }
 }

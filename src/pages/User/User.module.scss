@@ -131,20 +131,22 @@
 
     .photos-icon,
     .likes-icon,
-    .collections-icon {
+    .collections-icon,
+    .stats-icon {
         position: relative;
         display: flex;
+        align-items: center;
         flex-direction: row;
         background: transparent;
         text-transform: capitalize;
         font-size: large;
-        color: rgba(22, 24, 35, 0.6);
+        color: var(--text-color);
         margin-left: 2%;
         padding-bottom: 16px;
         padding-top: 16px;
 
         & span {
-            font-size: 1vw;
+            font-size: 1em;
             margin-left: 8px;
         }
 

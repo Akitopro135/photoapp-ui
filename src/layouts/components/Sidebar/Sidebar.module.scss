@@ -1,7 +1,10 @@
 .sidebar-wrapper {
-    position: relative;
+    position: sticky;
+    top: var(--default-layout-header-height);
     display: flex;
     flex-direction: column;
+    padding-left: 10px;
+    padding-right: 10px;
     align-items: center;
     width: 100%;
 
@@ -30,12 +33,13 @@
     position: relative; /* Để có thể điều chỉnh phần gạch chân */
 
     min-width: fit-content;
-    margin-left: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
     background: transparent;
     font-weight: normal; /* Mặc định chữ không in đậm */
     text-decoration: none; /* Mặc định không có gạch chân */
     text-transform: capitalize;
-    font-size: large;
+    font-size: 1em;
     color: rgba(22, 24, 35, 0.6);
     padding-bottom: 16px;
     padding-top: 16px;

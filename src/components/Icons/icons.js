@@ -219,6 +219,33 @@ export const CollectionIcon = ({ width = '2.4rem', height = '2.4rem', className 
     </svg>
 );
 
+export const StatsIcon = ({ width = '2.4rem', height = '2.4rem', className }) => (
+    <svg
+        className={className}
+        width={width}
+        height={height}
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        viewBox="0 0 294 294"
+    >
+        <g>
+            <path d="M279,250H15c-8.284,0-15,6.716-15,15s6.716,15,15,15h264c8.284,0,15-6.716,15-15S287.284,250,279,250z" />
+            <path
+                d="M30.5,228h47c5.247,0,9.5-4.253,9.5-9.5v-130c0-5.247-4.253-9.5-9.5-9.5h-47c-5.247,0-9.5,4.253-9.5,9.5v130
+		C21,223.747,25.253,228,30.5,228z"
+            />
+            <path
+                d="M123.5,228h47c5.247,0,9.5-4.253,9.5-9.5v-195c0-5.247-4.253-9.5-9.5-9.5h-47c-5.247,0-9.5,4.253-9.5,9.5v195
+		C114,223.747,118.253,228,123.5,228z"
+            />
+            <path
+                d="M216.5,228h47c5.247,0,9.5-4.253,9.5-9.5v-105c0-5.247-4.253-9.5-9.5-9.5h-47c-5.247,0-9.5,4.253-9.5,9.5v105
+		C207,223.747,211.253,228,216.5,228z"
+            />
+        </g>
+    </svg>
+);
+
 export const TwitterIcon = ({ width = '2.4rem', height = '2.4rem', className }) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -254,6 +281,28 @@ export const InstagramIcon = ({ width = '2.4rem', height = '2.4rem', className }
             clipRule="evenodd"
             d="M 16 3 C 8.83 3 3 8.83 3 16 L 3 34 C 3 41.17 8.83 47 16 47 L 34 47 C 41.17 47 47 41.17 47 34 L 47 16 C 47 8.83 41.17 3 34 3 L 16 3 z M 37 11 C 38.1 11 39 11.9 39 13 C 39 14.1 38.1 15 37 15 C 35.9 15 35 14.1 35 13 C 35 11.9 35.9 11 37 11 z M 25 14 C 31.07 14 36 18.93 36 25 C 36 31.07 31.07 36 25 36 C 18.93 36 14 31.07 14 25 C 14 18.93 18.93 14 25 14 z M 25 16 C 20.04 16 16 20.04 16 25 C 16 29.96 20.04 34 25 34 C 29.96 34 34 29.96 34 25 C 34 20.04 29.96 16 25 16 z"
         ></path>
+    </svg>
+);
+
+export const FacebookIcon = ({ width = '2.4rem', height = '2.4rem', className }) => (
+    <svg
+        fill="currentColor"
+        className={className}
+        width={width}
+        height={height}
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 504 504"
+    >
+        <g>
+            <g>
+                <path
+                    d="M377.6,0H126C56.8,0,0,56.8,0,126.4V378c0,69.2,56.8,126,126,126h251.6c69.6,0,126.4-56.8,126.4-126.4V126.4
+			C504,56.8,447.2,0,377.6,0z M319.6,252H272v156h-60V252h-32v-64h28v-27.2c0-25.6,12.8-66,66.8-66H324V148h-34.8
+			c-5.6,0-13.2,3.6-13.2,16v24h49.2L319.6,252z"
+                />
+            </g>
+        </g>
     </svg>
 );
 

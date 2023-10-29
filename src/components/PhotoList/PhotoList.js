@@ -12,11 +12,11 @@ function PhotoList({ data, check }) {
     const handleResize = () => {
         // Xử lý khi chiều rộng thay đổi
         if (
-            (window.screen.width * 33) / 100 < window.innerWidth &&
-            window.innerWidth < (window.screen.width * 66) / 100
+            (window.screen.width * 36) / 100 < window.innerWidth &&
+            window.innerWidth < (window.screen.width * 72) / 100
         ) {
             setIsWidthInRange(2);
-        } else if (window.innerWidth < (window.screen.width * 33) / 100) {
+        } else if (window.innerWidth < (window.screen.width * 36) / 100) {
             setIsWidthInRange(1);
         } else {
             setIsWidthInRange(3);

@@ -15,7 +15,11 @@ const routes = {
         return '/photo/' + id;
     },
     collection: function (id = ':id') {
-        return '/collection/' + id;
+        if (id === '') {
+            return '/collection';
+        } else {
+            return '/collection/' + id;
+        }
     },
     user: function ({ userName = ':username', value = ':value' }) {
         return '/user/' + userName + '/' + value;
@@ -26,8 +30,12 @@ const routes = {
     // userCollection: function (userName = ':username') {
     //     return '/user/' + userName + '/collections';
     // },
-    topic: function (topicIdOrSlug = ':topicIdOrSlug') {
-        return '/topic/' + topicIdOrSlug;
+    topic: function ({ topicIdOrSlug = ':topicIdOrSlug' }) {
+        if (topicIdOrSlug === '') {
+            return '/topic';
+        } else {
+            return '/topic/' + topicIdOrSlug;
+        }
     },
 };
 
