@@ -1,0 +1,94 @@
+@mixin animate($animation, $duration, $method, $times) {
+    animation: $animation $duration $method $times;
+}
+
+@mixin keyframes($name) {
+    @keyframes #{$name} {
+        @content;
+    }
+}
+
+.wrapper {
+    display: flex;
+    min-height: 1000px;
+    height: 100%;
+    width: 100vw;
+    flex-direction: column;
+}
+
+//introduct
+.introduct {
+    width: 100vw;
+    //background-color: rgba(135, 187, 224, 0.2);
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    & span {
+        display: flex;
+        flex-direction: row-reverse;
+        font-weight: bold;
+        font-size: 2vw;
+    }
+}
+
+.image {
+    padding: 2%;
+}
+
+@include keyframes(fade) {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+//collection image
+// .collection-image {
+//     display: flex;
+//     //background-color: rgba(255, 91, 91, 0.3);
+//     flex-direction: column;
+//     align-items: center;
+//     width: 100%;
+//     padding: 2%;
+//     & span {
+//         font-weight: bold;
+//         font-size: 2vw;
+//     }
+// }
+
+// .collection-image-body {
+//     display: flex;
+//     width: 100%;
+//     justify-content: space-between;
+//     align-items: center;
+//     padding-left: 10%;
+//     padding-right: 10%;
+// }
+
+.collection-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: var(--margin-detail-page);
+    margin-top: var(--margin-detail-page);
+
+    .related_collections-title {
+        font-weight: bold;
+        font-size: 2vw;
+    }
+}
+
+.collection-image-body {
+    display: flex;
+    min-height: 100vh;
+    width: 80%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
