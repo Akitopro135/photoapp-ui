@@ -1,3 +1,5 @@
+import config from '~/config';
+
 import { Contact } from '~/pages/Contact';
 import { Search } from '~/pages/Search';
 import { DetailPhoto } from '~/pages/DetailPhoto';
@@ -6,8 +8,10 @@ import { User } from '~/pages/User';
 import { Topic, Topics } from '~/pages/Topic';
 import { Home } from '~/pages/Home';
 import { Following } from '~/pages/Following';
+import { Edit } from '~/pages/Account';
+
 import { HeaderOnly } from '~/layouts';
-import config from '~/config';
+import { AccountLayout } from '~/layouts/AccountLayout';
 
 const publicRoutes = [
     { path: config.routes.home, component: Home },
@@ -20,6 +24,7 @@ const publicRoutes = [
     { path: config.routes.user({}), component: User },
     { path: config.routes.topic({}), component: Topic },
     { path: config.routes.topic({ topicIdOrSlug: '' }), component: Topics },
+    { path: config.routes.account({ value: '' }), component: Edit, layout: AccountLayout },
 ];
 const privateRoutes = [];
 export { publicRoutes, privateRoutes };

@@ -1,5 +1,29 @@
 import axios from 'axios';
-import unsplash from '..';
+
+export const loginWithUnsplash = () => {
+    const baseUrl = 'https://unsplash.com/oauth/authorize';
+    const clientId = `client_id=${process.env.REACT_APP_ACCESS_KEY}`;
+    const redirect = `redirect_uri=http://localhost:3000/user/me/photos/`;
+    const responseType = `response_type=code`;
+    const allScope = [
+        'public',
+        'read_user',
+        'write_user',
+        'read_photos',
+        'write_photos',
+        'write_likes',
+        'write_followers',
+        'read_collections',
+        'write_collections',
+    ];
+
+    const scope = `scope=${allScope.join('+')}`;
+
+    const url = `${baseUrl}?${clientId}&${redirect}&${responseType}&${scope}`;
+    //const url = `${baseUrl}?${clientId}&${redirect}&${responseType}`;
+
+    return url;
+};
 
 const requestKey = () => {
     const getStoredToken = localStorage.getItem('unsplashToken');
@@ -51,7 +75,6 @@ const getToken = async (code) => {
         });
 
         const response = await getInfo.get(`/me`);
-        //const response = await TOKEN.get(`/me`);
 
         localStorage.setItem('currentId', response.data.username);
         window.location.reload();

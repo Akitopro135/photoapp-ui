@@ -6,7 +6,7 @@ import { Download, Heart } from '~/components/Icons';
 
 const cx = classNames.bind(styles);
 
-function DetailPhotoUser({ photo }) {
+function DetailPhotoUser({ photo, handleLike }) {
     return (
         <div className={cx('detail-header')}>
             <Link
@@ -20,7 +20,7 @@ function DetailPhotoUser({ photo }) {
                 <a href={photo.links.download} className={cx('btn-download')}>
                     <Download />
                 </a>
-                <button className={cx('btn-heart')}>
+                <button className={cx('btn-heart', photo.liked_by_user && 'active')} onClick={handleLike}>
                     <Heart />
                 </button>
             </div>

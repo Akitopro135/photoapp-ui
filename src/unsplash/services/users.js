@@ -4,7 +4,8 @@ import {
     ListUserPhotoParams,
     StatisticsParams,
 } from '../params/users';
-import { API } from '../utils';
+import { API, TOKEN } from '../utils';
+//import API from '.';
 import validation from './validation';
 
 const UserService = {
@@ -25,7 +26,7 @@ const UserService = {
     },
     listLikedPhotos: async (input = ListUserLikePhotoParams) => {
         const { username, ...params } = input;
-        validation.checkOrderBy(params.order_by);
+        params.order_by && validation.checkOrderBy(params.order_by);
         params.orientation && validation.checkOrientation(params.orientation);
         const response = await API.get(`/users/${username}/likes`, { params });
         return response.data;

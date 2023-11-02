@@ -1,10 +1,11 @@
 import { ListPhotoParams, ListRandomPhotosParams, UpdatePhotoParams } from '../params/photos';
 import { API, TOKEN } from '../utils';
+//import API from '.';
 import validation from './validation';
 
 const PhotoService = {
     get: async (id) => {
-        const response = await API.get(`/photos/${id}`);
+        const response = await TOKEN.get(`/photos/${id}`);
         return response.data;
     },
     list: async (params = ListPhotoParams) => {
@@ -29,14 +30,20 @@ const PhotoService = {
     update: async (input = UpdatePhotoParams) => {
         const { id, ...params } = input;
         const response = await TOKEN.put(`/photos/${id}`, { params });
+        //const response = await API.put(`/photos/${id}`, { params });
+
         return response.data;
     },
     like: async (id) => {
         const response = await TOKEN.post(`/photos/${id}/like`);
+        //const response = await API.post(`/photos/${id}/like`);
+
         return response.data;
     },
     unLike: async (id) => {
         const response = await TOKEN.delete(`/photos/${id}/like`);
+        //const response = await API.delete(`/photos/${id}/like`);
+
         return response.data;
     },
 };

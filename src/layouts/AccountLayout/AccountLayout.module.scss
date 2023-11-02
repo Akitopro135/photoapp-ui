@@ -1,0 +1,16 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.section {
+    display: flex;
+    margin-top: var(--default-layout-header-height);
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    width: 80%;
+}

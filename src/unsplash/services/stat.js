@@ -1,4 +1,5 @@
 import { API } from '../utils';
+//import API from '.';
 
 const StatService = {
     total: async () => {
