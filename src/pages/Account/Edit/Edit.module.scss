@@ -1,0 +1,82 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+input[type='text'],
+select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.user {
+    display: flex;
+    flex-direction: row;
+}
+
+.image {
+    display: flex;
+    width: 20%;
+    justify-content: center;
+
+    .profile-image {
+        height: 200px;
+        border-radius: 100%;
+    }
+}
+
+.profile {
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+
+    .profile-name {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+        & div {
+            width: 50%;
+            padding: 10px;
+        }
+    }
+
+    .email {
+        & div {
+            padding: 10px;
+        }
+    }
+
+    .username {
+        & div {
+            padding: 10px;
+        }
+    }
+}
+
+.about {
+    display: flex;
+    flex-direction: column;
+
+    .location {
+        padding-bottom: 20px;
+    }
+
+    .portfolio {
+        padding-bottom: 20px;
+    }
+
+    .instagram {
+        padding-bottom: 20px;
+    }
+
+    .bio {
+        padding-bottom: 20px;
+    }
+}

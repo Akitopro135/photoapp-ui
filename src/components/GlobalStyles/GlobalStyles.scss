@@ -1,0 +1,39 @@
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+:root {
+    --primary: #fe2c55;
+    --black: #000;
+    --white: #fff;
+    --icon-color: rgba(22, 24, 35, 0.34);
+    --text-color: rgba(22, 24, 35, 0.6);
+    --tippy-wrapper-background: rgb(243, 238, 238);
+    --default-layout-width: 1360px;
+    --default-layout-header-height: 50px;
+    --sidebar-height: 60px;
+    --background-image: #e9e8e8;
+    //image: url('../../assets/images/background.webp')
+}
+* {
+    box-sizing: border-box;
+}
+html {
+    font-size: 62.5%;
+}
+body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;
+}
+
+button,
+input,
+[tabindex] {
+    outline: none;
+    border: none;
+}
+
+a {
+    color: var(--black);
+    text-decoration: none;
+}
