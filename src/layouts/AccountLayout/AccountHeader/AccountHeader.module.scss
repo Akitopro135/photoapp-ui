@@ -1,14 +1,9 @@
 .wrapper {
-    --border-radius: 92px;
-    --search-height: calc(var(--default-layout-header-height) - 15px);
-    --top-spacer: 9px;
-    --search-button-color: rgba(22, 24, 35, 0.34);
-    --search-button-width: 50px;
-
     position: fixed;
     top: 0;
     left: 0;
     z-index: 20;
+    padding: 20px;
     display: flex;
     justify-content: center;
     height: var(--default-layout-header-height);
@@ -43,7 +38,6 @@
 .logo {
     display: flex;
     align-items: center;
-    margin-left: 20px;
     width: 30vw;
 }
 
@@ -61,25 +55,11 @@
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    margin-right: 20px;
     width: 30vw;
-}
-
-.more-btn {
-    display: inline;
-    width: 40px;
-    height: 40px;
-    background-color: transparent;
 }
 
 //Account-tippy
 .account-btn {
-    background-color: transparent;
-    cursor: pointer;
-}
-
-//More-tippy
-.more-btn {
     background-color: transparent;
     cursor: pointer;
 }

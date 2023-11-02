@@ -1,3 +1,5 @@
+import config from '.';
+
 const routes = {
     home: '/',
     following: '/following',
@@ -35,6 +37,13 @@ const routes = {
             return '/topic';
         } else {
             return '/topic/' + topicIdOrSlug;
+        }
+    },
+    account: function ({ value = ':value' }) {
+        if (value === '') {
+            return '/account';
+        } else {
+            return '/account/' + value;
         }
     },
 };

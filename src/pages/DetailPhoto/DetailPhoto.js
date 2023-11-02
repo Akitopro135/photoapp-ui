@@ -15,7 +15,7 @@ function DetailPhoto() {
     const params = useParams();
     const id = params.id.slice(0, params.id.length);
 
-    const { data: photo } = usePhoto({ id });
+    const { data: photo, like } = usePhoto({ id });
 
     const { data: listPhoto } = useSearch({
         query: photo ? photo.tags[0].title : '',
@@ -26,7 +26,7 @@ function DetailPhoto() {
         <>
             {photo && (
                 <div className={cx('detail-wrapper')}>
-                    <DetailPhotoUser photo={photo} />
+                    <DetailPhotoUser photo={photo} handleLike={like} />
                     <div className={cx('detail-content')}>
                         <div className={cx('content-photo')}>
                             <PhotoItem data={photo} hardWidthVW={50} />

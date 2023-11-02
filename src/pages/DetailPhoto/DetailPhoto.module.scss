@@ -52,9 +52,17 @@
 
     .btn-download {
         background-color: transparent;
+        cursor: pointer;
     }
     .btn-heart {
         background-color: transparent;
+        cursor: pointer;
+        &:hover {
+            filter: brightness(0.8);
+        }
+    }
+    .active {
+        color: rgb(255, 53, 53);
     }
 }
 

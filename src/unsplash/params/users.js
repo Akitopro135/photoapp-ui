@@ -13,7 +13,7 @@ export const ListUserLikePhotoParams = {
     username: '',
     page: 1,
     per_page: 10,
-    order_by: 'latest',
+    order_by: undefined,
     orientation: undefined,
 };
 

@@ -1,5 +1,6 @@
 import { ListTopicParams, ListTopicPhotoParams } from '../params/topic';
 import { API } from '../utils';
+//import API from '.';
 import validation from './validation';
 
 const TopicService = {
