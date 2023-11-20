@@ -3,6 +3,7 @@ import styles from './CollectionCard.module.scss';
 import config from '~/config';
 import { Link } from 'react-router-dom';
 import { CollectionPhoto } from '../CollectionPhoto';
+import { scrollToTop } from '~/helpers';
 
 const cx = classNames.bind(styles);
 
@@ -15,9 +16,14 @@ function CollectionCard({ collection }) {
         slicedTag = collection.tags.slice(0, 3);
     }
 
+    const fixWord = (word) => {
+        const words = word.split(' ');
+        return words.length === 1 ? words[0] : words[0] + ' ' + words[1];
+    };
+
     return (
         <div className={cx('collection-card-wrapper')}>
-            <Link to={config.routes.collection(`${collection.id}`)}>
+            <Link to={config.routes.collection(`${collection.id}`)} onClick={scrollToTop}>
                 <CollectionPhoto data={collection.preview_photos} />
             </Link>
             <div className={cx('collection-card-info')}>
@@ -32,7 +38,7 @@ function CollectionCard({ collection }) {
                         className={cx('tags')}
                         onClick={() => window.scrollTo({ top: 0 })}
                     >
-                        {tag.title}
+                        {fixWord(tag.title)}
                     </Link>
                 ))}
             </div>

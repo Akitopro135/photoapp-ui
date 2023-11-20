@@ -1,10 +1,11 @@
 import classNames from 'classnames/bind';
 import styles from './Sidebar.module.scss';
 import config from '~/config';
-import { useTopic, useTopicList } from '~/hooks';
+
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { PhotoItem } from '~/components/PhotoItem';
+import { useTopic, useTopicList } from '~/unsplash/hooks';
 
 const cx = classNames.bind(styles);
 
@@ -16,7 +17,7 @@ function Sidebar() {
         params.topicIdOrSlug.slice(0, params.topicIdOrSlug.length);
 
     const { data: topic } = useTopic({
-        topicIdOrSlug: topicIdOrSlug,
+        id_or_slug: topicIdOrSlug,
         check: params.topicIdOrSlug,
     });
 
@@ -31,17 +32,21 @@ function Sidebar() {
 
     const toggleItem = (item) => {
         setActiveItem(item);
+        //window.reload();
+        setTimeout(() => {
+            window.location.reload();
+        }, 1);
     };
 
     return (
         <>
             <div className={cx('sidebar-wrapper')}>
                 <div className={cx('sidebar-items')}>
-                    {data.results &&
-                        data.results.map((item) => (
+                    {data &&
+                        data.map((item) => (
                             <Link
                                 key={item.id}
-                                to={config.routes.topic(`${item.slug}`)}
+                                to={config.routes.topic({ topicIdOrSlug: `${item.slug}` })}
                                 className={cx(
                                     'items',
                                     activeItem.slug === item.slug && params.topicIdOrSlug && 'active',
@@ -53,15 +58,18 @@ function Sidebar() {
                         ))}
                 </div>
             </div>
-            <div className={cx('cover-photo')}>
-                {activeItem && params.topicIdOrSlug && (
-                    <>
-                        <PhotoItem data={activeItem.cover_photo} hardWidthVW={100} hardHeightVH={60} />
-                        <h1>{activeItem.title}</h1>
-                        <span>{activeItem.description}</span>
-                    </>
-                )}
-            </div>
+            {activeItem && params.topicIdOrSlug && (
+                <div className={cx('cover-photo')}>
+                    <PhotoItem
+                        data={activeItem.cover_photo}
+                        hardWidthVW={100}
+                        hardHeightVH={80}
+                        className={'sidebar-image'}
+                    />
+                    <h1>{activeItem.title}</h1>
+                    <span>{activeItem.description}</span>
+                </div>
+            )}
         </>
     );
 }

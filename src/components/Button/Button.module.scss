@@ -18,9 +18,9 @@
 
 .home-more-info-btn {
     position: absolute;
-    width: 7vw;
-    height: 2vw;
-    bottom: -1vw;
+    width: auto;
+    height: 10%;
+    bottom: -5%;
     background-color: white;
     border-radius: 4px;
 
@@ -33,6 +33,6 @@
     }
 
     & h2 {
-        font-size: 0.8vw;
+        font-size: 1.6em;
     }
 }

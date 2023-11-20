@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import styles from './Search.module.scss';
+import styles from './SearchHeader.module.scss';
 import config from '~/config';
 
 import { Link } from 'react-router-dom';

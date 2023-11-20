@@ -35,15 +35,15 @@ function ListPhoto({ data, title, morePhoto = false, className }) {
                 </button>
                 {changeImage ? (
                     <div className={cx('list-body-image')}>
-                        <PhotoCard data={data[1]} className={className} width={20} info button profileImage />
-                        <PhotoCard data={data[0]} className={className} width={20} info button profileImage />
-                        <PhotoCard data={data[2]} className={className} width={20} info button profileImage />
+                        <PhotoCard data={data[1]} className={className} info button profileImage />
+                        <PhotoCard data={data[0]} className={className} info button profileImage />
+                        <PhotoCard data={data[2]} className={className} info button profileImage />
                     </div>
                 ) : (
                     <div className={cx('list-body-image')}>
-                        <PhotoCard data={data[3]} className={className} width={20} info button profileImage />
-                        <PhotoCard data={data[4]} className={className} width={20} info button profileImage />
-                        <PhotoCard data={data[5]} className={className} width={20} info button profileImage />
+                        <PhotoCard data={data[3]} className={className} info button profileImage />
+                        <PhotoCard data={data[4]} className={className} info button profileImage />
+                        <PhotoCard data={data[5]} className={className} info button profileImage />
                     </div>
                 )}
                 <button className={cx('angle-btn')} onClick={hangleChangeImage}>

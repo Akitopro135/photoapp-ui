@@ -1,4 +1,4 @@
-export function calculateImageSize({ photo, width }) {
+export function calculateImageSize({ photo, width, widthVW }) {
     // let calculatedWidth;
     // let calculatedHeight;
 
@@ -19,6 +19,8 @@ export function calculateImageSize({ photo, width }) {
     let widthPX = (width * window.screen.width) / 100;
     let heightPX = widthPX / aspectRatio;
 
+    let heightVH = widthVW / aspectRatio;
+
     return {
         // calculatedWidth,
         // calculatedHeight,
@@ -28,5 +30,6 @@ export function calculateImageSize({ photo, width }) {
         width,
         widthPX,
         heightPX,
+        heightVH,
     };
 }

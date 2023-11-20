@@ -18,10 +18,7 @@
     justify-content: space-between;
     background-size: cover;
     background-position: center;
-
-    & h1 {
-        text-transform: capitalize;
-    }
+    text-transform: capitalize;
 }
 
 .info {
@@ -82,7 +79,7 @@
 .collections {
     display: flex;
     flex-direction: row;
-    width: 80%;
+    width: 100%;
     justify-content: space-between;
 }
 

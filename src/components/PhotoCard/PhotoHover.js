@@ -43,7 +43,7 @@ function PhotoHover({ data, check, widthPC, hardWidthVW, hardHeightVH, className
                         data={data}
                         widthPC={widthPC}
                         onClick={onClick}
-                        className={className}
+                        className={'hover-photo'}
                         hardWidthVW={hardWidthVW}
                         hardHeightVH={hardHeightVH}
                         passProps={passProps}
@@ -59,7 +59,7 @@ function PhotoHover({ data, check, widthPC, hardWidthVW, hardHeightVH, className
                 >
                     <Link to={handleLink()} className={cx('user-info')} onClick={() => window.scrollTo({ top: 0 })}>
                         <img src={data.user.profile_image.medium} alt="" className={cx('profile-image')} />
-                        <span>{data.user.username}</span>
+                        <span className={cx('user-name')}>{data.user.username}</span>
                     </Link>
                 </div>
             )}

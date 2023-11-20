@@ -8,7 +8,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 20;
+    z-index: 3;
     display: flex;
     justify-content: center;
     height: var(--default-layout-header-height);
@@ -51,6 +51,12 @@
     width: 40px;
 }
 
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+
 .actions {
     display: flex;
     flex-direction: row-reverse;
@@ -64,4 +70,16 @@
     width: 40px;
     height: 40px;
     background-color: transparent;
+}
+
+//Account-tippy
+.account-btn {
+    background-color: transparent;
+    cursor: pointer;
+}
+
+//More-tippy
+.more-btn {
+    background-color: transparent;
+    cursor: pointer;
 }
