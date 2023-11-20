@@ -10,7 +10,7 @@ function useLoadMore({ checkScroll = false, fetchDatas, fetchDatasProps }) {
         setData([]);
     }, [fetchDatasProps.id, fetchDatasProps.username, fetchDatasProps.query, fetchDatasProps.id_or_slug]);
 
-    const { data } = fetchDatas({
+    const { data, loading } = fetchDatas({
         ...fetchDatasProps,
         page,
     });
@@ -29,6 +29,7 @@ function useLoadMore({ checkScroll = false, fetchDatas, fetchDatasProps }) {
 
     return {
         loadMoreData,
+        loading,
         total: data?.total || 0,
     };
 }

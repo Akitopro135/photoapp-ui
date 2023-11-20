@@ -1,0 +1,119 @@
+.content-photo-detail {
+    margin: 20px;
+}
+
+.detail-view-download {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: var(--margin-detail-page);
+
+    .info {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 30vw;
+
+        .downloads {
+            position: relative;
+            margin-left: 50px;
+            margin-right: 50px;
+
+            &::before {
+                content: '';
+                position: absolute;
+                right: 100px;
+                height: 50px;
+                width: 2px;
+                background-color: rgba(0, 0, 0, 0.12);
+            }
+
+            &::after {
+                content: '';
+                position: absolute;
+                left: 100px;
+                height: 50px;
+                width: 2px;
+                background-color: rgba(0, 0, 0, 0.12);
+            }
+        }
+
+        & div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 1em;
+
+            :nth-child(2) {
+                font-weight: bold;
+            }
+        }
+    }
+
+    .actions {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        //width: 12%;
+        //margin-right: 20px;
+
+        & button {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 8px;
+            margin-right: 2px;
+            border-radius: 4px;
+            background-color: transparent;
+            border-style: solid;
+            border-width: 1px;
+            border-color: rgb(208, 208, 208);
+            font-size: 1em;
+
+            :first-child {
+                width: 1em;
+                margin-right: 4px;
+            }
+        }
+    }
+}
+
+.detail-order {
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--margin-detail-page);
+    margin-bottom: 2%;
+    font-size: 1.2em;
+
+    & div {
+        display: flex;
+        align-items: center;
+
+        :first-child {
+            width: 1em;
+            margin-right: 4px;
+        }
+    }
+}
+
+.detail-tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1%;
+    .tags {
+        margin-right: 1%;
+        margin-bottom: 1%;
+        text-transform: capitalize;
+        color: darkgray;
+        padding: 12px;
+        background-color: rgb(217, 217, 217);
+        border-radius: 4px;
+        font-size: 1em;
+
+        &:hover {
+            color: black;
+        }
+    }
+}

@@ -3,6 +3,7 @@ import styles from './CollectionCard.module.scss';
 import config from '~/config';
 import { Link } from 'react-router-dom';
 import { CollectionPhoto } from '../CollectionPhoto';
+import { scrollToTop } from '~/helpers';
 
 const cx = classNames.bind(styles);
 
@@ -22,7 +23,7 @@ function CollectionCard({ collection }) {
 
     return (
         <div className={cx('collection-card-wrapper')}>
-            <Link to={config.routes.collection(`${collection.id}`)}>
+            <Link to={config.routes.collection(`${collection.id}`)} onClick={scrollToTop}>
                 <CollectionPhoto data={collection.preview_photos} />
             </Link>
             <div className={cx('collection-card-info')}>

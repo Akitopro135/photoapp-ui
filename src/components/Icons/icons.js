@@ -32,6 +32,23 @@ export const CloseIcon = ({ width = '2.4rem', height = '2.4rem', className }) =>
     </svg>
 );
 
+export const MoreIcon = ({ width = '2.4rem', height = '2.4rem', className }) => (
+    <svg
+        className={className}
+        width={width}
+        height={height}
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        viewBox="0 0 448 512"
+    >
+        <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"
+        />
+    </svg>
+);
+
 export const AngleRight = ({ width = '2.4rem', height = '2.4rem', className }) => (
     <svg
         className={className}
@@ -66,6 +83,23 @@ export const AngleLeft = ({ width = '2.4rem', height = '2.4rem', className }) =>
     </svg>
 );
 
+export const LoadingIcon = ({ width = '2.4rem', height = '2.4rem', className }) => (
+    <svg
+        className={className}
+        width={width}
+        height={height}
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        viewBox="0 0 512 512"
+    >
+        <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z"
+        />
+    </svg>
+);
+
 export const Heart = ({ width = '2.4rem', height = '2.4rem', className }) => (
     <svg
         className={className}
@@ -79,6 +113,74 @@ export const Heart = ({ width = '2.4rem', height = '2.4rem', className }) => (
             fillRule="evenodd"
             clipRule="evenodd"
             d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"
+        />
+    </svg>
+);
+
+export const PlusIcon = ({ width = '2.4rem', height = '2.4rem', className }) => (
+    <svg
+        className={className}
+        width={width}
+        height={height}
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        viewBox="0 0 448 512"
+    >
+        <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+        />
+    </svg>
+);
+
+export const LockIcon = ({ width = '2.4rem', height = '2.4rem', className }) => (
+    <svg
+        className={className}
+        width={width}
+        height={height}
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        viewBox="0 0 448 512"
+    >
+        <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"
+        />
+    </svg>
+);
+
+export const UnLockIcon = ({ width = '2.4rem', height = '2.4rem', className }) => (
+    <svg
+        className={className}
+        width={width}
+        height={height}
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        viewBox="0 0 576 512"
+    >
+        <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M352 144c0-44.2 35.8-80 80-80s80 35.8 80 80v48c0 17.7 14.3 32 32 32s32-14.3 32-32V144C576 64.5 511.5 0 432 0S288 64.5 288 144v48H64c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V256c0-35.3-28.7-64-64-64H352V144z"
+        />
+    </svg>
+);
+
+export const NothingIcon = ({ width = '2.4rem', height = '2.4rem', className }) => (
+    <svg
+        className={className}
+        width={width}
+        height={height}
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        viewBox="0 0 1024 1024"
+    >
+        <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M512 64c-247.4 0-448 200.6-448 448 0 247.4 200.6 448 448 448s448-200.6 448-448C960 264.6 759.4 64 512 64L512 64zM118.3 512c0-217.4 176.3-393.7 393.7-393.7 94.3 0 180.9 33.2 248.7 88.5 10.3 8.4 20.1 17.3 29.5 26.6L220.8 777c-1-1.1-2-2.2-2.9-3.3C155.9 704.2 118.3 612.5 118.3 512L118.3 512zM512 905.7c-94.8 0-181.8-33.5-249.7-89.3l565.4-539.7c49 65.6 78 147.1 78 235.3C905.7 729.4 729.4 905.7 512 905.7L512 905.7zM512 905.7"
         />
     </svg>
 );

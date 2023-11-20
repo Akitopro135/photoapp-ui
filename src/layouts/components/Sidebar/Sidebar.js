@@ -58,15 +58,18 @@ function Sidebar() {
                         ))}
                 </div>
             </div>
-            <div className={cx('cover-photo')}>
-                {activeItem && params.topicIdOrSlug && (
-                    <>
-                        <PhotoItem data={activeItem.cover_photo} hardWidthVW={100} hardHeightVH={60} />
-                        <h1>{activeItem.title}</h1>
-                        <span>{activeItem.description}</span>
-                    </>
-                )}
-            </div>
+            {activeItem && params.topicIdOrSlug && (
+                <div className={cx('cover-photo')}>
+                    <PhotoItem
+                        data={activeItem.cover_photo}
+                        hardWidthVW={100}
+                        hardHeightVH={80}
+                        className={'sidebar-image'}
+                    />
+                    <h1>{activeItem.title}</h1>
+                    <span>{activeItem.description}</span>
+                </div>
+            )}
         </>
     );
 }

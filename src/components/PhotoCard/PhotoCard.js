@@ -17,8 +17,6 @@ function PhotoCard({
     profileImage = false,
     checkScrollToTop = false,
     checkReload = false,
-    width = 24,
-    height = 12,
     passProps,
 }) {
     const handleClick = async () => {
@@ -28,15 +26,15 @@ function PhotoCard({
 
     return (
         <div className={cx('wrapper')}>
-            <div style={{ width: `${width}vw`, height: `${height * 2}vw` }} className={cx('card')}>
+            <div style={{ width: window.screen.width / 4, height: window.screen.height / 2 }} className={cx('card')}>
                 <div className={cx('wrapper-image')}>
                     <Link to={config.routes.detailPhoto(`${data.id}`)}>
                         <PhotoItem
                             data={data}
                             onClick={handleClick}
                             className={className}
-                            hardWidthVW={width}
-                            hardHeightVH={height}
+                            hardHeightPX={window.screen.height / 4}
+                            hardWidthPX={window.screen.width / 4}
                         />
                     </Link>
                 </div>
@@ -54,7 +52,11 @@ function PhotoCard({
                     </div>
                 )}
                 {button && (
-                    <Button to={config.routes.detailPhoto(`${data.id}`)} className={'home-more-info-btn'}>
+                    <Button
+                        to={config.routes.detailPhoto(`${data.id}`)}
+                        className={'home-more-info-btn'}
+                        onClick={scrollToTop}
+                    >
                         <h2>More Info</h2>
                     </Button>
                 )}

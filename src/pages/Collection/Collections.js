@@ -4,12 +4,13 @@ import styles from './Collections.module.scss';
 import { CollectionCard } from '~/components/CollectionCard';
 import { useLoadMore } from '~/hooks';
 import { useCollections } from '~/unsplash/hooks';
+import { Loading } from '~/components/Loading';
 
 const cx = classNames.bind(styles);
 
 function Collections() {
     //Lấy danh sách search collections
-    const { loadMoreData: collections } = useLoadMore({
+    const { loadMoreData: collections, loading: moreCollectionLoading } = useLoadMore({
         checkScroll: true,
         fetchDatas: useCollections,
         fetchDatasProps: {
@@ -17,6 +18,9 @@ function Collections() {
         },
     });
 
+    if (!collections) {
+        return <Loading />;
+    }
     return (
         <div className={cx('wrapper')}>
             <span className={cx('title')}>Collections</span>
@@ -27,6 +31,7 @@ function Collections() {
                 {collections.map((collection) => (
                     <CollectionCard key={collection.id} collection={collection} />
                 ))}
+                {moreCollectionLoading && <Loading />}
             </div>
         </div>
     );

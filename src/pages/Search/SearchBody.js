@@ -1,13 +1,14 @@
 import classNames from 'classnames/bind';
-import styles from './Search.module.scss';
+import styles from './SearchBody.module.scss';
 
 import { PhotoCard } from '~/components/PhotoCard';
 import { UserCard } from '~/components/UserCard';
 import { CollectionCard } from '~/components/CollectionCard';
+import { Loading } from '~/components/Loading';
 
 const cx = classNames.bind(styles);
 
-function SearchBody({ activeTab, data, usersData, collectionsData }) {
+function SearchBody({ activeTab, data, usersData, collectionsData, checkLoading }) {
     return (
         <div className={cx('content-body')}>
             {data &&
@@ -21,6 +22,7 @@ function SearchBody({ activeTab, data, usersData, collectionsData }) {
             {collectionsData &&
                 activeTab === 'collections' &&
                 collectionsData.map((collection) => <CollectionCard key={collection.id} collection={collection} />)}
+            {checkLoading && <Loading />}
         </div>
     );
 }

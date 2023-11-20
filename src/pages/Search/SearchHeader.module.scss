@@ -1,0 +1,58 @@
+.content-header {
+    position: sticky;
+    top: var(--default-layout-header-height);
+    background: var(--background-image);
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    width: 100%;
+    box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
+
+    .photos-icon,
+    .users-icon,
+    .collections-icon {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-transform: capitalize;
+        color: darkgray;
+        padding: 12px;
+        background-color: transparent;
+        height: var(--sidebar-height);
+        border-radius: 4px;
+        margin-left: 20px;
+        cursor: pointer;
+
+        & span {
+            font-size: 1em;
+            margin-left: 8px;
+        }
+
+        &:hover {
+            color: black;
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            bottom: 0;
+            left: 0;
+            background-color: black; /* Màu sắc của gạch chân */
+            transform: scaleX(0); /* Ẩn gạch chân ban đầu */
+            transform-origin: 0 0; /* Đặt điểm bắt đầu ở góc trái trên của phần tử */
+            transition: transform 0.2s ease-in-out; /* Hiệu ứng khi hover */
+        }
+    }
+
+    .active {
+        color: black;
+        cursor: default;
+        &::before {
+            transform: scaleX(1); /* Hiển thị gạch chân cho item active */
+        }
+    }
+}

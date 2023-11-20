@@ -1,8 +1,9 @@
 import classNames from 'classnames/bind';
-import styles from './User.module.scss';
+import styles from './UserHeader.module.scss';
 import config from '~/config';
 import { Link } from 'react-router-dom';
-import { CollectionIcon, Heart, ImageIcon, StatsIcon } from '~/components/Icons';
+import { CollectionIcon, Heart, ImageIcon } from '~/components/Icons';
+import { formatNumber } from '~/helpers';
 
 const cx = classNames.bind(styles);
 
@@ -15,7 +16,7 @@ function UserHeader({ user, activeTab, handleTabChange, check }) {
                 onClick={() => activeTab !== 'photos' && handleTabChange('photos')}
             >
                 <ImageIcon />
-                <span>Photos {user.total_photos}</span>
+                <span>Photos {formatNumber(user.total_photos)}</span>
             </Link>
             <Link
                 to={config.routes.user({ userName: check ? `me` : `${user.username}`, value: 'likes' })}
@@ -23,7 +24,7 @@ function UserHeader({ user, activeTab, handleTabChange, check }) {
                 onClick={() => activeTab !== 'likes' && handleTabChange('likes')}
             >
                 <Heart />
-                <span>Likes {user.total_likes}</span>
+                <span>Likes {formatNumber(user.total_likes)}</span>
             </Link>
             <Link
                 to={config.routes.user({ userName: check ? `me` : `${user.username}`, value: 'collections' })}
@@ -31,18 +32,8 @@ function UserHeader({ user, activeTab, handleTabChange, check }) {
                 onClick={() => activeTab !== 'collections' && handleTabChange('collections')}
             >
                 <CollectionIcon />
-                <span>Collections {user.total_collections}</span>
+                <span>Collections {formatNumber(user.total_collections)}</span>
             </Link>
-            {check && (
-                <Link
-                    to={config.routes.user({ userName: `me`, value: 'stats' })}
-                    className={cx('stats-icon', activeTab === 'stats' ? 'active' : '')}
-                    onClick={() => activeTab !== 'stats' && handleTabChange('stats')}
-                >
-                    <StatsIcon />
-                    <span>Stats</span>
-                </Link>
-            )}
         </div>
     );
 }

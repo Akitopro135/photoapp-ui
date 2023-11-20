@@ -12,17 +12,21 @@ import validation from './validation';
 
 const CollectionService = {
     list: async (params = ListCollectionParams) => {
+        params.page && validation.checkNumberValue({ value: params.page, string: 'page' });
+        params.per_page && validation.checkNumberValue({ value: params.per_page, string: 'per_page' });
         const response = await API.get(`/collections`, { params });
         return response.data;
     },
     get: async (id) => {
-        const response = await API.get(`/collections/${id}`);
+        const response = await TOKEN.get(`/collections/${id}`);
         return response.data;
     },
     getPhotos: async (input = GetCollectionPhotosParams) => {
         const { id, ...params } = input;
+        params.page && validation.checkNumberValue({ value: params.page, string: 'page' });
+        params.per_page && validation.checkNumberValue({ value: params.per_page, string: 'per_page' });
         params.orientation && validation.checkOrientation(params.orientation);
-        const response = await API.get(`/collections/${id}/photos`, { params });
+        const response = await TOKEN.get(`/collections/${id}/photos`, { params });
         return response.data;
     },
     getRelatedCollections: async (id) => {
@@ -30,11 +34,13 @@ const CollectionService = {
         return response.data;
     },
     create: async (params = CreateCollectionParams) => {
+        params.private && validation.checkBooleanValue(params.private);
         const response = await TOKEN.post(`/collections`, undefined, { params });
         //const response = await API.post(`/collections`, undefined, { params });
         return response.data;
     },
     update: async (id, params = UpdateCollectionParams) => {
+        params.private && validation.checkBooleanValue(params.private);
         const response = await TOKEN.put(`/collections/${id}`, undefined, { params });
         //const response = await API.put(`/collections/${id}`, undefined, { params });
         return response.data;

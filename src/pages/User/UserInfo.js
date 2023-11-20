@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import styles from './User.module.scss';
+import styles from './UserInfo.module.scss';
 import config from '~/config';
 
 import { Link } from 'react-router-dom';
@@ -7,9 +7,9 @@ import { InstagramIcon, LinkIcon, LocationDot, TwitterIcon } from '~/components/
 
 const cx = classNames.bind(styles);
 
-function UserInfo({ user }) {
+function UserInfo({ user, changeStyle }) {
     return (
-        <div className={cx('title')}>
+        <div className={cx('title', changeStyle && 'title-change')}>
             <div className={cx('image')}>
                 <img src={user.profile_image.large} className={cx('profile-image')} alt="" />
             </div>

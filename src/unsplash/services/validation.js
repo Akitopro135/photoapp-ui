@@ -1,4 +1,16 @@
 const validation = {
+    checkNumberValue: ({ string = 'value', value }) => {
+        if (typeof value !== 'number' || isNaN(value)) {
+            throw new Error(`${string} must be "number"`);
+        } else if (value <= 0) {
+            throw new Error(`${string} > 0`);
+        }
+    },
+    checkBooleanValue: (value) => {
+        if (typeof value !== 'boolean') {
+            throw new Error('private must be "true" or "false"');
+        }
+    },
     checkContentFilter: (content_filter) => {
         if (!['low', 'high'].includes(content_filter)) {
             throw new Error('content_filter must be "low" or "high');

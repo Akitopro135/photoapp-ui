@@ -1,16 +1,13 @@
 .wrapper {
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
-    z-index: 20;
     padding: 20px;
     display: flex;
     justify-content: center;
     height: var(--default-layout-header-height);
     width: 100%;
-    //box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
     background: var(--background-image);
-    //background-size: cover;
 }
 
 .inner {

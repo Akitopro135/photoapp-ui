@@ -28,7 +28,7 @@ function AccountMenu({ data, showResult, setShowResult, children }) {
                                     View profile
                                 </Link>
                                 <button className={cx('stats-btn')}>Stats</button>
-                                <Link to={config.routes.account({ value: '' })} className={cx('setting-btn')}>
+                                <Link to={config.routes.account.edit()} className={cx('setting-btn')}>
                                     Account settings
                                 </Link>
                                 <Link

@@ -1,7 +1,7 @@
 .wrapper-image {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+    // width: 100%;
+    // display: flex;
+    // justify-content: center;
 
     //z-index: 1;
 
@@ -41,7 +41,14 @@
 .collection-image {
     :last-child {
         border-radius: 8px;
-        padding: 5px;
+        padding: 2px;
+        object-fit: cover;
+    }
+}
+
+//SidebarPhoto
+.sidebar-image {
+    :last-child {
         object-fit: cover;
     }
 }
@@ -54,6 +61,22 @@
         object-fit: cover;
         filter: brightness(0.7);
     }
+}
+
+//PopupPhoto
+.popup-image {
+    :last-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        object-fit: cover;
+    }
+}
+
+//HoverPhoto
+.hover-photo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 //Search
@@ -79,6 +102,14 @@
             animation-duration: 0.7s;
             opacity: 0.8;
         }
+    }
+}
+
+.home-introduct-image {
+    :last-child {
+        object-fit: cover;
+        object-position: center;
+        border-radius: 0;
     }
 }
 

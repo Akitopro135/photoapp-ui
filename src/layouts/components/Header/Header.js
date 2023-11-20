@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 
 import config from '~/config';
 import images from '~/assets/images';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { Search } from '../Search';
 import { Button } from '~/components/Button';
 import { useUser } from '~/unsplash/hooks';
@@ -15,6 +13,7 @@ import { useState } from 'react';
 import { loginWithUnsplash } from '~/unsplash/utils/token';
 import { AccountMenu } from '~/components/Popper/AccountMenu';
 import { Menu } from '~/components/Popper/Menu';
+import { MoreIcon } from '~/components/Icons';
 
 const cx = classNames.bind(styles);
 
@@ -52,7 +51,7 @@ function Header() {
                                         className={cx('more-btn')}
                                         onClick={() => (showResult === 'more' ? setShowResult('') : handleTab('more'))}
                                     >
-                                        <FontAwesomeIcon icon={faEllipsisVertical} />
+                                        <MoreIcon />
                                     </button>
                                 </div>
                             </Menu>
@@ -78,7 +77,7 @@ function Header() {
                     ) : (
                         <>
                             <button className={cx('more-btn')}>
-                                <FontAwesomeIcon icon={faEllipsisVertical} />
+                                <MoreIcon />
                             </button>
                             <Button href={loginWithUnsplash()}>Log In</Button>
                         </>

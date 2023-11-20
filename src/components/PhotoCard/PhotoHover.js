@@ -43,7 +43,7 @@ function PhotoHover({ data, check, widthPC, hardWidthVW, hardHeightVH, className
                         data={data}
                         widthPC={widthPC}
                         onClick={onClick}
-                        className={className}
+                        className={'hover-photo'}
                         hardWidthVW={hardWidthVW}
                         hardHeightVH={hardHeightVH}
                         passProps={passProps}

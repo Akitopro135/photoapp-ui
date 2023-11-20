@@ -6,7 +6,17 @@ import { calculateImageSize } from '~/helpers';
 
 const cx = classNames.bind(styles);
 
-function PhotoItem({ data, widthPC, hardWidthVW, hardHeightVH, className, onClick, passProps }) {
+function PhotoItem({
+    data,
+    widthPC,
+    hardWidthPX,
+    hardHeightPX,
+    hardWidthVW,
+    hardHeightVH,
+    className,
+    onClick,
+    passProps,
+}) {
     const [loading, setLoading] = useState(true);
 
     const props = {
@@ -37,11 +47,17 @@ function PhotoItem({ data, widthPC, hardWidthVW, hardHeightVH, className, onClic
             {loading && data.blur_hash && (
                 <Blurhash
                     hash={data.blur_hash}
-                    width={hardWidthVW ? `${hardWidthVW}vw` : `${calculatedWidth}px`}
+                    width={hardWidthPX ? `${hardWidthPX}px` : hardWidthVW ? `${hardWidthVW}vw` : `${calculatedWidth}px`}
                     height={
-                        hardHeightVH ? `${hardHeightVH}vw` : hardWidthVW ? `${heightVH}vw` : `${calculatedHeight}px`
+                        hardHeightPX
+                            ? `${hardHeightPX}px`
+                            : hardHeightVH
+                            ? `${hardHeightVH}vh`
+                            : hardWidthVW
+                            ? `${heightVH}vw`
+                            : `${calculatedHeight}px`
                     }
-                    //style={{ margin: 2 }}
+                    style={{ marginBottom: 4, marginTop: 4 }}
                 />
             )}
             <img
@@ -49,9 +65,11 @@ function PhotoItem({ data, widthPC, hardWidthVW, hardHeightVH, className, onClic
                 alt=""
                 className={cx('image', { hidden: loading })}
                 style={{
-                    width: hardWidthVW ? `${hardWidthVW}vw` : `${calculatedWidth}px`,
-                    height: hardHeightVH
-                        ? `${hardHeightVH}vw`
+                    width: hardWidthPX ? `${hardWidthPX}px` : hardWidthVW ? `${hardWidthVW}vw` : `${calculatedWidth}px`,
+                    height: hardHeightPX
+                        ? `${hardHeightPX}px`
+                        : hardHeightVH
+                        ? `${hardHeightVH}vh`
                         : hardWidthVW
                         ? `${heightVH}vw`
                         : `${calculatedHeight}px`,

@@ -1,19 +1,15 @@
 import classNames from 'classnames/bind';
 import styles from './Edit.module.scss';
 
-import config from '~/config';
-import { useUser } from '~/unsplash/hooks';
+import { useCurrentUser } from '~/unsplash/hooks';
 import { useEffect, useState } from 'react';
+import { scrollToTop } from '~/helpers';
+import { Loading } from '~/components/Loading';
+import { useResize, useValueChange } from '~/hooks';
 
 const cx = classNames.bind(styles);
 
 function Account() {
-    const { data } = useUser({
-        username: localStorage.getItem('currentId'),
-    });
-
-    //console.log(data);
-
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -23,7 +19,15 @@ function Account() {
     const [instagram, setInstagram] = useState('');
     const [bio, setBio] = useState('');
 
-    console.log(data);
+    const { changeStyle } = useResize({ size: 69 });
+
+    const { data, update } = useCurrentUser();
+
+    const { length: bioLength, handleChange: handleChangeBio } = useValueChange({
+        value: bio,
+        set: setBio,
+        maxLength: 250,
+    });
 
     useEffect(() => {
         if (!data) return;
@@ -31,43 +35,50 @@ function Account() {
             firstName: data.first_name,
             lastName: data.last_name,
             email: data.email,
+            userName: data.username,
+            location: data.location,
+            portfolio: data.portfolio_url,
+            instagram: data.instagram_username,
+            bio: data.bio,
         };
 
-        setFirstName(initialData.firstName);
-        setLastName(initialData.lastName);
+        data.first_name && setFirstName(initialData.firstName);
+        data.last_name && setLastName(initialData.lastName);
+        data.email && setEmail(initialData.email);
+        data.username && setUserName(initialData.userName);
+        data.location && setLocation(initialData.location);
+        data.portfolio_url && setPortfolio(initialData.portfolio);
+        data.instagram_username && setInstagram(initialData.instagram);
+        data.bio && setBio(initialData.bio);
     }, [data]);
 
-    // const check = () => {
-    //     if (localStorage.getItem('currentId') === null) {
-    //         return (window.location = config.routes.home);
-    //     } else {
-    //         return true;
-    //     }
-    // };
-
-    const shouldRender = localStorage.getItem('currentId') !== null;
-
-    if (!shouldRender) {
-        // Chuyển hướng trang khi không thỏa mãn điều kiện
-        window.location = config.routes.home;
-        return null; // Tránh hiển thị nội dung khi chuyển hướng
-    }
-
-    const handleUpdate = () => {
-        console.log(firstName);
+    const handleUpdate = async () => {
+        await update({
+            first_name: firstName.trim(),
+            last_name: lastName.trim(),
+            email: email.trim(),
+            username: userName.trim(),
+            location: location.trim(),
+            url: portfolio.trim(),
+            instagram_username: instagram.trim(),
+            bio: bio.trim(),
+        });
+        scrollToTop();
     };
 
-    return (
-        <>
-            {data && (
-                <div className={cx('wrapper')}>
+    if (!data) {
+        return <Loading />;
+    } else {
+        return (
+            <>
+                <div className={cx('wrapper', changeStyle && 'change-text')}>
                     <h1>Edit profile</h1>
-                    <div className={cx('user')}>
-                        <div className={cx('image')}>
+                    <div className={cx('user', changeStyle && 'change-style')}>
+                        <div className={cx('image', changeStyle && 'change-style')}>
                             <img src={data.profile_image.large} alt="ProfileImage" className={cx('profile-image')} />
                         </div>
-                        <div className={cx('profile')}>
-                            <div className={cx('profile-name')}>
+                        <div className={cx('profile', changeStyle && 'change-style')}>
+                            <div className={cx('profile-name', changeStyle && 'change-style')}>
                                 <div>
                                     <label>First Name</label>
                                     <input
@@ -135,15 +146,22 @@ function Account() {
                         <div className={cx('bio')}>
                             <div>
                                 <label>Bio</label>
-                                <input type="text" value={bio} onChange={(e) => setBio(e.target.value)} />
+                                <div className={cx('div-textarea')}>
+                                    <textarea type="text" value={bio} onChange={(e) => handleChangeBio(e)} />
+                                    <span className={cx('char-count', bioLength === 0 ? 'char-count-error' : '')}>
+                                        {bioLength}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <button onClick={handleUpdate}>Click</button>
+                    <button className={cx('btn-update')} onClick={handleUpdate}>
+                        Update account
+                    </button>
                 </div>
-            )}
-        </>
-    );
+            </>
+        );
+    }
 }
 
 export default Account;

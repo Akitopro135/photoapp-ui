@@ -2,17 +2,12 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-}
+    padding-left: 20px;
+    padding-right: 20px;
 
-input[type='text'],
-select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+    h1 {
+        font-size: 2vw;
+    }
 }
 
 .user {
@@ -23,10 +18,11 @@ select {
 .image {
     display: flex;
     width: 20%;
-    justify-content: center;
+    align-items: center;
 
     .profile-image {
         height: 200px;
+        width: 200px;
         border-radius: 100%;
     }
 }
@@ -58,11 +54,31 @@ select {
             padding: 10px;
         }
     }
+
+    .change-style {
+        flex-direction: column;
+
+        & div {
+            width: 100%;
+            padding: 10px;
+        }
+    }
 }
 
+.change-style {
+    flex-direction: column;
+    width: 100%;
+}
+
+.change-text {
+    h1 {
+        font-size: 2em;
+    }
+}
 .about {
     display: flex;
     flex-direction: column;
+    padding: 10px;
 
     .location {
         padding-bottom: 20px;
@@ -79,4 +95,15 @@ select {
     .bio {
         padding-bottom: 20px;
     }
+}
+
+.btn-update {
+    border-radius: 4px;
+    height: 60px;
+    background-color: var(--black);
+    color: var(--white);
+    font-size: 1.2em;
+    padding: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
 }

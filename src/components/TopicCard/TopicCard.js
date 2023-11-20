@@ -8,14 +8,20 @@ import config from '~/config';
 
 const cx = classNames.bind(styles);
 
-function TopicCard({ topic, width, height, className }) {
+function TopicCard({ topic, className }) {
     return (
         <div
             className={cx('wrapper')}
+            style={{ width: window.screen.width / 4 }}
             onClick={() => (window.location = config.routes.topic({ topicIdOrSlug: topic.slug }))}
         >
             <div className={cx('header')}>
-                <PhotoItem data={topic.cover_photo} className={className} hardWidthVW={width} hardHeightVH={height} />
+                <PhotoItem
+                    data={topic.cover_photo}
+                    className={className}
+                    hardWidthPX={window.screen.width / 4}
+                    hardHeightPX={window.screen.height / 3}
+                />
             </div>
             <div className={cx('body')}>
                 <div className={cx('header')}>
