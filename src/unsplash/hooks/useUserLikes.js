@@ -12,10 +12,7 @@ function useUserLike(userInput = ListUserLikePhotoParams) {
         setLoading(true);
 
         unsplash.user
-            .listLikedPhotos({
-                ...ListUserLikePhotoParams,
-                ...userInput,
-            })
+            .listLikedPhotos({ ...ListUserLikePhotoParams, ...userInput })
             .then((data) => setData(data))
             .catch((error) => {
                 console.log('User Page List Like Photos Error: ' + error);

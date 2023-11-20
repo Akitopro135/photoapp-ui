@@ -6,6 +6,8 @@ function usePhoto({ id }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
 
+    const [href, setHref] = useState();
+
     const getPhoto = () => {
         if (loading) return;
         setLoading(true);
@@ -17,6 +19,14 @@ function usePhoto({ id }) {
                 setError(error);
             })
             .finally(() => setLoading(false));
+    };
+
+    const download = () => {
+        if (!data) return;
+
+        unsplash.photo.track(id).then((href) => {
+            setHref(href);
+        });
     };
 
     const like = () => {
@@ -54,7 +64,10 @@ function usePhoto({ id }) {
 
     return {
         data,
+        setData,
         like,
+        href,
+        download,
         loading,
         error,
     };

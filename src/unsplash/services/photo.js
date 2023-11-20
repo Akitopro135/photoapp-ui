@@ -9,6 +9,9 @@ const PhotoService = {
         return response.data;
     },
     list: async (params = ListPhotoParams) => {
+        params.page && validation.checkNumberValue({ value: params.page, string: 'page' });
+        params.per_page && validation.checkNumberValue({ value: params.per_page, string: 'per_page' });
+        params.order_by && validation.checkOrderBy(params.order_by);
         const response = await API.get(`/photos`, { params });
         return response.data;
     },
@@ -21,14 +24,18 @@ const PhotoService = {
         return response.data;
     },
     random: async (params = ListRandomPhotosParams) => {
-        validation.checkOrientation(params.orientation);
-        validation.checkContentFilter(params.content_filter);
+        params.orientation && validation.checkOrientation(params.orientation);
+        params.content_filter && validation.checkContentFilter(params.content_filter);
         validation.checkCount(params.count);
         const response = await API.get('/photos/random', { params });
         return response.data;
     },
     update: async (input = UpdatePhotoParams) => {
         const { id, ...params } = input;
+        params.location.latitude &&
+            validation.checkNumberValue({ value: params.location.latitude, string: 'latitude' });
+        params.location.longitude &&
+            validation.checkNumberValue({ value: params.location.longitude, string: 'longtitude' });
         const response = await TOKEN.put(`/photos/${id}`, { params });
         //const response = await API.put(`/photos/${id}`, { params });
 
@@ -47,32 +54,5 @@ const PhotoService = {
         return response.data;
     },
 };
-
-// async function listPhoto({ page = 1, per_page = 10, order_by = 'latest' }) {
-//     const response = await API.get(`/photos?page=${page}&per_page=${per_page}&order_by=${order_by}`);
-//     return response.data;
-// }
-
-// async function getRandomPhoto({
-//     collections,
-//     topics,
-//     username,
-//     query,
-//     orientation = 'landscape',
-//     content_filter = 'low',
-//     count = 1,
-// }) {
-//     if (content_filter !== 'low' && content_filter !== 'high') {
-//         throw new Error('content_filter must be "low" or "high"');
-//     } else if (orientation !== 'landscape' && orientation !== 'portrait' && orientation !== 'squarish') {
-//         throw new Error('orientation must be "landscape" or "portrait" or "squarish"');
-//     } else if (count > 30 || count < 0) {
-//         throw new Error('count > 1; max: 30');
-//     }
-//     const response = await API.get(
-//         `/photos/random?query=${query}||username=${username}||topics=${topics}||collections=${collections}&orientation=${orientation}&content_filter=${content_filter}&count=${count}`,
-//     );
-//     return response.data;
-// }
 
 export default PhotoService;

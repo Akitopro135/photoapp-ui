@@ -1,22 +1,22 @@
 export const ListSearchPhotoParams = {
-    query: '',
-    page: 1,
-    per_page: 10,
-    order_by: 'relevant',
-    collections: '',
-    content_filter: 'low',
-    color: 'black_and_white',
+    query: undefined,
+    page: undefined,
+    per_page: undefined,
+    order_by: undefined,
+    collections: undefined,
+    content_filter: undefined,
+    color: undefined,
     orientation: undefined,
 };
 
 export const ListSearchUserParams = {
-    query: '',
-    page: 1,
-    per_page: 10,
+    query: undefined,
+    page: undefined,
+    per_page: undefined,
 };
 
 export const ListSearchCollectionParams = {
-    query: '',
-    page: 1,
-    per_page: 10,
+    query: undefined,
+    page: undefined,
+    per_page: undefined,
 };

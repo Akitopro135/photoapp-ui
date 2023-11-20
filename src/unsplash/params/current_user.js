@@ -1,10 +1,10 @@
 export const UpdateUserProfieParams = {
-    username: '',
-    first_name: '',
-    last_name: '',
-    email: '',
-    url: '',
-    location: '',
-    bio: '',
-    instagram_username: '',
+    username: undefined,
+    first_name: undefined,
+    last_name: undefined,
+    email: undefined,
+    url: undefined,
+    location: undefined,
+    bio: undefined,
+    instagram_username: undefined,
 };

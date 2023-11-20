@@ -1,1 +1,2 @@
-export { default as Edit } from './Edit/Edit';
+export { Edit } from './Edit';
+export { CollectionManage } from './CollectionManage';

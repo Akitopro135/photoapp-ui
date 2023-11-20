@@ -9,6 +9,7 @@ import { Topic, Topics } from '~/pages/Topic';
 import { Home } from '~/pages/Home';
 import { Following } from '~/pages/Following';
 import { Edit } from '~/pages/Account';
+import { CollectionManage } from '~/pages/Account';
 
 import { HeaderOnly } from '~/layouts';
 import { AccountLayout } from '~/layouts/AccountLayout';
@@ -24,7 +25,8 @@ const publicRoutes = [
     { path: config.routes.user({}), component: User },
     { path: config.routes.topic({}), component: Topic },
     { path: config.routes.topic({ topicIdOrSlug: '' }), component: Topics },
-    { path: config.routes.account({ value: '' }), component: Edit, layout: AccountLayout },
+    { path: config.routes.account.edit(), component: Edit, layout: AccountLayout },
+    { path: config.routes.account.collectionManage(), component: CollectionManage, layout: AccountLayout },
 ];
 const privateRoutes = [];
 export { publicRoutes, privateRoutes };

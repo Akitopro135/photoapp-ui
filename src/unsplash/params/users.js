@@ -1,30 +1,30 @@
 export const ListUserPhotoParams = {
-    username: '',
-    page: 1,
-    per_page: 10,
-    order_by: 'latest',
+    username: undefined,
+    page: undefined,
+    per_page: undefined,
+    order_by: undefined,
     stats: false,
-    resolution: 'days',
-    quantity: 30,
+    resolution: undefined,
+    quantity: undefined,
     orientation: undefined,
 };
 
 export const ListUserLikePhotoParams = {
-    username: '',
-    page: 1,
-    per_page: 10,
+    username: undefined,
+    page: undefined,
+    per_page: undefined,
     order_by: undefined,
     orientation: undefined,
 };
 
 export const ListUserCollectionParams = {
-    username: '',
-    page: 1,
-    per_page: 10,
+    username: undefined,
+    page: undefined,
+    per_page: undefined,
 };
 
 export const StatisticsParams = {
-    username: '',
-    resolution: 'days',
-    quantity: 30,
+    username: undefined,
+    resolution: undefined,
+    quantity: undefined,
 };

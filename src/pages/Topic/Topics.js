@@ -3,11 +3,16 @@ import styles from './Topics.module.scss';
 
 import { useTopicList } from '~/unsplash/hooks';
 import { TopicCard } from '~/components/TopicCard';
+import { Loading } from '~/components/Loading';
 
 const cx = classNames.bind(styles);
 
 function Topics() {
-    const { data } = useTopicList({});
+    const { data, loading } = useTopicList({});
+
+    if (loading) {
+        return <Loading />;
+    }
     return (
         <div className={cx('wrapper')}>
             <span className={cx('title')}>Topics</span>
@@ -16,7 +21,7 @@ function Topics() {
             </span>
             <div className={cx('topics-wrapper')}>
                 {data.map((topic) => (
-                    <TopicCard key={topic.id} topic={topic} width={24} height={10} className={'topic-photo'} />
+                    <TopicCard key={topic.id} topic={topic} width={24} height={30} className={'topic-photo'} />
                 ))}
             </div>
         </div>

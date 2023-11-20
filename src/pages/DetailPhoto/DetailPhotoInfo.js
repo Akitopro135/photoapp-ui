@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import styles from './DetailPhoto.module.scss';
+import styles from './DetailPhotoInfo.module.scss';
 import config from '~/config';
 import {
     Aperture,

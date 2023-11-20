@@ -1,33 +1,33 @@
 export const ListCollectionParams = {
-    page: 1,
-    per_page: 10,
+    page: undefined,
+    per_page: undefined,
 };
 
 export const GetCollectionPhotosParams = {
-    id: '',
-    page: 1,
-    per_page: 10,
+    id: undefined,
+    page: undefined,
+    per_page: undefined,
     orientation: undefined,
 };
 
 export const CreateCollectionParams = {
-    title: '',
-    description: '',
-    private: false,
+    title: undefined,
+    description: undefined,
+    private: undefined,
 };
 
 export const UpdateCollectionParams = {
-    title: '',
-    description: '',
-    private: false,
+    title: undefined,
+    description: undefined,
+    private: undefined,
 };
 
 export const AddPhotoToCollectionParams = {
-    collection_id: '',
-    photo_id: '',
+    collection_id: undefined,
+    photo_id: undefined,
 };
 
 export const RemovePhotoFromCollectionParams = {
-    collection_id: '',
-    photo_id: '',
+    collection_id: undefined,
+    photo_id: undefined,
 };

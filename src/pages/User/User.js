@@ -2,13 +2,13 @@ import classNames from 'classnames/bind';
 import styles from './User.module.scss';
 import { useParams } from 'react-router-dom';
 import { useUser, useUserPhotos, useUserCollection, useUserLike } from '~/unsplash/hooks';
-import { useLoadMore } from '~/hooks';
+import { useLoadMore, useResize } from '~/hooks';
 
 import { useEffect, useState } from 'react';
 import UserInfo from './UserInfo';
 import UserHeader from './UserHeader';
 import UserBody from './UserBody';
-import unsplash from '~/unsplash';
+import { Loading } from '~/components/Loading';
 
 const cx = classNames.bind(styles);
 
@@ -28,6 +28,8 @@ function User() {
 
     const [activeTab, setActiveTab] = useState('photos');
 
+    const { changeStyle } = useResize({ size: 40 });
+
     const handleTabChange = (tab) => {
         setActiveTab(tab);
         window.scrollTo({ top: 0 });
@@ -46,12 +48,12 @@ function User() {
     }, [params]);
 
     //Lấy thông tin user
-    const { data: user } = useUser({
+    const { data: user, loading: userInfoLoading } = useUser({
         username: params.username === 'me' ? localStorage.getItem('currentId') : userName,
     });
 
     //Lấy list photos có scroll để load thêm photos
-    const { loadMoreData } = useLoadMore({
+    const { loadMoreData, loading: photosLoading } = useLoadMore({
         checkScroll: activeTab === 'photos' ? true : false,
         fetchDatas: useUserPhotos,
         fetchDatasProps: {
@@ -61,7 +63,7 @@ function User() {
     });
 
     //Lấy list collection có scroll để load thêm collections
-    const { loadMoreData: collectionsData } = useLoadMore({
+    const { loadMoreData: collectionsData, loading: collectionsLoading } = useLoadMore({
         checkScroll: activeTab === 'collections' ? true : false,
         fetchDatas: useUserCollection,
         fetchDatasProps: {
@@ -70,7 +72,7 @@ function User() {
     });
 
     //Lấy list photos like có scroll để load thêm photos like
-    const { loadMoreData: likePhotosData } = useLoadMore({
+    const { loadMoreData: likePhotosData, loading: likePhotosLoading } = useLoadMore({
         checkScroll: activeTab === 'likes' ? true : false,
         fetchDatas: useUserLike,
         fetchDatasProps: {
@@ -79,28 +81,28 @@ function User() {
         },
     });
 
+    if (userInfoLoading || !user) {
+        return <Loading />;
+    }
     return (
-        <>
-            {user && (
-                <div className={cx('wrapper')}>
-                    <UserInfo user={user} />
-                    <div className={cx('content-wrapper')}>
-                        <UserHeader
-                            user={user}
-                            activeTab={activeTab}
-                            handleTabChange={handleTabChange}
-                            check={params.username === 'me' ? true : false}
-                        />
-                        <UserBody
-                            activeTab={activeTab}
-                            loadMoreData={loadMoreData}
-                            likePhotosData={likePhotosData}
-                            collectionsData={collectionsData}
-                        />
-                    </div>
-                </div>
-            )}
-        </>
+        <div className={cx('wrapper')}>
+            <UserInfo user={user} changeStyle={changeStyle} />
+            <div className={cx('content-wrapper')}>
+                <UserHeader
+                    user={user}
+                    activeTab={activeTab}
+                    handleTabChange={handleTabChange}
+                    check={params.username === 'me' ? true : false}
+                />
+                <UserBody
+                    activeTab={activeTab}
+                    loadMoreData={loadMoreData}
+                    likePhotosData={likePhotosData}
+                    collectionsData={collectionsData}
+                    checkLoading={photosLoading || likePhotosLoading || collectionsLoading}
+                />
+            </div>
+        </div>
     );
 }
 
