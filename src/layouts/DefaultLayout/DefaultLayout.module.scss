@@ -1,0 +1,22 @@
+.wrapper {
+    display: flex;
+    //quay theo chieu doc
+    flex-direction: column;
+    //can giua
+    align-items: center;
+    background: var(--background-image);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container {
+    padding: var(--default-layout-horizontal-spacer);
+    width: 100%;
+    margin-top: var(--default-layout-header-height);
+}
+
+.content {
+    width: 100vw;
+    min-height: 100vh;
+    //align-items: center;
+}

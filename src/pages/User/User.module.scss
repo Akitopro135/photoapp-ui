@@ -1,0 +1,21 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    background: var(--background-image);
+    min-height: 1000px;
+    height: 100%;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+//Content
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    & span {
+        display: flex;
+        flex-direction: row;
+        width: 80%;
+    }
+}
