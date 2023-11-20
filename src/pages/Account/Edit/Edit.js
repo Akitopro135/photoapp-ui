@@ -35,7 +35,6 @@ function Account() {
 
         setFirstName(initialData.firstName);
         setLastName(initialData.lastName);
-        setEmail(initialData.email);
     }, [data]);
 
     // const check = () => {
