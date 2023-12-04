@@ -8,14 +8,14 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 10;
+    z-index: 3;
     display: flex;
     justify-content: center;
     height: var(--default-layout-header-height);
     width: 100%;
-    box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
+    //box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
     background: var(--background-image);
-    background-size: cover;
+    //background-size: cover;
 }
 
 .inner {
@@ -29,18 +29,40 @@
 
 .logo-link {
     display: flex;
+    align-items: center;
+
+    h1 {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.6rem;
+        padding: 9px 16px;
+    }
 }
 
 .logo {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    width: 30vw;
+}
+
+.logo-image {
+    width: 40px;
+}
+
+.profile-image {
     width: 40px;
     height: 40px;
-    margin-left: 20px;
+    border-radius: 100%;
 }
 
 .actions {
     display: flex;
+    flex-direction: row-reverse;
     align-items: center;
     margin-right: 20px;
+    width: 30vw;
 }
 
 .more-btn {
@@ -48,4 +70,16 @@
     width: 40px;
     height: 40px;
     background-color: transparent;
+}
+
+//Account-tippy
+.account-btn {
+    background-color: transparent;
+    cursor: pointer;
+}
+
+//More-tippy
+.more-btn {
+    background-color: transparent;
+    cursor: pointer;
 }

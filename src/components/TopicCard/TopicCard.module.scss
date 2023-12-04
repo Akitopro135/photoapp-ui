@@ -1,0 +1,68 @@
+:root {
+    --margin-top-bottom: 28px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 4px 4px 4px 4px rgb(0 0 0 / 12%);
+    background: var(--background-image);
+    margin-bottom: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    padding: var(--margin-top-bottom);
+
+    .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: var(--margin-top-bottom);
+
+        .info {
+            display: flex;
+            flex-direction: column;
+
+            .title {
+                font-weight: bold;
+                font-size: 1.6em;
+            }
+
+            .user {
+                color: var(--icon-color);
+
+                &:hover {
+                    color: var(--black);
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .profile-image {
+            border-radius: 100%;
+        }
+    }
+
+    .description {
+        text-align: justify;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Số dòng hiển thị */
+        -webkit-box-orient: vertical;
+    }
+
+    .total-photos {
+        display: flex;
+        margin-top: var(--margin-top-bottom);
+
+        :first-child {
+            margin-right: var(--margin-top-bottom);
+            color: var(--icon-color);
+        }
+    }
+}

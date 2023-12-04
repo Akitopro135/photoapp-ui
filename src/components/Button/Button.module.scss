@@ -10,10 +10,6 @@
     cursor: pointer;
     background-color: transparent;
 
-    + .wrapper {
-        margin-left: 8px;
-    }
-
     &.disabled {
         pointer-events: none;
         opacity: 0.5;
@@ -22,31 +18,21 @@
 
 .home-more-info-btn {
     position: absolute;
-    width: 7vw;
-    height: 5vh;
-    bottom: -1vw;
+    width: auto;
+    height: 10%;
+    bottom: -5%;
     background-color: white;
     border-radius: 4px;
 
     &:hover {
         background-color: cadetblue;
-        animation: translate 0.5s linear;
     }
 
     & h1 {
-        font-size: 1vw;
+        font-size: 0.8vw;
     }
 
     & h2 {
-        font-size: 1vw;
-    }
-}
-
-@keyframes translate {
-    0% {
-        transform: rotateX(0deg);
-    }
-    100% {
-        transform: rotateX(180deg);
+        font-size: 1.6em;
     }
 }

@@ -1,0 +1,75 @@
+//top image
+.wrapper-list {
+    display: flex;
+    //background-color: rgba(255, 91, 91, 0.3);
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 2%;
+
+    & h1 {
+        font-size: 2em;
+    }
+
+    & h2 {
+        font-size: 1.6em;
+    }
+}
+
+.list-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    padding-left: 5%;
+    padding-right: 5%;
+
+    & .btn-seemore {
+        display: flex;
+        align-items: center;
+        background-color: transparent;
+        color: green;
+        font-size: 1em;
+        cursor: pointer;
+
+        &:hover {
+            color: greenyellow;
+        }
+    }
+}
+
+.list-body {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    //padding-left: 10%;
+    //padding-right: 10%;
+}
+
+.angle-btn {
+    width: 10%;
+    height: 100%;
+    font-size: 1.8rem;
+    background-color: transparent;
+    cursor: pointer;
+
+    :hover {
+        background-color: rgb(22 24 35 / 0.03);
+    }
+
+    // &:active {
+    //     .top-image-body {
+    //         @include animate(fade, 1s, linear, 1);
+    //     }
+    // }
+}
+
+.list-body-image {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 80%;
+}

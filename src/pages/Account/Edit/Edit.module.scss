@@ -1,0 +1,109 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    h1 {
+        font-size: 2vw;
+    }
+}
+
+.user {
+    display: flex;
+    flex-direction: row;
+}
+
+.image {
+    display: flex;
+    width: 20%;
+    align-items: center;
+
+    .profile-image {
+        height: 200px;
+        width: 200px;
+        border-radius: 100%;
+    }
+}
+
+.profile {
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+
+    .profile-name {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+        & div {
+            width: 50%;
+            padding: 10px;
+        }
+    }
+
+    .email {
+        & div {
+            padding: 10px;
+        }
+    }
+
+    .username {
+        & div {
+            padding: 10px;
+        }
+    }
+
+    .change-style {
+        flex-direction: column;
+
+        & div {
+            width: 100%;
+            padding: 10px;
+        }
+    }
+}
+
+.change-style {
+    flex-direction: column;
+    width: 100%;
+}
+
+.change-text {
+    h1 {
+        font-size: 2em;
+    }
+}
+.about {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+
+    .location {
+        padding-bottom: 20px;
+    }
+
+    .portfolio {
+        padding-bottom: 20px;
+    }
+
+    .instagram {
+        padding-bottom: 20px;
+    }
+
+    .bio {
+        padding-bottom: 20px;
+    }
+}
+
+.btn-update {
+    border-radius: 4px;
+    height: 60px;
+    background-color: var(--black);
+    color: var(--white);
+    font-size: 1.2em;
+    padding: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+}

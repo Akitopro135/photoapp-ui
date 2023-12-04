@@ -1,187 +1,115 @@
-.wrapper {
-    //display: block;
-}
+.wrapper-image {
+    // width: 100%;
+    // display: flex;
+    // justify-content: center;
 
-:root {
-    --width-popup-content: 75vw;
-    --height-popup-content: 80vh;
-}
+    //z-index: 1;
 
-.popup-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100vh;
-    z-index: 950;
-    background: rgba(22, 24, 35, 0.8);
-}
-
-.btn-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: transparent;
-    color: var(--white);
-    cursor: pointer;
-}
-
-.popup-content {
-    position: relative;
-    width: var(--width-popup-content);
-    height: var(--height-popup-content);
-}
-
-.popup-image {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 4px;
-    cursor: zoom-in;
-}
-
-.popup-profile {
-    position: absolute;
-    bottom: 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-    height: 10%;
-    background-color: rgba(0, 0, 0, 0.5);
-    font-size: calc((var(--width-popup-content) + var(--height-popup-content)) * 2.5 / 200);
-    color: var(--white);
-
-    & span {
-        cursor: pointer;
+    .hidden {
+        display: none;
     }
 }
 
-.popup-profile-image {
-    height: 80%;
-    margin: 1vw;
-    border-radius: 100%;
-    cursor: pointer;
+.hidden {
+    animation: hide 1s;
 }
 
-.popup-action {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    display: flex;
-    justify-content: center;
-    width: 12%;
-    font-size: calc((var(--width-popup-content) + var(--height-popup-content)) * 1.5 / 200);
-    flex-direction: row;
-}
-
-.popup-btn-heart {
-    display: flex;
-    align-items: center;
-    background-color: var(--white);
-    color: var(--icon-color);
-    border-radius: 4px;
-    margin: auto;
-    cursor: pointer;
-
-    :first-child {
-        width: calc((var(--width-popup-content) + var(--height-popup-content)) * 2 / 200);
-    }
-
-    &:hover {
-        color: black;
-    }
-}
-
-.popup-btn-download {
-    display: flex;
-    align-items: center;
-    background-color: var(--white);
-    color: var(--icon-color);
-    border-radius: 4px;
-    margin: auto;
-    cursor: pointer;
-
-    :first-child {
-        width: calc((var(--width-popup-content) + var(--height-popup-content)) * 2 / 200);
-    }
-
-    &:hover {
-        color: black;
-    }
-}
-
-.popup-btn-more-info {
-    display: flex;
-    align-items: center;
-    background-color: var(--white);
-    color: var(--icon-color);
-    border-radius: 4px;
-    margin: auto;
-    padding-left: 4%;
-    padding-right: 4%;
-    cursor: pointer;
-
-    &:hover {
-        color: black;
-    }
-}
-
-//Home page
 .image {
-    width: 50vw;
-    height: 35vw;
-    border-radius: 4px;
-    cursor: pointer;
+    //display: flex;
+    //z-index: 1;
+    border-radius: 8px;
 }
 
-.card-home {
-    position: relative;
-    width: 20vw;
-    height: 50vh;
+//UserPhotos
+.user-photos {
+    width: 100%; /* Chia độ rộng bằng nhau */
+    height: auto; /* Giữ tỷ lệ khung hình */
+    margin-top: 10px;
+}
+
+//RelatedPhotos
+.related-photo {
+    margin-bottom: 20px;
+
+    &:hover {
+        opacity: 0.8;
+    }
+    //flex: 1;
+}
+
+//CollectionPhoto
+.collection-image {
+    :last-child {
+        border-radius: 8px;
+        padding: 2px;
+        object-fit: cover;
+    }
+}
+
+//SidebarPhoto
+.sidebar-image {
+    :last-child {
+        object-fit: cover;
+    }
+}
+
+//TopicPhoto
+.topic-photo {
+    :last-child {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        object-fit: cover;
+        filter: brightness(0.7);
+    }
+}
+
+//PopupPhoto
+.popup-image {
+    :last-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        object-fit: cover;
+    }
+}
+
+//HoverPhoto
+.hover-photo {
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 4px 4px 4px 4px rgb(0 0 0 / 12%);
-    background: var(--background-image);
-    background-size: cover;
+    justify-content: center;
+}
 
-    & .profile-user-name {
-        position: absolute;
-        bottom: 17.5%;
-        text-align: center;
-
-        & span {
-            font-size: calc((2vw + 2vh) / 2);
-            font-weight: bold;
+//Search
+.search {
+    :last-child {
+        cursor: pointer;
+        object-fit: cover;
+        border-radius: 4px;
+        &:hover {
+            opacity: 0.8;
         }
     }
+}
 
-    & .profile-image {
-        position: absolute;
-        top: 42.5%;
-        width: 4vw;
-        height: 4vw;
-        border-radius: 100%;
-    }
-
-    & .image {
-        position: absolute;
-        left: 0;
-        width: 15vw;
-        height: 50%;
-        border-radius: 4px 100% 100%;
+//Home
+.home {
+    :last-child {
         cursor: pointer;
-
+        border-radius: 4px 100% 100%;
+        object-fit: cover;
         &:hover {
             animation-name: rotate;
             animation-duration: 0.7s;
             opacity: 0.8;
         }
+    }
+}
+
+.home-introduct-image {
+    :last-child {
+        object-fit: cover;
+        object-position: center;
+        border-radius: 0;
     }
 }
 
@@ -197,44 +125,11 @@
     }
 }
 
-//Search page
-.card-search {
-    position: relative;
-    width: 20vw;
-    height: 50vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 10%;
-    box-shadow: 4px 4px 4px 4px rgb(0 0 0 / 12%);
-    background: var(--background-image);
-    background-size: cover;
-
-    & .profile-user-name {
-        position: absolute;
-        bottom: 17.5%;
-        text-align: center;
-
-        & span {
-            font-size: calc((2vw + 2vh) / 2);
-            font-weight: bold;
-        }
+@keyframes hide {
+    0% {
+        opacity: 0;
     }
-
-    & .profile-image {
-        position: absolute;
-        top: 42.5%;
-        width: 4vw;
-        height: 4vw;
-        border-radius: 100%;
-    }
-
-    & .image {
-        position: absolute;
-        left: 0;
-        width: 20vw;
-        height: 50%;
-        border-radius: 4px;
-        cursor: pointer;
+    100% {
+        opacity: 1;
     }
 }
